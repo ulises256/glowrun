@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarreraService } from '../../../../services';
 import { Carrera, GoogleMaps, Punto } from '../../../../models';
 
@@ -17,7 +17,7 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 	carrerasProximas: Carrera[] = []
 	  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1};
 		 
-	constructor(private route: ActivatedRoute) {
+	constructor(private route: ActivatedRoute, private router: Router,) {
 		this.carrera = new Carrera({}, 'bandera');
 		this.imagenes = [
 			'assets/images/cuadritos/glow_home_1.png',
@@ -49,6 +49,10 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 
 	afterChange(event){
 		console.log(event)
+	}
+
+	verCarrera(id) {
+		this.router.navigate(['carreras/' + id]);
 	}
 
 	ngOnInit() {
