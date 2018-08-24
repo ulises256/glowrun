@@ -1,0 +1,41 @@
+.usuario
+	.usuario-content
+		mat-card
+			section.encabezado
+				.foto
+					img([src]="usuario.getFoto()" *ngIf="usuario.getFoto()")
+				.nombre
+					h2(*ngIf="!usuario.getNombre()") {{usuario.getCorreo()}}
+					h2(*ngIf="usuario.getNombre()") {{usuario.getNombre()}}
+					button(mat-menu-item type="submit" (click)="editar(usuarioForm)" matTooltip="{{editable.tooltip}}")
+						mat-icon {{editable.icon}}
+						span {{editable.tooltip}}
+					a(mat-menu-item [routerLink]="['/admin']" *ngIf="usuario && usuario.getTipo()=='admin'" matTooltip="Ir al administrador")
+						mat-icon edit
+						span Administrar
+			section.datos([formGroup]="usuarioForm")
+				.nombre
+					h4 Nombre:
+					mat-form-field(class="input-layout")
+						input(matInput formControlName="nombre"  (ngModelChange)="usuario.setNombre($event)" autocomplete="off"  required)
+					mat-divider
+				.nombre
+					h4 Apellidos:
+					mat-form-field(class="input-layout")
+						input(matInput formControlName="apellido"  (ngModelChange)="usuario.setApellidos($event)" autocomplete="off"  required)
+					mat-divider
+				.correo
+					h4 Correo:
+					mat-form-field(class="input-layout")
+						input(matInput formControlName="correo"  (ngModelChange)="usuario.setCorreo($event)"  autocomplete="off"  required)
+					mat-divider
+				.edad
+					h4 Edad:
+					mat-form-field(class="input-layout")
+						input(matInput formControlName="edad"  (ngModelChange)="usuario.setEdad($event)"  autocomplete="off"  required)
+					mat-divider
+				.genero
+					h4 Sexo:
+					mat-form-field(class="input-layout")
+						input(matInput formControlName="sexo"  (ngModelChange)="usuario.setSexo($event)" autocomplete="off"   required)
+					mat-divider

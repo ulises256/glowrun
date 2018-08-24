@@ -1,0 +1,45 @@
+.usuario
+    display flex
+    width 100%
+    height 100%
+    justify-content center
+    align-items center
+    .usuario-content
+        width 75%
+        height 100%
+        display grid
+        .mat-card
+            width 100%
+            height 100%
+            display grid
+            grid-gap 10px         
+            grid-template-columns 1fr
+            grid-template-rows 1fr 1fr
+            margin 10px 10px 10px 10px
+            .encabezado
+                display flex
+                flex-direction row
+                justify-content center 
+                align-items center
+                .foto
+                    width 255px
+                    height 255px
+                    margin 0px 10px 0px 10px
+                    img 
+                        width 100%
+                        height 100%
+                .nombre
+                    margin 0px 10px 0px 10px
+            .datos
+                display flex
+                flex-direction column
+                justify-content center 
+                align-items center
+                .nombre , .correo , .edad, .genero
+                    display flex
+                    flex-direction row 
+                    align-items center
+                    justify-content center  
+                    width 50%
+                    .mat-form-field
+                        flex 1

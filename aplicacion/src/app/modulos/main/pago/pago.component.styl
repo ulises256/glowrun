@@ -1,0 +1,95 @@
+funcion1()
+    // -webkit-transition all 0.30s ease-in-out
+    // -moz-transition all 0.30s ease-in-out
+    // -ms-transition all 0.30s ease-in-out
+    // -o-transition all 0.30s ease-in-out
+    outline none
+    box-sizing border-box
+    -webkit-box-sizing: border-box
+    -moz-box-sizing border-box
+    width 90%
+    background #fff
+    margin-bottom 1%
+    border 1px solid #ccc
+    padding 1%
+    color #555
+    font 15px Arial, Helvetica, sans-serif
+
+funcion2()
+    box-shadow 0 0 5px #78909C
+    border 1px solid #78909C
+
+.pago, .pago-content, .header, .head, .body, .nombre, .card, .debito, .iconos, .credito, .body2, .footer
+    display flex
+
+.pago
+    justify-content center
+    width 100%
+    align-items center
+    .pago-content
+        flex-direction column
+        width 90%
+        justify-content center
+        .header
+            justify-content flex-start
+        .body
+            width 100%
+            .nombre
+                flex-direction column
+            .card
+                flex-direction column
+                .head
+                    background-image url('assets/images/cuadritos/glow_debitoocredito.png')
+                    background-repeat no-repeat
+                    background-size cover
+                    background-position center center
+                    .debito
+                        flex-direction column
+                        .iconos
+                            img 
+                                width 48px
+                                height 48px
+                    .credito
+                        flex-direction column
+                        .iconos
+                            img 
+                                width 48px
+                                height 48px
+
+        
+
+
+
+.formulario
+    display flex
+    flex-direction column
+    justify-content center
+    font 20px Arial, Helvetica, sans-serif
+    margin 10px auto
+    padding 16px
+    background-color transparent
+    label
+        color #616161
+        font-size 18px
+    .contenido
+        display flex
+        flex-direction column
+        width 100%
+    .contenido input[type="text"],
+    .contenido input[type="password"]
+        funcion1()
+    .contenido input[type="text"]:focus,
+    .contenido input[type="password"]:focus
+        funcion2()                                 
+    .botones
+        display flex
+        flex-direction column
+        height 100%
+        flex 1
+        margin 10px 10px 10px 10px
+        fo
+        button
+            display flex
+            justify-content center
+            width 100%
+            height 100%

@@ -1,0 +1,143 @@
+mobile = 'screen and (max-width: 768px)'
+
+transition(duracion, delay)
+    -webkit-transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
+    transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
+    -webkit-transition-delay delay ease-in-out
+    transition-delay delay ease-in-out   
+
+*
+    font-family Loto
+
+.home
+    display flex
+    width 100%
+    height 100%
+    justify-content center
+    align-items center
+    background-color black    
+    .home-content
+        display flex
+        width 100%
+        height 100%
+        flex-direction column
+        .portada
+            position relative
+            width 100%
+            height 70%
+            @media mobile
+                height 440px
+            .background
+                position absolute
+                top 0
+                left 0
+                height 100%
+                width 100%
+                pointer-events none
+                overflow hidden
+            .contador
+                position absolute
+                background rgba(0, 0, 0, 0.5)
+                color #f1f1f1
+                width 100%
+                max-width 100%
+                height 100%
+                display flex
+                flex-direction column
+                .titulo, .tiempo, .boton, .dias, .horas, .minutos, .segundos
+                    display flex
+                    justify-content center
+                    align-items  center
+                    width 100%
+                    h1, h3 
+                        font-size 50px
+                        height 0px
+                        @media screen and (max-width: 1048px)
+                            font-size 38px
+                        @media mobile
+                            font-size 20px                           
+                .tiempo
+                    height 65%
+                    .dias, .horas, .minutos, .segundos
+                        flex 1
+                        flex-direction column
+        .linea
+            width 100%
+            height 8px
+            background-color #00C834
+        .piesito
+            display flex
+            color white
+            width 100%
+            justify-content center
+            align-items center
+            margin-top: 50px;
+            margin-bottom: 50px;
+            .piesito-content
+                display flex
+                width 90%
+                justify-content center
+                align-items center
+                @media screen and (max-width: 970px)
+                    flex-direction column
+                @media mobile
+                    flex-direction column
+                .galeria
+                    flex 3
+                    display flex
+                    justify-content center
+                    align-items center
+                    margin 10px 10px 10px 10px                                         
+                    .titu
+                        flex 1
+                        background-repeat no-repeat
+                        background-size cover
+                        background-position center
+                        background-image url('assets/images/cuadritos/glow_galeria.png')
+                        height 270px
+                        display flex
+                        justify-content center
+                        align-items center
+                        flex-direction column
+                        h2
+                            font-size 50px
+                            height 5px
+                    .images
+                        flex 2
+                        transition(500ms, 0)
+                        img 
+                            width 100%
+                            height 275px                            
+                        &:hover
+                            cursor pointer 
+                            transform rotate(1deg) scale(1.1)
+                .tit, .primero, .segundo, .tercero
+                    display flex
+                    flex 1
+                    justify-content center
+                    align-items center
+                .primero, .segundo, .tercero
+                    height 250px
+                    margin 10px 10px 10px 10px
+                    position relative
+                    img 
+                        width 100%
+                        height 100%
+                    &:hover
+                        cursor pointer                        
+                    .content
+                        position absolute
+                        display flex
+                        justify-content center
+                        align-items center
+                        flex-direction column
+                        padding 25px 25px 25px 25px
+                        .fecha
+                            width 100%
+                            display flex
+                            justify-content flex-start
+                        .nombre, .pie
+                            width 100%
+                            display flex
+                            justify-content center
+                            align-items center

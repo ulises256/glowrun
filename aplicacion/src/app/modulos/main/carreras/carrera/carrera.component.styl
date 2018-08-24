@@ -1,0 +1,111 @@
+
+
+.carrera
+    display flex
+    justify-content center
+    width 100%
+    height 100%
+    max-height 90vh
+    color white
+    .carrera-content
+        display flex
+        width 90%
+        height 100%
+        max-height 100%
+        flex-direction column
+        color white
+        .arriba, .abajo, .izquierda, .car, .derecha, .proximas
+            display flex
+        .arriba
+            height 90%
+            .izquierda, .derecha
+                flex 3
+            .centro
+                flex 1
+            .izquierda, .derecha
+                flex-direction column
+            .izquierda
+                .titulo, .registro, .descripcion
+                    height 10%
+                    align-items baseline
+                    h1
+                        &.titulo
+                            font-family Loto
+                            font-size 38px
+                    h3
+                        &.reg
+                            font-family Gloss_And_Bloom
+                            font-size 25px
+                .mapita, .cositas
+                    height 40%
+                    align-items center
+            .derecha
+                .galeria
+                    width 100%
+                    max-width 100%
+                    height 50%
+                    max-height 30%
+                    position relative
+                    .carousel
+                        width 100%
+                        height 100%
+                        max-height 100%
+                        max-width 100%
+                        position absolute
+                        .slide
+                            overflow hidden
+                .proximas
+                    max-width 100%
+                    padding-top: 130px;
+                    flex-direction column
+                    .car
+                        max-width 100%
+                        .tit, .primero, .segundo, .tercero
+                            display flex
+                            flex 1
+                            justify-content center
+                            align-items center
+                        .primero, .segundo, .tercero
+                            height 250px
+                            margin 10px 10px 10px 10px
+                            position relative
+                            img 
+                                width 100%
+                                height 100%
+                            &:hover
+                                cursor pointer                        
+                            .content
+                                position absolute
+                                display flex
+                                justify-content center
+                                align-items center
+                                flex-direction column
+                                p, h2
+                                    margin 0px
+                                .fecha
+                                    width 100%
+                                    display flex
+                                    justify-content flex-start
+                                .nombre, .pie
+                                    width 100%
+                                    display flex
+                                    justify-content center
+                                    align-items center
+        .abajo
+            height 25%
+            align-items center
+            justify-content center
+            flex-direction column
+            .patrocinadores
+                width 40%
+                height 100%
+                max-width 90%
+                display flex
+                align-items center
+                justify-content center                
+                .patro
+                    flex 1
+                    height 100%
+                    max-width 100%
+            
+        

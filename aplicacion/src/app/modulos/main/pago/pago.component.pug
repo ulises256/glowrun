@@ -1,0 +1,47 @@
+.pago
+	.pago-content
+		.header
+			.tiempo
+				p se acaba en 3 hors
+		.body
+			.nombre
+				h2 PAGO
+				p.nombresito Juan Perez
+			.card
+				.head
+					.debito
+						h2 Debito
+						.iconos
+							img([src]="image" *ngFor="let image of iconsCards")
+					.credito
+						h2 CREDITO
+						.iconos
+							img([src]="image" *ngFor="let image of iconsDebit")
+				.formulario
+					form([formGroup]="tarjetaForm" id="payment-form" (ngSubmit)="cobrar(tarjetaForm)" novalidate).formulario
+						.contenido
+							input(type="hidden" name="divice_id_token" id="divice_id_token")
+							label(for="nombre") Nombre Completo
+							input(type="text" id="nombre" formControlName="nombre"  placeholder="Como aparece en la tarjeta" autocomplete="off" required)
+							mat-error(*ngFor='let validation of tarteja_mensajes_errores .nombre')
+								mat-error.error-message(*ngIf="tarjetaForm.get('nombre').hasError(validation.type) && (tarjetaForm.get('nombre').dirty || tarjetaForm.get('nombre').touched)") {{validation.message}}
+							label(for="tarjeta") Número de tarjeta
+							input( id="tarjeta" type="password" formControlName="tarjeta"  autocomplete="off" required)
+							mat-error(*ngFor='let validation of tarteja_mensajes_errores .tarjeta')
+								mat-error.error-message(*ngIf="tarjetaForm.get('tarjeta').hasError(validation.type) && (tarjetaForm.get('tarjeta').dirty || tarjetaForm.get('tarjeta').touched)") {{validation.message}}
+							label(for="fecha") Fecha de expiración
+							input(type="text"  id="fecha" formControlName="mes"  placeholder="Mes" autocomplete="off" required)
+							mat-error(*ngFor='let validation of tarteja_mensajes_errores .mes')
+								mat-error.error-message(*ngIf="tarjetaForm.get('mes').hasError(validation.type) && (tarjetaForm.get('mes').dirty || tarjetaForm.get('mes').touched)") {{validation.message}}
+							input(type="text"  id="field1" formControlName="ano"  placeholder="Año" autocomplete="off" required)
+							mat-error(*ngFor='let validation of tarteja_mensajes_errores .ano')
+								mat-error.error-message(*ngIf="tarjetaForm.get('ano').hasError(validation.type) && (tarjetaForm.get('ano').dirty || tarjetaForm.get('ano').touched)") {{validation.message}}
+							label(for="codigo") Código de seguridad
+							input(type="password"  id="codigo" formControlName="codigo" placeholder="3 digitos" autocomplete="off" required)
+							mat-error(*ngFor='let validation of tarteja_mensajes_errores .codigo')
+								mat-error.error-message(*ngIf="tarjetaForm.get('codigo').hasError(validation.type) && (tarjetaForm.get('codigo').dirty || tarjetaForm.get('codigo').touched)") {{validation.message}}
+						.botones
+							button(mat-raised-button type="submit" color="primary")
+								span Pagar
+		.body2
+		.footer
