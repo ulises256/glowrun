@@ -9,19 +9,19 @@
                     .flecha-container
                         button.flecha(mat-icon-button)
                             mat-icon keyboard_arrow_left
-                    .carrera-content(*ngFor="let carrera of carrerasProximas | slice:0:3;" (click)="verCarrera(carrera.$id)")
+                    .carrera-content(*ngFor="let carrera of carrerasProximas | slice:0:3; let i = index" (click)="verCarrera(carrera.$id)")
                         .carrera
                             .imagen-container(style="background-image : url('assets/images/example.png')")
                             .pie
                                               
-                                .info
+                                .info([style.backgroundColor]="imagenes[i].color")
                                     .fecha
                                         span 26
                                         span {{carrera.$fechaini | date:'mediumDate'}}
                                         span {{carrera.$fechaini | date:'mediumDate'}}
                                     h2 {{carrera?.$nombre}}
                                 .mancha
-                                    img(src="assets/images/cuadritos/glow_galeria2.png")
+                                    img([src]="imagenes[i].image")
                     .flecha-container
                         button.flecha(mat-icon-button)                        
                             mat-icon keyboard_arrow_right

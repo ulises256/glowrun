@@ -17,6 +17,12 @@ export class CarrerasComponent implements OnInit {
 		items: 3,
 		totalPaginas: undefined
 	}
+	imagenes = [
+		{color: '#f53277', image: 'assets/images/cuadritos/glow_home_1.png'},
+		{color: '#45c900', image: 'assets/images/cuadritos/glow_home_2.png'},
+		{color: '#40ccf4', image: 'assets/images/cuadritos/glow_home_3.png'},
+	]
+	
 	constructor(private router: Router,) { 
 		CarreraService.obtenerHome()
 		.then(r => r && r.data ? this.carrerasProximas = r.data.map(c => new Carrera(c, 'bandera')) : null);
