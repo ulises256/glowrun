@@ -31,7 +31,7 @@
             .carreritas-container
                 .carreritas
                     .flecha-container
-                        button.flecha(mat-icon-button)
+                        button.flecha(mat-icon-button (click)="anterior()")
                             mat-icon keyboard_arrow_left
                     .carrera-content(*ngFor="let carrera of carrerasFiltro | slice:0:3;" (click)="verCarrera(carrera.$id)")
                         .carrera
@@ -47,5 +47,5 @@
                                 .mancha
                                     img(src="assets/images/cuadritos/glow_galeria2.png")
                     .flecha-container
-                        button.flecha(mat-icon-button)                        
+                        button.flecha(mat-icon-button (click)="siguiente()")                        
                             mat-icon keyboard_arrow_right
