@@ -63,11 +63,11 @@
                 (quitarPatro)="quitarPatrocinador($event)"
                 (agregarPatro)="agregarPatrocinador($event)")
         mat-card.boletos
-            boletos([boletos]="carrera?.getBoletos()"
+            boletos([boletos]="boletos"
             (quitarBoleto)="quitarBoleto($event)"
             (agregarBoleto)="agregarBoleto($event)")
         mat-card.camino
-            camino([ruta]="carrera?.$ruta")
+            camino([rutas]="ruta")
         mat-card.galeria
             galeria(
             [imagenes]="carrera?.geImagenes()"

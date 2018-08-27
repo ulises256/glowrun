@@ -9,7 +9,12 @@ import { Ruta } from '../../../../../models/ruta.model';
 })
 export class CaminoComponent implements OnInit, AfterViewInit{
 
-	@Input() ruta: Ruta;
+	ruta: Ruta;
+	@Input() set rutas(ruta) {
+		this.ruta = ruta
+	}
+
+	puntos: Punto[] = [];
 	@ViewChild('googleMap') gmapElement: ElementRef;
 	mapa: GoogleMaps
 
@@ -27,7 +32,8 @@ export class CaminoComponent implements OnInit, AfterViewInit{
 	}
 
 	mostrarRuta(){
-		this.mapa.construirPolyLine(this.ruta.$puntos);
+		console.log(this.ruta)
+		this.ruta.getPuntos().then(ps => this.mapa.construirPolyLine(ps))
 	}
 
 	borarRuta() {

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarreraService, EstadoService } from '../../../../services';
 import { Carrera, Estado, Municipio, Patrocinador, Boleto } from '../../../../models';
+import { Ruta } from '../../../../models/ruta.model';
 
 @Component({
 	selector: 'app-carrera',
@@ -16,6 +17,8 @@ export class CarreraComponent implements OnInit {
 	municipios: any;
 	formMunicipio: FormGroup
 	fecha = new Date();
+	boletos: Boleto[] = [];
+	ruta: Ruta = new Ruta({});
 	public editable = {disiabled: true, icon: 'edit', tooltip: 'Editar Campos'};
 	constructor(private domSanitizer: DomSanitizer, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
@@ -62,6 +65,8 @@ export class CarreraComponent implements OnInit {
 		this.route.params.subscribe(params => {
 			CarreraService.obtenerCarrera(+params['id'])
 				.then(r => r && r.data ? this.carrera = new Carrera(r.data): null)
+				.then(c => this.carrera.getBoletos().then(b => this.boletos = b))
+				.then(r => this.carrera.getRuta().then(r => this.ruta = r));
 		});
 
 		this.formMunicipio = this.formBuilder.group({

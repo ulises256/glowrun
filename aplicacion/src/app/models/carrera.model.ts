@@ -81,8 +81,9 @@ export class Carrera {
 		return this.ciudades;
 	}
 
-	public getBoletos(): Boleto[] {
-		return this.boletos;
+	public getBoletos(){
+		return CarreraService.obtenerBoletos(this.id)
+			.then(r => r && r.data ? this.boletos = r.data.map(b => new Boleto(b)) : null);
 	}
 
 	public set $id(value: number) {

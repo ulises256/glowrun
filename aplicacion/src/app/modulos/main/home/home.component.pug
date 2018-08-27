@@ -20,7 +20,7 @@
                         h3 {{time1.seconds}}
                         h3 SEGUNDOS
                 .boton
-                    a(mat-raised-button color="primary" id="btn-comprar") COMPRAr BOLETO
+                    a(mat-raised-button color="primary" id="btn-comprar" (click)="irAComprar(carrerasProximas[0]?.$id)") COMPRAR BOLETO
         .linea
         .piesito
             .piesito-content

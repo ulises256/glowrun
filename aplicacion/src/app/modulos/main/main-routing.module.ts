@@ -16,6 +16,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { FaqComponent } from './faq/faq.component';
 import { CarreraComponent } from './carreras/carrera/carrera.component';
 import { PagoComponent } from './pago/pago.component';
+import { BoletoComponent } from './boleto/boleto.component';
 
 const main_routers: Routes = [
 	{
@@ -47,11 +48,11 @@ const main_routers: Routes = [
 				component: FaqComponent
 			},
 			{
-				path: 'comprar/:nombre',
-				component: PagoComponent
+				path: 'comprar/:id',
+				component: BoletoComponent
 			},
 			{
-				path: 'comprar/:nombre/pago',
+				path: 'comprar/:id/pago',
 				component: PagoComponent
 			},
 			{

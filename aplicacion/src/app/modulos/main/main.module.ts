@@ -24,6 +24,8 @@ import { GaleriasComponent } from './galerias/galerias.component';
 import { CarreraComponent } from './carreras/carrera/carrera.component';
 import { PagoComponent } from './pago/pago.component';
 import { ExplicacionComponent } from './partials/explicacion/explicacion.component';
+import { BoletoComponent } from './boleto/boleto.component';
+
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { ExplicacionComponent } from './partials/explicacion/explicacion.compone
 		FaqComponent,
 		GaleriasComponent,
 		PagoComponent,
-		ExplicacionComponent
+		ExplicacionComponent,
+		BoletoComponent
 	],
 	entryComponents: [
 		LoginComponent

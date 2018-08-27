@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
 
 	}
 
+	irAComprar(idCarrera) {
+		this.router.navigate(['/comprar/' + idCarrera]);
+	}
+
 	ngOnInit() {
 
 		$("#btn-comprar").hover(function () {
