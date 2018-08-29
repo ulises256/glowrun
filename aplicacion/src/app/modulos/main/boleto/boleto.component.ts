@@ -23,6 +23,8 @@ export class BoletoComponent implements OnInit {
 	actual: Boleto = undefined;
 	proximo: Boleto = undefined;
 	time1$: Observable<Time>;
+	precioCompra: number = 0;
+	cantidadBoletos: number = 1;
 
 	constructor(private route: ActivatedRoute, private router:Router, public location: Location, private timerService: TimerService) { }
 
@@ -34,12 +36,27 @@ export class BoletoComponent implements OnInit {
 				.then(c => c.getBoletos().then(boletitos => this.boletos = boletitos))
 				.then(b => {
 					this.actual = this.boletos.find(n => n.getActivo() == true);
+					this.precioCompra =  this.actual.$preciofin;
 					this.proximo = this.boletos.find(n => n.$fechaini> this.actual.$fechafin);
 				})
 				.then(a => this.time1$ = this.timerService.timer(new Date(moment(this.actual.$fechafin).format('MMMM DD, YYYY HH:mm:ss'))))
 				.then(c => this.location.replaceState('comprar/' + this.carrera.$nombre))
-				.catch(erro => this.irse());
+				// .catch(erro => this.irse());
 		})
+	}
+
+	cambiarPrecio(cantidad) {
+		console.log(cantidad)
+		this.precioCompra = this.actual.$precioini * cantidad.target.value;
+		this.cantidadBoletos = cantidad;
+	}
+
+	irComprar(){
+		let datos = {
+			cantidad: this.cantidadBoletos,
+			total: this.precioCompra			
+		}
+		this.router.navigate(['comprar', datos, 'pago'])
 	}
 
 	private irse(){

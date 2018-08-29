@@ -3,7 +3,7 @@
 		.fila1
 			.contador
 				.tiempo(*ngIf="time1$ | async as time1")
-					p El precio eleva su costo dentro de: {{time1.hours}}hrs
+					p El precio eleva su costo dentro de: {{time1.days}} dias {{time1.hours}} hrs
 		.fila2
 			.title
 				h1 COMPRAR BOLETOS
@@ -17,6 +17,9 @@
 						.precio
 							h2 ${{actual?.$precioini}}mxn
 							p despues ${{proximo?.$precioini}}mxn
+					input(type="number" id="cantidad" placeholder="cantidad" (change)="cambiarPrecio($event)"  min="1" value="1" autocomplete="off" required)
+					p precio a pagar: {{precioCompra}}
+					button(mat-button color="accent" (click)="irComprar()") confirmar
 		.fila3
 			.politicas
 				p "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OpenPayModel, Tarjeta, Costumer } from '../../../models/openpay.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-pago',
@@ -15,7 +16,7 @@ export class PagoComponent implements OnInit {
 	private openpay: OpenPayModel;
 	iconsCards = []
 	iconsDebit = []
-	constructor(private formBuilder: FormBuilder,private domSanitizer: DomSanitizer) { 
+	constructor(private formBuilder: FormBuilder,private domSanitizer: DomSanitizer , private route: ActivatedRoute) { 
 		this.iconsCards.push('assets/images/Amex.svg')
 		this.iconsCards.push('assets/images/Visa.svg')
 		this.iconsCards.push('assets/images/Mastercard.svg')
@@ -70,6 +71,10 @@ export class PagoComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		this.route.params.subscribe(params => {
+			console.log(params)
+		})
 
 		this.openpay = new OpenPayModel(this.fomrTarjeta);
 
