@@ -3,6 +3,7 @@ import { ElementRef } from "@angular/core";
 import { OrdenService } from "../services";
 import { Orden } from "./orden.model";
 import { Usuario } from "./usuario.model";
+import { BehaviorSubject } from "rxjs";
 
 export class OpenPayModel {
     private MERCHANT_ID: string = OPENPAYKEYS.MERCHANT_ID;
@@ -11,7 +12,7 @@ export class OpenPayModel {
 	private form: ElementRef;
 	private orden: Orden;
 	private usuario: Usuario;
-
+	private status  = new BehaviorSubject<number | string>(0)
 	private tarjeta: Tarjeta = {id: null, aNombreDe: null, marca: null};
 
     constructor(form: ElementRef, produccion: boolean = true) {
@@ -26,15 +27,10 @@ export class OpenPayModel {
 		OpenPay.token.create(obj, this.SuccessCallback, this.ErrorCallback);
 		this.orden = orden;
 		this.usuario = usuario;
-			// function SuccessCallback(response) {
-			// 	alert('Operación exitosa');
-			// 	// var content = '', results = document.getElementById('resultDetail');
-			// 	// content .= 'Id tarjeta: ' + response.data.id+ '<br />';
-			// 	// content .= 'A nombre de: ' + response.data.holder_name + '<br />';
-			// 	// content .= 'Marca de tarjeta usada: ' + response.data.brand + '<br />';
-			// 	// results.innerHTML = content;
-			// 	console.log(response)
-			// }
+	}
+
+	obtenerStatus() {
+		return this.status;
 	}
 
 	validarCarNumber(cardNumber: string) {
@@ -54,7 +50,7 @@ export class OpenPayModel {
 	}
 
 	private SuccessCallback = (response) => {
-		alert('Operación exitosa');
+		// alert('Operación exitosa');
 		var deviceSessionId = OpenPay.deviceData.setup("payment-form", "divice_id_token");
 		console.log(deviceSessionId)
 		console.log(response)
@@ -67,6 +63,8 @@ export class OpenPayModel {
 			description : 'Compra de boleto(s) de Glow run 5k',
 			order_id : this.orden.$id,
 			device_session_id : deviceSessionId,
+			send_email: true,
+			redirect_url: 'localhost:5000/user',
 			customer : {
 				 name : response.data.card.holder_name,
 				 last_name : response.data.card.holder_name,
@@ -76,12 +74,13 @@ export class OpenPayModel {
 
 		console.log(chargeRequest)
 
-		OrdenService.pagar(chargeRequest).then(res => console.log(res))
+		OrdenService.pagar(this.orden.$id ,chargeRequest).then(res => res.data.error_code ? this.status.next(res.data.error_code) : this.status.next(res.data[0]))
 	}
 
 	private ErrorCallback = (response) => {
-		alert('Error en la transaccion');
+		// alert('Error en la transaccion');
 		console.log(response)
+		this.status.next(response.message)
 	}	
 }
 

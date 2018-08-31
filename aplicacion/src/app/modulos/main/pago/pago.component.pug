@@ -1,12 +1,13 @@
+//- ngx-loading([show]="status==0" [config]="{ backdropBorderRadius: '12px' }")
 .pago
 	.pago-content
 		.header
-			.tiempo
+			.tiempo(*ngIf="status!=1 && status==null")
 				p se acaba en 3 hors
-		.body
+		.body(*ngIf="status!=1 && status==null")
 			.nombre
 				h2 PAGO
-				p.nombresito Juan Perez
+				p.nombresito {{usuario?.getNombre()}}
 			.card
 				.head
 					.debito
@@ -43,5 +44,12 @@
 						.botones
 							button(mat-raised-button type="submit" color="primary")
 								span Pagar
+		.body(*ngIf="status==1")
+			.nombre
+				h2 PAGO
+				h3 exitoso
+			.card
+				.formulario
+					h1 Imprimir boleto
 		.body2
 		.footer

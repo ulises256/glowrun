@@ -10,6 +10,7 @@ module.exports = ({Sequelize, sequelize } = conector) =>
         monto: Sequelize.FLOAT,
         cantidad: Sequelize.INTEGER,
         descuento: Sequelize.FLOAT,
+        
 
     },{
     	name : {

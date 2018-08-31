@@ -13,7 +13,7 @@ route.route('/data/orden/:id')
 route.route('/data/orden/usuario/:id')
         .get(x.obtenerUsuario);
 
-route.route('/data/orden/pagar/transaccion')
+route.route('/data/orden/pagar/transaccion/pago/:idOrden')
         .post(x.crearTransaccionPagar)
 module.exports = route;
 

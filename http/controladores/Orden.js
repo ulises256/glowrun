@@ -20,32 +20,19 @@ ex.create = (req, res, next) => orden.create(req.body).then(response => res.stat
 ex.crearTransaccionPagar = (req, res, next) => 
     openpay.charges.create(req.body, function (error, body){
             console.log(body)
-            console.log(error)
+            if(body){
+                let ordensita = {
+                    status : body.status,
+                    fechaCompra: body.operation_date
+                }
+
+                orden.update(ordensita, { where: { id: req.params.idOrden } } ).then(response => res.status(200).jsonp(response))
+            }
+
+            if(error) {
+                res.status(200).jsonp({error_code: error.error_code})
+            }
           });
-
-
-
-
-//     console.log(req.body)
-
-//     var newCharge = {
-//         "method": "card",
-//         "customer":{
-//             "name": "John Doe",
-//             "email": "luisgateshouse@gmail.com"
-//         },
-//         "amount" : 200.00,
-//         "description" : "Service Charge",
-//         "order_id" : "oid-00721",
-//         "device_session_id": req.body.deviceSessionId,
-//         "source_id" : req.body.idTarjeta
-//       };    
-//     openpay.charges.create(newCharge, function (error, body){
-//         console.log(body)
-//         console.log(error)
-//       });
-// }
-
 
 ex.delete = (req, res, next) => orden.findById(req.params.id)
     .then(orden => orden.destroy())

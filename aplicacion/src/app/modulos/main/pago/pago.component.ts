@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { OpenPayModel, Tarjeta, Costumer } from '../../../models/openpay.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { OpenPayModel, Costumer } from '../../../models/openpay.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';;
 import { OrdenService, AuthService } from '../../../services';
 import { Orden, Usuario } from '../../../models';
-import { BehaviorSubject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { LoadingComponent } from '../../../extras/loading/loading.component';
 
 @Component({
 	selector: 'app-pago',
@@ -21,9 +20,14 @@ export class PagoComponent implements OnInit {
 	iconsDebit = []
 	orden: Orden;
 	usuario: Usuario;
-
 	sub: any;
-	constructor(private formBuilder: FormBuilder,private domSanitizer: DomSanitizer , private route: ActivatedRoute, private router: Router, private ordenService: OrdenService, private auth: AuthService) { 
+
+	status = null;
+	constructor(
+		private formBuilder: FormBuilder,
+		private ordenService: OrdenService,
+		private auth: AuthService,
+		private dialog: MatDialog) { 
 		this.iconsCards.push('assets/images/Amex.svg')
 		this.iconsCards.push('assets/images/Visa.svg')
 		this.iconsCards.push('assets/images/Mastercard.svg')
@@ -48,7 +52,24 @@ export class PagoComponent implements OnInit {
 				'cvv2': form.controls.codigo.value
 			}
 			this.openpay.crearToken(costumer, this.orden, this.usuario);
+
+			this.openpay.obtenerStatus().subscribe(status => {
+				console.log(status);
+				this.status = status 
+				this.cargar();
+			})
+
 		}
+	}
+
+	cargar() {
+		this.status==0? this.dialog.open(LoadingComponent) : null;
+		this.status==1? this.dialog.closeAll() : null;
+		if(typeof(this.status) == "string") {
+			this.dialog.closeAll() 
+			alert(this.status)
+		}
+
 	}
 
 	tarteja_mensajes_errores = {
@@ -95,7 +116,7 @@ export class PagoComponent implements OnInit {
 		})
 
 		this.tarjetaForm = this.formBuilder.group({
-			nombre: [this.usuario.getNombre(), Validators.compose([Validators.required])],
+			nombre: ['Luis Malaga', Validators.compose([Validators.required])],
 			tarjeta: ['4111111111111111', Validators.compose([Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
 			mes: ['12', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
 			ano: ['20', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],

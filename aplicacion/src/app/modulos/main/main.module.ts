@@ -25,6 +25,7 @@ import { CarreraComponent } from './carreras/carrera/carrera.component';
 import { PagoComponent } from './pago/pago.component';
 import { ExplicacionComponent } from './partials/explicacion/explicacion.component';
 import { BoletoComponent } from './boleto/boleto.component';
+import { LoadingComponent } from '../../extras/loading/loading.component';
 
 
 
@@ -53,10 +54,12 @@ import { BoletoComponent } from './boleto/boleto.component';
 		GaleriasComponent,
 		PagoComponent,
 		ExplicacionComponent,
-		BoletoComponent
+		BoletoComponent,
+		LoadingComponent
 	],
 	entryComponents: [
-		LoginComponent
+		LoginComponent,
+		LoadingComponent
 	]
 })
 export class MainModule { }

@@ -64,7 +64,6 @@ export class BoletoComponent implements OnInit, OnDestroy {
 			 id_usuario: this.usuario.getId(),
 			 id_boleto: this.actual.$id,
 			 monto: this.precioCompra,
-			 fechaCompra: new Date,
 			 cantidad: this.cantidadBoletos,
 			 descuento: 0,
 		}

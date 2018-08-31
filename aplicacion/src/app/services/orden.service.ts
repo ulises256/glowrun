@@ -36,8 +36,8 @@ export class OrdenService {
         return axios.default.get(this.apiUrl + '/data/orden/usuario/' + idOrden);
     }
 
-    public static pagar(datos) {
-        return axios.default.post(this.apiUrl + '/data/orden/pagar/transaccion', datos);
+    public static pagar(id:number, datos) {
+        return axios.default.post(this.apiUrl + '/data/orden/pagar/transaccion/pago/'+ id, datos);
     }
 
     modificarOrdenPendiente(orden: Orden) {
