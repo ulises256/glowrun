@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OpenPayModel, Tarjeta, Costumer } from '../../../models/openpay.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrdenService, AuthService } from '../../../services';
+import { Orden, Usuario } from '../../../models';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'app-pago',
@@ -16,7 +19,11 @@ export class PagoComponent implements OnInit {
 	private openpay: OpenPayModel;
 	iconsCards = []
 	iconsDebit = []
-	constructor(private formBuilder: FormBuilder,private domSanitizer: DomSanitizer , private route: ActivatedRoute) { 
+	orden: Orden;
+	usuario: Usuario;
+
+	sub: any;
+	constructor(private formBuilder: FormBuilder,private domSanitizer: DomSanitizer , private route: ActivatedRoute, private router: Router, private ordenService: OrdenService, private auth: AuthService) { 
 		this.iconsCards.push('assets/images/Amex.svg')
 		this.iconsCards.push('assets/images/Visa.svg')
 		this.iconsCards.push('assets/images/Mastercard.svg')
@@ -30,6 +37,8 @@ export class PagoComponent implements OnInit {
 	}
 
 	cobrar(form: FormGroup) {
+		
+		console.log(this.orden)
 		if (form.valid) {
 			let costumer: Costumer = {
 				'holder_name': form.controls.nombre.value,
@@ -38,7 +47,7 @@ export class PagoComponent implements OnInit {
 				'expiration_year': form.controls.ano.value,
 				'cvv2': form.controls.codigo.value
 			}
-			this.openpay.crearToken(costumer);
+			this.openpay.crearToken(costumer, this.orden, this.usuario);
 		}
 	}
 
@@ -72,19 +81,27 @@ export class PagoComponent implements OnInit {
 
 	ngOnInit() {
 
-		this.route.params.subscribe(params => {
-			console.log(params)
-		})
+		// this.router.getNavigatedData() ? null : this.router.navigateByData({url: ['/'], data: null})
 
 		this.openpay = new OpenPayModel(this.fomrTarjeta);
 
-		this.tarjetaForm = this.formBuilder.group({
-			nombre: ['', Validators.compose([Validators.required])],
-			tarjeta: ['', Validators.compose([Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
-			mes: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
-			ano: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
-			codigo: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])]
+		this.ordenService.obtenerOrdenPendiente().subscribe(orden => {
+			this.orden = orden;
+		}).closed;
+		console.log(this.orden)
+
+		this.auth.obtenerUsuario().subscribe(usuario => {
+			this.usuario = usuario;
 		})
+
+		this.tarjetaForm = this.formBuilder.group({
+			nombre: [this.usuario.getNombre(), Validators.compose([Validators.required])],
+			tarjeta: ['4111111111111111', Validators.compose([Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+			mes: ['12', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+			ano: ['20', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+			codigo: ['110', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])]
+		});		
+
 	}
 
 }

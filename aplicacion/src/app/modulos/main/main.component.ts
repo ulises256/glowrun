@@ -14,7 +14,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 	selector: 'app-main',
 	templateUrl: './main.component.pug',
 	styleUrls: ['./main.component.styl'],
-	providers: [MediaMatcher, AuthService],
+	providers: [MediaMatcher],
 	animations: [
 		trigger('routerTransition', [
 			transition('* <=> *', [
@@ -89,6 +89,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	salir() {
+		this.us.modificarRedirect('/')
 		this.us.salir();
 	}
 

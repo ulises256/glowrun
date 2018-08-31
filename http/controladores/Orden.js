@@ -14,28 +14,38 @@ openpay.setProductionReady(false);
 
 var ex = module.exports = {};
 
-ex.create = (req, res, next) => {
-    console.log(req.body)
+ex.create = (req, res, next) => orden.create(req.body).then(response => res.status(200).jsonp(response))
 
-    var newCharge = {
-        "method": "card",
-        "customer":{
-            "name": "John Doe",
-            "email": "luisgateshouse@gmail.com"
-        },
-        "amount" : 200.00,
-        "description" : "Service Charge",
-        "order_id" : "oid-00721",
-        "device_session_id": req.body.deviceSessionId,
-        "source_id" : req.body.idTarjeta
-      };    
-    openpay.charges.create(newCharge, function (error, body){
-        console.log(body)
-        console.log(error)
-      });
-}
-// orden.create(req.body)
-//     .then(response => res.status(200).jsonp(response))
+
+ex.crearTransaccionPagar = (req, res, next) => 
+    openpay.charges.create(req.body, function (error, body){
+            console.log(body)
+            console.log(error)
+          });
+
+
+
+
+//     console.log(req.body)
+
+//     var newCharge = {
+//         "method": "card",
+//         "customer":{
+//             "name": "John Doe",
+//             "email": "luisgateshouse@gmail.com"
+//         },
+//         "amount" : 200.00,
+//         "description" : "Service Charge",
+//         "order_id" : "oid-00721",
+//         "device_session_id": req.body.deviceSessionId,
+//         "source_id" : req.body.idTarjeta
+//       };    
+//     openpay.charges.create(newCharge, function (error, body){
+//         console.log(body)
+//         console.log(error)
+//       });
+// }
+
 
 ex.delete = (req, res, next) => orden.findById(req.params.id)
     .then(orden => orden.destroy())

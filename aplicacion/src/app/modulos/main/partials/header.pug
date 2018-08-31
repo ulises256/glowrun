@@ -11,7 +11,8 @@ mat-toolbar(id="menu" class="mat-elevation-z8" role="header" *ngIf="!mobileQuery
         .derecha
             a(mat-button [routerLink]="navLinks[5].path"  [routerLinkActive]="['active']" *ngIf="!(usuario && usuario.getId())").link {{navLinks[5].label}}
             a(mat-button *ngIf="usuario && usuario.getId()" [mat-menu-trigger-for]="menuUser").link
-                mat-icon account_circle        
+                mat-icon(*ngIf="usuario && !(usuario.getFoto())") account_circle
+                img(*ngIf="usuario && usuario.getFoto()" [src]="usuario.getFoto()", alt="foto perfil").avatar
 
 mat-toolbar(id="menu-movil" color="primary" class="mat-elevation-z8" role="header" *ngIf="mobileQuery.matches")
     mat-toolbar-row

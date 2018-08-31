@@ -6,14 +6,22 @@ export class Orden {
     private nombre: string;
     private id_usuario: number;
 	private id_boleto: number;
+	private monto: number;
 	private fechaCompra: Date;
+	private cantidad: number;
+	private descuento: number;
+	private status: string;
 
 	constructor(arg) {
 		this.id = arg.id;
 		this.nombre = arg.nombre;
 		this.id_usuario = arg.id_usuario;
 		this.id_boleto = arg.id_boleto;
-		this.fechaCompra = arg.fechaCompra;		
+		this.monto = arg.monto;
+		this.fechaCompra = arg.fechaCompra;
+		this.cantidad = arg.cantidad;
+		this.descuento = arg.descuento;
+		this.status = arg.status;
     }
 
 	public get $id(): number {
@@ -34,7 +42,23 @@ export class Orden {
 	
 	public get $fechaCompra(): Date {
 		return this.fechaCompra;
-    }
+	}
+	
+	public get $cantidad(): number {
+		return this.cantidad
+	}
+
+	public get $descuento() : number {
+		return this.descuento;
+	}
+
+	public get $monto(): number {
+		return this.monto;
+	}
+
+	public get $status() : string {
+		return this.status;
+	}
 	
 	public set $id(value: number) {
 		this.id = value;
@@ -54,5 +78,21 @@ export class Orden {
 
 	public set $fechaCompra(value: Date) {
 		this.fechaCompra = value;
+	}
+
+	public set $cantidad(value: number) {
+		this.cantidad = value
+	}
+
+	public set $descuento(value: number) {
+		this.descuento = value;
+	}
+
+	public set $monto(value: number) {
+		this.monto = value;
+	}
+
+	public set $status(value: string) {
+		this.status = value
 	}
 }

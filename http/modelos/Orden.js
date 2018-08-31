@@ -7,7 +7,10 @@ module.exports = ({Sequelize, sequelize } = conector) =>
             defaultValue: 'pendiente',
         },
         fechaCompra: Sequelize.DATE,
-        precio: Sequelize.FLOAT
+        monto: Sequelize.FLOAT,
+        cantidad: Sequelize.INTEGER,
+        descuento: Sequelize.FLOAT,
+
     },{
     	name : {
     		singular: 'orden',

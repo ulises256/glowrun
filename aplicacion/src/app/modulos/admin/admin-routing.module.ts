@@ -7,8 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
  */
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuard } from '../../guards/auth.guard';
-import { AuthService } from '../../services/auth.service';
 import { CarrerasComponent } from './carreras/carreras.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CarreraComponent } from './carreras/carrera/carrera.component';
@@ -62,6 +60,5 @@ const admin_routers: Routes = [
 	exports: [
 		RouterModule
 	],
-	providers: [AuthGuard, AuthService]
 })
 export class AdminRoutingModule { }

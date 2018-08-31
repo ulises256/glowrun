@@ -8,7 +8,6 @@ import { MainComponent } from './main.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from '../../guards/auth.guard';
-import { AuthService } from '../../services/auth.service';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { GaleriasComponent } from './galerias/galerias.component';
 import { CarrerasComponent } from './carreras/carreras.component';
@@ -52,7 +51,7 @@ const main_routers: Routes = [
 				component: BoletoComponent
 			},
 			{
-				path: 'comprar/:id/pago',
+				path: 'pago',
 				component: PagoComponent
 			},
 			{
@@ -80,6 +79,5 @@ const main_routers: Routes = [
 	exports: [
 		RouterModule
 	],
-	providers: [AuthGuard, AuthService]
 })
 export class MainRoutingModule { }

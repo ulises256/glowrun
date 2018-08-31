@@ -33,6 +33,7 @@
     "@types/lodash": "^4.14.108",
     "@vimeo/player": "^2.3.0",
     "angular-froala-wysiwyg": "^2.8.4",
+    "angular2-navigate-with-data": "^1.1.11",
     "angular4-social-login": "^1.1.1",
     "animejs": "^2.2.0",
     "c3": "^0.4.21",

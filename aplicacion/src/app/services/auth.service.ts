@@ -11,7 +11,9 @@ export class AuthService {
     private apiUrl: string = APILOCAL.url;
     private usuarioSubject = new BehaviorSubject<Usuario>(null);
     private isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
-    private isLoginObserver = this.isLoginSubject.asObservable()
+    private isLoginObserver = this.isLoginSubject.asObservable();
+
+    private redirecionarA = new BehaviorSubject<string>('/');
 
     constructor(private router: Router) {
         console.log('Auth contructor')
@@ -20,18 +22,52 @@ export class AuthService {
         console.log(this.isLoginSubject.getValue());
     }
 
-    public iniciarSesion(usuario) {
+    iniciarSesion(usuario) {
         return axios.default.post(this.apiUrl + '/data/login', usuario)
             .then(response => this.validarToken(response.data.token, response.data.success))
     }
 
-    public registrar(usuario) {
+    registrar(usuario) {
         return axios.default.post(this.apiUrl + '/data/registro', usuario)
             .then(response => this.validarToken(response.data.token, response.data.success))
     }
 
-    public loginFacebook(token) {
+    loginFacebook(token) {
         return this.validarToken(token);
+    }
+
+    salir() {
+        this.destuirUsuario();
+        this.obtenerRedirect().subscribe(path => this.router.navigate([path]))
+    }
+
+    usuarioLogeado() {
+        this.isLoginSubject.next(this.hasToken())
+        return this.isLoginObserver;
+    }
+
+    esAdmin() {
+        return this.usuarioSubject.asObservable()
+            .first()
+            .map(user => {
+                console.log(user)
+                if (user && user.getTipo() === "admin") {
+                    return true
+                }
+                return false;
+            })
+    }
+
+    obtenerUsuario() {
+        return this.usuarioSubject;
+    }    
+
+    obtenerRedirect() {
+        return this.redirecionarA.asObservable();
+    }
+
+    modificarRedirect(redirect: string) {
+        this.redirecionarA.next(redirect);
     }
 
     private hasToken(): boolean {
@@ -62,29 +98,5 @@ export class AuthService {
         localStorage.removeItem("token")
     }
 
-    public salir() {
-        this.destuirUsuario();
-        this.router.navigate(['/login'])
-    }
 
-    public usuarioLogeado() {
-        this.isLoginSubject.next(this.hasToken())
-        return this.isLoginObserver;
-    }
-
-    public esAdmin() {
-        return this.usuarioSubject.asObservable()
-            .first()
-            .map(user => {
-                console.log(user)
-                if (user && user.getTipo() === "admin") {
-                    return true
-                }
-                return false;
-            })
-    }
-
-    public obtenerUsuario() {
-        return this.usuarioSubject;
-    }
 }

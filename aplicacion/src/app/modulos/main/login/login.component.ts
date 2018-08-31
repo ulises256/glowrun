@@ -19,11 +19,12 @@ export class LoginComponent implements OnInit {
 
 
 	login(form: FormGroup) {
+		console.log(form)
 		if(form.controls.usuario.valid && form.controls.contra.valid){
 			let usuario = {correo: form.controls.usuario.value, password: form.controls.contra.value}
 			this.auth.iniciarSesion(usuario)
 			.then(response => response? this.inicioIncorecto = false: this.inicioIncorecto = true)
-			.then(response => response? null: this.router.navigate(['/']))
+			.then(response => response? null: this.auth.obtenerRedirect().subscribe(path => this.router.navigate([path])))
 		}
 	}
 
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
 			let usuario = {correo: form.controls.correo.value, password: form.controls.contrasena.value}
 			this.auth.registrar(usuario)
 			.then(response => response? this.registroIncorecto = false: this.registroIncorecto = true)
-			.then(response => response? null: this.router.navigate(['/']))
+			.then(response => response? null: this.auth.obtenerRedirect().subscribe(path => this.router.navigate([path])))
 		} 
 	}
 
@@ -58,7 +59,9 @@ export class LoginComponent implements OnInit {
 				res != false ?
 				this.router.navigate(['/user']) : this.router.navigate(['/'])
 			}) : null;
-          });
+		  });
+		  
+		this.auth.usuarioLogeado().subscribe(logeado => logeado? this.router.navigate(['/']): null)
 
     }
 }

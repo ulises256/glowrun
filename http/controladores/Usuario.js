@@ -71,9 +71,7 @@ ex.read = function(req, res, next) {
 
     if (id) {
         usuario.findById(id, {
-			include : [
-				{ model: avatar }
-			]
+
 		}).then(function(usuario) {
             res.status(200).jsonp(usuario);
         });
@@ -156,16 +154,13 @@ passport.use('login', new localStrategy({
 
 }, function(req, username, password, done) {
     usuario.findOne({
-        include : [
-            { model: avatar }
-        ],
         where: {
             'correo': username
         }
     }).then(function(user) {
         if (user == null) {
-            return done(null, false)
             console.log('no se encontro un usuario');
+            return done(null, false)
         }
         if (password == user.password) {
             return done(null, user)

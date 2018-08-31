@@ -1,5 +1,7 @@
 import { UsuarioService } from "../services/usuario.service";
 import { Carrera } from "./carrera.model";
+import { Orden } from "./orden.model";
+import { OrdenService } from "../services";
 
 export class Usuario {
     private id: number;
@@ -15,6 +17,7 @@ export class Usuario {
     private id_open: number;
     private foto;
     // private carreras: Carrera[];
+    private ordenes: Orden[];
 
     constructor(arg, $foto?){
         this.id = arg.id;
@@ -29,7 +32,7 @@ export class Usuario {
         this.gustos = arg.gustos;
         this.id_open = arg.id_open;
         $foto ? this.foto = $foto : UsuarioService.obtenerFoto(this.id).then(responde =>{
-            responde && responde.data? this.foto = responde.data.fb_avatar : this.foto = 'assets/images/perfil.png';
+            responde && responde.data? this.foto = responde.data.fb_avatar : null;
         }) ;
 
         // UsuarioService.obtenerCarreras(this.id)
@@ -132,6 +135,5 @@ export class Usuario {
 
     public setGustos(value: string) {
         this.gustos = value;
-    }    
-
+    }
 }

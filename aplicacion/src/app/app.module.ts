@@ -6,7 +6,7 @@ import {DndModule} from 'ng2-dnd';
 import { AgmCoreModule } from '@agm/core';
 import { MaterialModule } from './extras/material.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-
+// import "angular2-navigate-with-data";
 import { AppComponent } from './app.component';
 // importando  Rutas
 import {AppRoutingModule} from './app.routers';
@@ -19,7 +19,8 @@ import { AdminModule } from './modulos/admin/admin.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SlickModule } from 'ngx-slick';
-import { PatrocinadorService } from './services';
+import { PatrocinadorService, OrdenService, AuthService } from './services';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { PatrocinadorService } from './services';
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   exports: [],
-  providers: [PatrocinadorService],
+  providers: [PatrocinadorService, OrdenService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
