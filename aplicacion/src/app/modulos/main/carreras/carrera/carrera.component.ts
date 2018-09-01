@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarreraService } from '../../../../services';
-import { Carrera, GoogleMaps, Punto } from '../../../../models';
+import { CarreraService, AuthService } from '../../../../services';
+import { Carrera, GoogleMaps, Punto, Usuario } from '../../../../models';
 
 @Component({
 	selector: 'app-carrera',
@@ -15,9 +15,10 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 	@ViewChild('googleMap') gmapElement: ElementRef;
 	mapa: GoogleMaps
 	carrerasProximas: Carrera[] = []
-	  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1};
+	user: Usuario;
+	slideConfig = {"slidesToShow": 1, "slidesToScroll": 1};
 
-	constructor(private route: ActivatedRoute, private router: Router,) {
+	constructor(private route: ActivatedRoute, private router: Router, private auth: AuthService) {
 		this.carrera = new Carrera({}, 'bandera');
 		this.imagenes = [
 			'assets/images/cuadritos/glow_home_1.png',
@@ -73,6 +74,8 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 						this.mapa.construirPolyLine(p)
 				})))
 		});
+
+		this.auth.obtenerUsuario().subscribe(user =>  this.user = user)
 	}
 
 }

@@ -5,6 +5,7 @@ import { OrdenService, AuthService } from '../../../services';
 import { Orden, Usuario } from '../../../models';
 import { MatDialog } from '@angular/material';
 import { LoadingComponent } from '../../../extras/loading/loading.component';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-pago',
@@ -26,6 +27,7 @@ export class PagoComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private ordenService: OrdenService,
+		private router: Router,
 		private auth: AuthService,
 		private dialog: MatDialog) {
 		this.iconsCards.push('assets/images/Amex.svg')
@@ -68,6 +70,7 @@ export class PagoComponent implements OnInit {
 		if(typeof(this.status) == "string") {
 			this.dialog.closeAll()
 			alert(this.status)
+			this.router.navigate(['/'])
 		}
 
 	}

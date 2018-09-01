@@ -4,10 +4,10 @@
             .izquierda
                 .titulo
                     h1.titulo {{carrera.$nombre}}
-                    .boton
-                        button(mat-raised-button color="primary" id="btn-comprar" (click)="irAComprar()") COMPRAR BOLETO
-                .registro
-                    h3.reg reistrate
+                .boton(*ngIf="user")
+                    button(mat-raised-button color="primary" id="btn-comprar" (click)="irAComprar()") COMPRAR BOLETO
+                .registro(*ngIf="!(user)")
+                    a.reg([routerLink]="['/login']") registrate
                 .descripcion
                     p {{carrera.$description}}
                 .mapita
