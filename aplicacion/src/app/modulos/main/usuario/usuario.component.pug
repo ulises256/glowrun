@@ -1,6 +1,6 @@
 .usuario
 	.usuario-content
-		mat-card
+		.mat-cardto
 			section.encabezado
 				.foto
 					img([src]="usuario.getFoto()" *ngIf="usuario.getFoto()")
@@ -10,9 +10,6 @@
 					button(mat-menu-item type="submit" (click)="editar(usuarioForm)" matTooltip="{{editable.tooltip}}")
 						mat-icon {{editable.icon}}
 						span {{editable.tooltip}}
-					a(mat-menu-item [routerLink]="['/admin']" *ngIf="usuario && usuario.getTipo()=='admin'" matTooltip="Ir al administrador")
-						mat-icon edit
-						span Administrar
 			section.datos([formGroup]="usuarioForm")
 				.nombre
 					h4 Nombre:

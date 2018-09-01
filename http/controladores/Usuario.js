@@ -307,7 +307,9 @@ ex.unirCarrera = (req, res, next) => usuario.findById(req.params.id)
                     .then(carreras => carreras.map(n => new Object({id: n.id_carrera})))
                     .then(carreras => carrera.findById(carreras[0].id).then(carrer => res.status(200).jsonp(carrer)))
                     .catch(err => res.status(500).jsonp(err))    
-    );    
+    );
+
+ex.obtenerBoletitos = (req, res, next) => 
 
 
 function socializar(red_id, avatar_id, profile, done) {

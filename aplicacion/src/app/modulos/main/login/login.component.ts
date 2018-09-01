@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
 
 
 	login(form: FormGroup) {
-		console.log(form)
 		if(form.controls.usuario.valid && form.controls.contra.valid){
 			let usuario = {correo: form.controls.usuario.value, password: form.controls.contra.value}
 			this.auth.iniciarSesion(usuario)
@@ -56,12 +55,13 @@ export class LoginComponent implements OnInit {
 		this.route.params.subscribe(params => {
 			console.log(params)
 			params.token? this.auth.loginFacebook(params.token).then(res => {
+				console.log(res)
 				res != false ?
 				this.router.navigate(['/user']) : this.router.navigate(['/'])
 			}) : null;
 		  });
 		  
-		this.auth.usuarioLogeado().subscribe(logeado => logeado? this.router.navigate(['/']): null)
+		this.auth.obtenerUsuario().subscribe(user => user && user.getId() ? this.router.navigate(['/']) : null)
 
     }
 }

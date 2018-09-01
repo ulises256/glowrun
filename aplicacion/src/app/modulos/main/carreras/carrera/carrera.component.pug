@@ -5,7 +5,7 @@
                 .titulo
                     h1.titulo {{carrera.$nombre}}
                     .boton
-                        button(mat-raised-button color="primary" id="btn-comprar") COMPRAR BOLETO
+                        button(mat-raised-button color="primary" id="btn-comprar" (click)="irAComprar()") COMPRAR BOLETO
                 .registro
                     h3.reg reistrate
                 .descripcion

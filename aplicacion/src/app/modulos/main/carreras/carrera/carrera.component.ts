@@ -16,7 +16,7 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 	mapa: GoogleMaps
 	carrerasProximas: Carrera[] = []
 	  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1};
-		 
+
 	constructor(private route: ActivatedRoute, private router: Router,) {
 		this.carrera = new Carrera({}, 'bandera');
 		this.imagenes = [
@@ -30,7 +30,9 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 			'#40ccf4'
 		]
 		CarreraService.obtenerHome()
-			.then(r => r && r.data ? this.carrerasProximas = r.data.map(c => new Carrera(c, 'bandera')) : null)		
+			.then(r => r && r.data ?
+				this.carrerasProximas =
+					r.data.map(c => new Carrera(c, 'bandera')) : null)
 	}
 
 	crearmapa(punto?: Punto) {
@@ -41,6 +43,10 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 		}, 1, true, 2);
 
 		this.mapa.contruirMapa();
+	}
+
+	irAComprar() {
+		this.router.navigate(['/comprar/' + this.carrera.$id]);
 	}
 
 	ngAfterViewInit(): void {
@@ -60,10 +66,11 @@ export class CarreraComponent implements OnInit, AfterViewInit{
 			CarreraService.obtenerCarrera(+params['id'])
 				.then(r => r && r.data ? this.carrera = new Carrera(r.data) : null)
 				.then(c => this.crearmapa())
-				.then(c => this.carrera.getRuta().then(r => r.getPuntos().then((p: Punto[]) => {
-					this.mapa.modificarZoom(14);
-					this.mapa.modificarCentro(p[0].$y, p[0].$x);
-					this.mapa.construirPolyLine(p)
+				.then(c => this.carrera.getRuta()
+					.then(r => r.getPuntos().then((p: Punto[]) => {
+						this.mapa.modificarZoom(14);
+						this.mapa.modificarCentro(p[0].$y, p[0].$x);
+						this.mapa.construirPolyLine(p)
 				})))
 		});
 	}

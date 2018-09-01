@@ -11,8 +11,14 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 		console.log('Estoy checando si estas logeado')
-		return this.auth.usuarioLogeado()
-		.do(res => res ? null : this.router.navigate(['/login']));
+		// return this.auth.usuarioLogeado()
+		// .do(res => res ? null : this.router.navigate(['/login']));
+		let hayUsuario: boolean;
+		this.auth.obtenerUsuario().asObservable().subscribe(user => {
+			user && user.getId() ? hayUsuario = true : hayUsuario = false;
+		}).closed
+
+		return hayUsuario;
 	}
 	
 	canActivateChild() {
@@ -20,7 +26,8 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
 		 let usuario = this.auth.obtenerUsuario().getValue()
 		 console.log(usuario)
 		 if(usuario && usuario.getTipo()=="admin"){
-			 return true
+			this.router.navigate(['/admin'])
+			return true
 		 }
 		 return false
 	  }

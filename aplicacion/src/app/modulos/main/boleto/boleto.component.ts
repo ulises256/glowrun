@@ -6,7 +6,6 @@ import { Carrera, Boleto, Usuario, Orden } from '../../../models';
 import { Observable } from 'rxjs';
 import { Time, TimerService } from '../../../services/timer.service';
 import * as moment from 'moment'
-import { providers } from 'ng2-dnd';
 
 @Component({
 	selector: 'app-boleto',
@@ -45,8 +44,8 @@ export class BoletoComponent implements OnInit, OnDestroy {
 				this.sub = this.auth.obtenerUsuario().subscribe(user => {
 					this.auth.modificarRedirect('/comprar/' + params['id'])
 					user ? this.usuario = user : this.router.navigate(['/login'])
-				}).closed;				
-		}).closed;
+				}).closed;
+		});
 	}
 
 	ngOnDestroy(){

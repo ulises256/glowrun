@@ -10,14 +10,16 @@ import { Router } from '@angular/router';
 export class AuthService {
     private apiUrl: string = APILOCAL.url;
     private usuarioSubject = new BehaviorSubject<Usuario>(null);
-    private isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
+    private isLoginSubject = new BehaviorSubject<boolean>(null);
     private isLoginObserver = this.isLoginSubject.asObservable();
 
     private redirecionarA = new BehaviorSubject<string>('/');
 
     constructor(private router: Router) {
         console.log('Auth contructor')
-        localStorage.getItem("token") != null ? this.validarToken(localStorage.getItem("token"), true) : null;
+        localStorage.getItem("token") != null ? 
+            (this.isLoginSubject.next(true),this.validarToken(localStorage.getItem("token")) )
+            : this.isLoginSubject.next(false);
         console.log(this.usuarioSubject.getValue());
         console.log(this.isLoginSubject.getValue());
     }
@@ -42,8 +44,7 @@ export class AuthService {
     }
 
     usuarioLogeado() {
-        this.isLoginSubject.next(this.hasToken())
-        return this.isLoginObserver;
+        return this.isLoginSubject.asObservable();
     }
 
     esAdmin() {
@@ -70,10 +71,6 @@ export class AuthService {
         this.redirecionarA.next(redirect);
     }
 
-    private hasToken(): boolean {
-        return localStorage.getItem('token') != null ? true : false;
-    }
-
     private validarToken(token, succes?) {
         return axios.default.get(this.apiUrl + '/data/token/' + token)
             .then(response => {
@@ -81,6 +78,7 @@ export class AuthService {
                     this.crearUsuario(response.data.user, token)
                     return true;
                 }
+                this.destuirUsuario();
                 return false
             })
     }

@@ -45,6 +45,9 @@ mat-menu(#menuUser="matMenu")
         mat-icon account_box
         span(*ngIf="usuario && !usuario.getNombre()") {{usuario.getCorreo()}}
         span(*ngIf="usuario && usuario.getNombre()") {{usuario.getNombre()}}
+    a( *ngIf="usuario && usuario.getTipo()=='admin'" mat-menu-item [routerLink]="['/admin']").link
+        mat-icon edit
+        span {{usuario.getTipo()}}
     a(mat-menu-item (click)="salir()").link
         mat-icon exit_to_app
         span Cerrar Sesión

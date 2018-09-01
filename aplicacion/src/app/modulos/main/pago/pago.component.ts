@@ -27,7 +27,7 @@ export class PagoComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private ordenService: OrdenService,
 		private auth: AuthService,
-		private dialog: MatDialog) { 
+		private dialog: MatDialog) {
 		this.iconsCards.push('assets/images/Amex.svg')
 		this.iconsCards.push('assets/images/Visa.svg')
 		this.iconsCards.push('assets/images/Mastercard.svg')
@@ -41,7 +41,7 @@ export class PagoComponent implements OnInit {
 	}
 
 	cobrar(form: FormGroup) {
-		
+
 		console.log(this.orden)
 		if (form.valid) {
 			let costumer: Costumer = {
@@ -55,7 +55,7 @@ export class PagoComponent implements OnInit {
 
 			this.openpay.obtenerStatus().subscribe(status => {
 				console.log(status);
-				this.status = status 
+				this.status = status
 				this.cargar();
 			})
 
@@ -66,7 +66,7 @@ export class PagoComponent implements OnInit {
 		this.status==0? this.dialog.open(LoadingComponent) : null;
 		this.status==1? this.dialog.closeAll() : null;
 		if(typeof(this.status) == "string") {
-			this.dialog.closeAll() 
+			this.dialog.closeAll()
 			alert(this.status)
 		}
 
@@ -102,8 +102,6 @@ export class PagoComponent implements OnInit {
 
 	ngOnInit() {
 
-		// this.router.getNavigatedData() ? null : this.router.navigateByData({url: ['/'], data: null})
-
 		this.openpay = new OpenPayModel(this.fomrTarjeta);
 
 		this.ordenService.obtenerOrdenPendiente().subscribe(orden => {
@@ -116,12 +114,34 @@ export class PagoComponent implements OnInit {
 		})
 
 		this.tarjetaForm = this.formBuilder.group({
-			nombre: ['Luis Malaga', Validators.compose([Validators.required])],
-			tarjeta: ['4111111111111111', Validators.compose([Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
-			mes: ['12', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
-			ano: ['20', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
-			codigo: ['110', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)])]
-		});		
+			nombre: ['Luis Malaga',
+					Validators.compose([Validators.required])],
+			tarjeta: [
+					'4111111111111111',
+					Validators.compose([Validators.required,
+					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+			mes: [
+				'12',
+				Validators.compose([
+					Validators.required,
+					Validators.minLength(2),
+					Validators.maxLength(2),
+					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+			ano: [
+				'20',
+				Validators.compose([
+					Validators.required,
+					Validators.minLength(2),
+					Validators.maxLength(2),
+					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+			codigo: [
+				'110',
+				Validators.compose([
+					Validators.required,
+					Validators.minLength(3),
+					Validators.maxLength(4),
+					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])]
+		});
 
 	}
 
