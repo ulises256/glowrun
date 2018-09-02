@@ -16,11 +16,6 @@
 					mat-form-field(class="input-layout")
 						input(matInput formControlName="nombre"  (ngModelChange)="usuario.setNombre($event)" autocomplete="off"  required)
 					mat-divider
-				.nombre
-					h4 Apellidos:
-					mat-form-field(class="input-layout")
-						input(matInput formControlName="apellido"  (ngModelChange)="usuario.setApellidos($event)" autocomplete="off"  required)
-					mat-divider
 				.correo
 					h4 Correo:
 					mat-form-field(class="input-layout")
@@ -36,3 +31,6 @@
 					mat-form-field(class="input-layout")
 						input(matInput formControlName="sexo"  (ngModelChange)="usuario.setSexo($event)" autocomplete="off"   required)
 					mat-divider
+			.ordenes
+				.tabla(*ngFor="let orden of ordenes")
+					h1 {{orden.$nombre}}

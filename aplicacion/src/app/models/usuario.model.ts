@@ -136,4 +136,9 @@ export class Usuario {
     public setGustos(value: string) {
         this.gustos = value;
     }
+
+    public getOrdenes() {
+        console.log('obteniendo las ordenes')
+        return UsuarioService.obtenerOrdenes(this.id).then(r => r && r.data ? this.ordenes =  r.data.map(orden => new Orden(orden)) : []);
+    }
 }

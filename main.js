@@ -38,6 +38,7 @@ var Patrocinador = require('./http/rutas/Patrocinador');
 var PuntoVenta = require('./http/rutas/PuntoVenta');
 var Cupon = require('./http/rutas/Cupon');
 var Ruta = require('./http/rutas/Ruta')
+var Auth = require('./http/rutas/Autentificacion')
 
 
 // - Conexion a la base de datos
@@ -85,6 +86,7 @@ app.use('/', Patrocinador);
 app.use('/', PuntoVenta);
 app.use('/', Cupon);
 app.use('/', Ruta);
+app.use('/', Auth);
 
 app.use(lessMiddleware(__dirname + '/aplicacion/dist/'));
 

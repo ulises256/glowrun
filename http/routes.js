@@ -63,11 +63,14 @@ router.get("/user", function(req, res) {
     res.render("index.html");
 })
 
-router.get("/token", function(req, res) {
+/*router.get("/token", function(req, res) {
+     console.log('El usuario es')
+    console.log(req.user)
+
     token = jwt.sign({ user: req.user}, secret, { expiresIn: '1h' });
 
     res.redirect('/user/' + token);
-})
+})*/
 
 router.get("/user/:token", function(req, res) {
     res.render("index.html");

@@ -5,11 +5,18 @@ import { Municipio } from "./municipios.model";
 import { Boleto } from "./boleto.model";
 import { Ruta } from "./ruta.model";
 
+enum Status {
+	PROXIMO = 'proximo',
+	REALIZADO =  'realizado'
+}
+
 export class Carrera {
 	private id: number;
 	private nombre: string;
 	private fechaini: Date;
 	private description: string;
+	private status: string;
+	private videoUrl: string;
 	private imagenes: Imagen[] = []
 	private imagenMapa: Imagen;
 	private patrocinadores: Patrocinador[] = [];
@@ -22,6 +29,9 @@ export class Carrera {
 		this.nombre = arg.nombre;
 		this.fechaini = arg.fechaini;
 		this.description = arg.description;
+		this.status = arg.status;
+		this.videoUrl = arg.videoUrl;
+
 		!(bandera) ?
 		(
 			CarreraService.obtenerImagenes(this.id)
@@ -59,6 +69,14 @@ export class Carrera {
 
 	public get $description(): string {
 		return this.description;
+	}
+
+	public get $status(): string {
+		return this.status;
+	}
+
+	public get $videoUrl(): string {
+		return this.videoUrl;
 	}
 	
 	public getRuta(){
@@ -100,6 +118,14 @@ export class Carrera {
 
 	public set $description(value: string) {
 		this.description = value;
+	}
+
+	public set $status(value: string) {
+		this.status = value;
+	}
+
+	public set $videoUrl(value: string) {
+		this.videoUrl = value
 	}
 
 	public set $ruta(value: Ruta) {

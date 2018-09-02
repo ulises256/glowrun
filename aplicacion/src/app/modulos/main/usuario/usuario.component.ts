@@ -1,5 +1,5 @@
 import { Component,  OnInit, OnDestroy } from '@angular/core';
-import { Usuario } from '../../../models/usuario.model';
+import { Usuario, Orden } from '../../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,6 +14,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   public editable = {disiabled: true, icon: 'edit', tooltip: 'Editar Datos'};
   usuario: Usuario;
   subscription: Subscription;
+  ordenes: Orden[] =  [];
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {
     this.subscription = this.auth.obtenerUsuario().subscribe(user => this.usuario = user);
@@ -32,14 +33,15 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   ngOnInit() {
 	this.usuarioForm = this.formBuilder.group({
 		nombre: this.formBuilder.control({value:this.usuario.getNombre(), disabled: this.editable.disiabled},  Validators.required),
-		apellido: this.formBuilder.control({value:this.usuario.getApellidos(), disabled: this.editable.disiabled},  Validators.required),
 		correo: this.formBuilder.control({value:this.usuario.getCorreo(), disabled: this.editable.disiabled},  Validators.required),
 		edad: this.formBuilder.control({value:this.usuario.getEdad(), disabled: this.editable.disiabled},  Validators.required),
 		sexo: this.formBuilder.control({value:this.usuario.getSexo(), disabled: this.editable.disiabled},  Validators.required),
 	});
+
+  this.usuario.getOrdenes().then(ordenes => this.ordenes = ordenes);
   }
 
   ngOnDestroy() {
-	this.subscription.unsubscribe();
+	// this.subscription.unsubscribe();
   }
 }

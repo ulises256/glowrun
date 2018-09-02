@@ -37,6 +37,9 @@ route.route('/data/carrera/rutas/:id')
         .get(x.obtenerRuta)
         .post(x.anadirRuta);        
 
+route.route('/data/carrera/galerias/galerias')
+        .get(x.obtenerCarreasConGaleria);
+
 route.route('/data/carrera/filtro')
         .post(x.filtroCarrera);
 

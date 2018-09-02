@@ -30,6 +30,19 @@
                         input(matInput [disabled]="editable.disiabled" [ngModel]="carrera.$fechaini" (ngModelChange)="carrera.$fechaini = $event" [matDatepicker]="picker" placeholder="Seleciona fecha de inicio")
                         mat-datepicker-toggle(matSuffix [for]="picker")
                         mat-datepicker(#picker startView="year" [startAt]="fecha")
+                    mat-form-field(class="input-layout")
+                        input(
+                                [disabled]="editable.disiabled"
+                                matInput name="videoUrl"
+                                placeholder="Enlace del video"
+                                [ngModel]="carrera.$videoUrl"
+                                (ngModelChange)="carrera.$videoUrl = $event"
+                                autocomplete="off" 
+                                required)
+                    mat-form-field(class="input-layout")    
+                        mat-select([disabled]="editable.disiabled" name="status" placeholder="Selecione el estatus"  [(ngModel)]="carrera.$status" required)
+                            mat-option( [value]="'proximo'") Proxima Carrera
+                            mat-option( [value]="'realizado'") Carrera Realizada                                                          
                 .ciudad
                     .inputs
                         form([formGroup]="formMunicipio" (ngSubmit)="anadirCiudad(formMunicipio)")

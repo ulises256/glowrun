@@ -36,6 +36,10 @@ export class UsuarioService {
         return axios.default.post(this.apiUrl + '/data/usuario/ordenes/' + orden.$id_usuario, orden);
     }
 
+    public static obtenerOrdenes(idUsario) {
+        return axios.default.get(this.apiUrl + '/data/usuario/ordenes/' + idUsario);
+    }
+
     public static obtenerCarreras(idUsuario) {
         return axios.default.get(this.apiUrl + '/data/usuario/carrea/' + idUsuario);
     }

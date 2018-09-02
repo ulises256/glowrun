@@ -11,24 +11,17 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 		console.log('Estoy checando si estas logeado')
-		// return this.auth.usuarioLogeado()
-		// .do(res => res ? null : this.router.navigate(['/login']));
 		let hayUsuario: boolean;
 		this.auth.obtenerUsuario().asObservable().subscribe(user => {
 			user && user.getId() ? hayUsuario = true : hayUsuario = false;
 		}).closed
-
 		return hayUsuario;
 	}
 	
 	canActivateChild() {
 		console.log('Estoy checandoo si tienes permisos we e.e');
-		 let usuario = this.auth.obtenerUsuario().getValue()
-		 console.log(usuario)
-		 if(usuario && usuario.getTipo()=="admin"){
-			this.router.navigate(['/admin'])
-			return true
-		 }
-		 return false
+		let tienePermisos: boolean;
+		this.auth.obtenerUsuario().asObservable().subscribe(user => user.getTipo() == 'admin'? tienePermisos = true : tienePermisos = false).closed
+		return tienePermisos;
 	  }
 }

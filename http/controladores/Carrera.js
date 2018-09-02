@@ -100,6 +100,10 @@ ex.obtenerBoletos = (req, res, next) => carrera.findById(req.params.id)
     .then(boletos => res.status(200).jsonp(boletos))
     .catch(err => console.log(err));
 
+
+ex.obtenerCarreasConGaleria = (req, res, next) => carrera.findAll({wehere: { status: 'realizado' }})
+    .then(carreras =>  res.status(200).jsonp(carreras));
+
 ex.agregarBoleto = (req, res, next) => carrera.findById(req.params.id)
     .then(carrera => carrera.createBoleto(req.body, {attributes: ['id', 'nombre', 'precioini', 'preciofin', 'fechaini', 'fechafin', 'tipo', 'activo'] }))
     .then(boleto => res.status(200).jsonp(boleto))

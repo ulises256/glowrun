@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 /* Importamos los componentes que se usarán en las rutas
  */
+
+ import { AuthGuard } from '../../guards/auth.guard';
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './home/home.component';
 import { CarrerasComponent } from './carreras/carreras.component';
@@ -17,8 +19,8 @@ const admin_routers: Routes = [
 	{
 		path: 'admin',
 		component: AdminComponent,
-		// canActivate: [AuthGuard],
-		// canActivateChild: [AuthGuard],
+		canActivate: [AuthGuard],
+		canActivateChild: [AuthGuard],
 		children: [
 			{
 				path: '',

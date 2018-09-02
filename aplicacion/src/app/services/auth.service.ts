@@ -11,7 +11,6 @@ export class AuthService {
     private apiUrl: string = APILOCAL.url;
     private usuarioSubject = new BehaviorSubject<Usuario>(null);
     private isLoginSubject = new BehaviorSubject<boolean>(null);
-    private isLoginObserver = this.isLoginSubject.asObservable();
 
     private redirecionarA = new BehaviorSubject<string>('/');
 

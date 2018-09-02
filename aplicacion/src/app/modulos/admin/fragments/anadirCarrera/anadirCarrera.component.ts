@@ -21,13 +21,12 @@ export class AnadirCarreraComponent implements OnInit {
 	}
 
 	submit(form: FormGroup) {
-		if(form.controls.nombre.valid && 
-			form.controls.descripcion.valid &&
-			form.controls.fecha.valid
-		){
+		if(form.valid) {
 			this.data.$fechaini = form.controls.fecha.value;
 			this.data.$nombre = form.controls.nombre.value;
 			this.data.$description = form.controls.descripcion.value;
+			this.data.$status = form.controls.status.value;
+			this.data.$videoUrl = form.controls.videoUrl.value;
 			this.dialogRef.close(this.data);
 		}
 	}
@@ -37,6 +36,8 @@ export class AnadirCarreraComponent implements OnInit {
 			nombre: [this.data.$nombre, Validators.required],
 			descripcion: [this.data.$description, Validators.required],
 			fecha: [this.data.$fechaini, Validators.required],
+			status: [this.data.$status, Validators.required],
+			videoUrl: [this.data.$videoUrl]
 		});
     }
 
