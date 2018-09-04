@@ -12,8 +12,8 @@ route.route('/data/orden/:id')
 
 route.route('/data/orden/usuario/:id')
         .get(x.obtenerUsuario);
-
+route.route('/data/orden/pagar/transaccion/pagos')
+        .post(x.verCargos)
 route.route('/data/orden/pagar/transaccion/pago/:idOrden')
-        .post(x.crearTransaccionPagar)
+        .post(x.crearTransaccionPagar);
 module.exports = route;
-

@@ -19,7 +19,7 @@ import { AdminModule } from './modulos/admin/admin.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SlickModule } from 'ngx-slick';
-import { PatrocinadorService, OrdenService, AuthService } from './services';
+import { PatrocinadorService, OrdenService, AuthService, CarreraService } from './services';
 import { AuthGuard } from './guards/auth.guard';
 
 
@@ -52,7 +52,7 @@ import { AuthGuard } from './guards/auth.guard';
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   exports: [],
-  providers: [PatrocinadorService, OrdenService, AuthService, AuthGuard],
+  providers: [PatrocinadorService, OrdenService, AuthService, AuthGuard, CarreraService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

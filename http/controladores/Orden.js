@@ -17,7 +17,7 @@ var ex = module.exports = {};
 ex.create = (req, res, next) => orden.create(req.body).then(response => res.status(200).jsonp(response))
 
 
-ex.crearTransaccionPagar = (req, res, next) => 
+ex.crearTransaccionPagar = (req, res, next) =>
     openpay.charges.create(req.body, function (error, body){
             console.log(body)
             if(body){
@@ -33,6 +33,14 @@ ex.crearTransaccionPagar = (req, res, next) =>
                 res.status(200).jsonp({error_code: error.error_code})
             }
           });
+
+ex.verCargos = (req, res, next) => {
+    let offset = 0
+    req.body.offset ? offset += req.body.offset : null;
+    openpay.charges.list({'offset':offset	}, (error, lista) => {
+        res.status(200).jsonp({lista: lista, offset: offset});
+    });
+}
 
 ex.delete = (req, res, next) => orden.findById(req.params.id)
     .then(orden => orden.destroy())

@@ -3,8 +3,7 @@ export class Imagen {
     private id: number;
 	public imagen: any;
 	private tipo: string;
-
-	constructor($id: number, $imagen: any, $tipo: string) {
+	constructor($id: number, $imagen: any, $tipo: string){
 		this.id = $id;
 		this.imagen = $imagen;
 		this.tipo = $tipo;

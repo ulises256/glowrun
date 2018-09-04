@@ -13,3 +13,4 @@ export class GaleriasComponent implements OnInit {
 	}
 
 }
+

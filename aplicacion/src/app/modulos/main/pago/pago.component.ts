@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OpenPayModel, Costumer } from '../../../models/openpay.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';;
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrdenService, AuthService } from '../../../services';
 import { Orden, Usuario } from '../../../models';
 import { MatDialog } from '@angular/material';
@@ -121,31 +121,41 @@ export class PagoComponent implements OnInit {
 					Validators.compose([Validators.required])],
 			tarjeta: [
 					'4111111111111111',
-					Validators.compose([Validators.required,
-					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+					Validators.compose(this.validarCampo('numero', true))],
 			mes: [
 				'12',
-				Validators.compose([
-					Validators.required,
-					Validators.minLength(2),
-					Validators.maxLength(2),
-					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+				Validators.compose(this.validarCampo('numero', true, 2, 2))],
 			ano: [
 				'20',
-				Validators.compose([
-					Validators.required,
-					Validators.minLength(2),
-					Validators.maxLength(2),
-					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
+				Validators.compose(this.validarCampo('numero', true, 2, 2))],
 			codigo: [
 				'110',
-				Validators.compose([
-					Validators.required,
-					Validators.minLength(3),
-					Validators.maxLength(4),
-					Validators.pattern(/^-?(0|[1-9]\d*)?$/)])]
+				Validators.compose(this.validarCampo('numero', true, 3, 4))]
 		});
 
 	}
+
+	validarCampo(tipo: string, req: boolean = true , min?: number, max?: number) {
+
+		let validaciones = [];
+
+		if(req)
+			validaciones.push(Validators.required)
+	
+		switch (tipo) {
+			case 'numero':
+				validaciones.push(Validators.pattern(/^-?(0|[1-9]\d*)?$/))
+				if(min)
+					validaciones.push(Validators.minLength(min))
+				if(max)
+					validaciones.push(Validators.maxLength(max))
+				break;
+			case 'email':
+				validaciones.push(Validators.email)
+				break;
+		}
+
+		return validaciones;
+	}	
 
 }
