@@ -23,7 +23,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.navLinks = [
       { path: '/admin', label: 'Inicio', icon : 'home'},
       { path: '/admin/carreras', label: 'Carreras', icon : 'directions_run'},
-      { path: '/admin/patrocinadores', label: 'Patrocinadores', icon : 'work'},            
+      { path: '/admin/patrocinadores', label: 'Patrocinadores', icon : 'work'},
+      { path: '/admin/ordenes', label: 'Cargos/Ordenes', icon : 'attach_money'},
       { path: '/admin/usuarios', label: 'Usuarios', icon : 'supervised_user_circle' }
       ];
   }

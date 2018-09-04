@@ -15,6 +15,7 @@ import { ConfirmDelDialogComponent } from './fragments/confirm-del-dialog/confir
 import { AnadirProyectoDialog } from './fragments/anadir-proyecto-dialog/anadir-proyecto-dialog.component';
 import { CarrerasComponent } from './carreras/carreras.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { OrdenesComponent } from './ordenes/ordenes.component'
 import { AnadirCarreraComponent } from './fragments/anadirCarrera/anadirCarrera.component';
 import { CarreraComponent } from './carreras/carrera/carrera.component';
 import { PatrocinadoresComponent } from './carreras/carrera/patrocinadores/patrocinadores.component';
@@ -67,7 +68,8 @@ import { DetallesUsuarioComponent } from './fragments/detalles-usuario/detalles-
     GaleriaComponent,
     PatrocinadoresAdminComponent,
     AgregarPatroComponent,
-    DetallesUsuarioComponent
+    DetallesUsuarioComponent,
+    OrdenesComponent
   ],
   providers: [PatrocinadorService]
   

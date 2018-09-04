@@ -40,6 +40,10 @@ export class OrdenService {
         return axios.default.post(this.apiUrl + '/data/orden/pagar/transaccion/pago/'+ id, datos);
     }
 
+    public static obtenerCargos(peticion) {
+        return axios.default.post(this.apiUrl + '/data/orden/pagar/transaccion/pagos', peticion);
+    }
+
     modificarOrdenPendiente(orden: Orden) {
         this.ordenPendienteSubject.next(orden);
         console.log(this.ordenPendienteSubject.value)

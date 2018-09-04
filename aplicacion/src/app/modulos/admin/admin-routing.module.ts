@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { CarrerasComponent } from './carreras/carreras.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CarreraComponent } from './carreras/carrera/carrera.component';
+import { OrdenesComponent } from './ordenes/ordenes.component'
 import { PatrocinadoresAdminComponent } from './patrocinadores-admin/patrocinadores-admin.component';
 import { AgregarPatroComponent } from './patrocinadores-admin/agregarPatro/agregarPatro.component';
 
@@ -19,8 +20,8 @@ const admin_routers: Routes = [
 	{
 		path: 'admin',
 		component: AdminComponent,
-		canActivate: [AuthGuard],
-		canActivateChild: [AuthGuard],
+/*		canActivate: [AuthGuard],
+		canActivateChild: [AuthGuard],*/
 		children: [
 			{
 				path: '',
@@ -45,7 +46,11 @@ const admin_routers: Routes = [
 			{
 				path: 'patrocinadores/:id',
 				component: AgregarPatroComponent
-			},																		
+			},
+			{
+				path: 'ordenes',
+				component: OrdenesComponent
+			},			
 			{
 				path: 'usuarios',
 				component: UsuariosComponent

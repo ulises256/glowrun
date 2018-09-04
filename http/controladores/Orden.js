@@ -36,8 +36,11 @@ ex.crearTransaccionPagar = (req, res, next) =>
 
 ex.verCargos = (req, res, next) => {
     let offset = 0
+    let limit = 0;
+
+    req.body.limit ? limit = req.body.limit : limit = 5;
     req.body.offset ? offset += req.body.offset : null;
-    openpay.charges.list({'offset':offset	}, (error, lista) => {
+    openpay.charges.list({'offset':offset, limit : limit	}, (error, lista) => {
         res.status(200).jsonp({lista: lista, offset: offset});
     });
 }

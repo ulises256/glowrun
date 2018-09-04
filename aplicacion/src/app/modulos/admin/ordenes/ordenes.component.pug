@@ -1,0 +1,29 @@
+.ordenes
+	.ordenes-content
+		mat-tab-group(mat-stretch-tabs class="example-stretched-tabs")
+			mat-tab(label="Cargos en OpenPay")
+				mat-form-field
+					input(matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Usuario")
+				.mat-elevation-z8
+					mat-table(#table [dataSource]="dataSource" matSort)
+						ng-container(matColumnDef="{{column.id}}" *ngFor="let column of columnNames")
+							mat-header-cell(*matHeaderCellDef mat-sort-header) {{column.value}}
+							mat-cell(*matCellDef="let element") {{element[column.id]}}
+
+						mat-header-row(*matHeaderRowDef="displayedColumns")
+						mat-row(*matRowDef="let row; columns: displayedColumns;" (click)="ver(row.id)")
+
+					mat-paginator([pageSizeOptions]="[5, 10, 25, 100]")
+			mat-tab(label="Ordenes de boletos")
+				mat-form-field
+					input(matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Usuario")
+				.mat-elevation-z8
+					mat-table(#table [dataSource]="dataSource" matSort)
+						ng-container(matColumnDef="{{column.id}}" *ngFor="let column of columnNames")
+							mat-header-cell(*matHeaderCellDef mat-sort-header) {{column.value}}
+							mat-cell(*matCellDef="let element") {{element[column.id]}}
+
+						mat-header-row(*matHeaderRowDef="displayedColumns")
+						mat-row(*matRowDef="let row; columns: displayedColumns;" (click)="ver(row.id)")
+
+					mat-paginator([pageSizeOptions]="[5, 10, 25, 100]")

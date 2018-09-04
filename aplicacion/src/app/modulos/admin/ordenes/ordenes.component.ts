@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { Usuario } from '../../../models';
-import { UsuarioService } from '../../../services';
+import { UsuarioService, OrdenService} from '../../../services';
 import { DetallesUsuarioComponent } from '../fragments/detalles-usuario/detalles-usuario.component';
 interface UsuarioInfoBasica {
 	id: number,
@@ -12,14 +12,14 @@ interface UsuarioInfoBasica {
 
 
 @Component({
-	selector: 'app-usuarios',
-	templateUrl: './usuarios.component.pug',
-	styleUrls: ['./usuarios.component.styl']
+	selector: 'app-ordenes',
+	templateUrl: './ordenes.component.pug',
+	styleUrls: ['./ordenes.component.styl']
 })
 
 
 
-export class UsuariosComponent implements OnInit {
+export class OrdenesComponent implements OnInit {
 
 	displayedColumns = [];
 	dataSource: MatTableDataSource<UsuarioInfoBasica>;
@@ -49,6 +49,8 @@ export class UsuariosComponent implements OnInit {
 	];
 
 	constructor(private dialog: MatDialog) {
+
+		OrdenService.obtenerCargos({offset: 25, limit: 25}).then(r => console.log(r.data))
 		this.displayedColumns = ['id', 'nombre', 'apellidos', 'correo']
 		this.dataSource = new MatTableDataSource(this.Usuarios);
 		UsuarioService.obtenerUsuarios()
