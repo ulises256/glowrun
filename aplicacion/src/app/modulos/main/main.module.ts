@@ -26,6 +26,8 @@ import { PagoComponent } from './pago/pago.component';
 import { ExplicacionComponent } from './partials/explicacion/explicacion.component';
 import { BoletoComponent } from './boleto/boleto.component';
 import { LoadingComponent } from '../../extras/loading/loading.component';
+import { PrivacidadComponent } from './privacidad/privacidad.component';
+import { CondicionesComponent } from './condiciones/condiciones.component';
 
 
 
@@ -55,7 +57,9 @@ import { LoadingComponent } from '../../extras/loading/loading.component';
 		PagoComponent,
 		ExplicacionComponent,
 		BoletoComponent,
-		LoadingComponent
+		LoadingComponent,
+		PrivacidadComponent,
+		CondicionesComponent
 	],
 	entryComponents: [
 		LoginComponent,

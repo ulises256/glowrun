@@ -16,6 +16,8 @@ import { FaqComponent } from './faq/faq.component';
 import { CarreraComponent } from './carreras/carrera/carrera.component';
 import { PagoComponent } from './pago/pago.component';
 import { BoletoComponent } from './boleto/boleto.component';
+import { PrivacidadComponent } from './privacidad/privacidad.component';
+import { CondicionesComponent } from './condiciones/condiciones.component';
 
 const main_routers: Routes = [
 	{
@@ -66,7 +68,15 @@ const main_routers: Routes = [
 			{
 				path: 'user/:token',
 				component: LoginComponent
-			}
+			},
+			{
+				path: 'privacidad',
+				component: PrivacidadComponent
+			},
+			{
+				path: 'condiciones',
+				component: CondicionesComponent
+			},			
 		]
 	}
 ];

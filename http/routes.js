@@ -20,6 +20,14 @@ router.get("/galerias/:url", function(req, res) {
     res.render("index");
 })
 
+router.get("/condiciones", function(req, res) {
+    res.render("index");
+})
+
+router.get("/privacidad", function(req, res) {
+    res.render("index");
+})
+
 router.get("/carreras/:url", function(req, res) {
     res.render("index");
 })

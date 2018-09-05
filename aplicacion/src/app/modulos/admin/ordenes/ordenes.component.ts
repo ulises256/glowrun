@@ -1,14 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-import { Usuario } from '../../../models';
-import { UsuarioService, OrdenService} from '../../../services';
+import { Orden } from '../../../models';
+import { OrdenService} from '../../../services';
 import { DetallesUsuarioComponent } from '../fragments/detalles-usuario/detalles-usuario.component';
-interface UsuarioInfoBasica {
-	id: number,
-	nombre: string,
-	apellidos: string,
-	correo: string
-}
+
+
+interface Cargos {
+	id: string,
+	holder_name: string,
+	amount: number,
+	method: string,
+	transaction_type: string,
+	status: string,
+	operation_date: Date,
+	description: string,
+	order_id: string,
+	customer_id: string
+}	
 
 
 @Component({
@@ -21,15 +29,60 @@ interface UsuarioInfoBasica {
 
 export class OrdenesComponent implements OnInit {
 
-	displayedColumns = [];
-	dataSource: MatTableDataSource<UsuarioInfoBasica>;
-	Usuarios: UsuarioInfoBasica[] = [];
+	columns_openpay = [];
+	columns_ordenes = [];
+
+	dataSourceOpenpay: MatTableDataSource<Cargos>;
+	cargos: Cargos[] = [];
+
+	dataSourceOrdenes: MatTableDataSource<Orden>;
+	ordenes: Orden[] = [];	
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
+
 	@ViewChild(MatSort) sort: MatSort;
+	@ViewChild(MatSort) sortOrdenes: MatSort;
 
+	columnsOpen = [
+		{
+			id: "id",
+			value: "id"
+		},
+		{
+			id: "holder_name",
+			value: "Nombre"
+		},
+		{
+			id: "method",
+			value: "Metodo"
+		},
+		{
+			id: "transaction_type",
+			value: "Tipo de trans."
+		},
+		{
+			id: "status",
+			value: "Estatus"
+		},
+		{
+			id: "operation_date",
+			value: "Fecha operación"
+		},	
+		{
+			id: "description",
+			value: "Descripción"
+		},
+		{
+			id: "order_id",
+			value: "Id Orden"
+		},
+		{
+			id: "customer_id",
+			value: "Id Cliente"
+		},				
+	];
 
-	columnNames = [
+	columnsOrdenes = [
 		{
 			id: "id",
 			value: "id"
@@ -39,32 +92,67 @@ export class OrdenesComponent implements OnInit {
 			value: "Nombre"
 		},
 		{
-			id: "apellidos",
-			value: "Apellidos"
+			id: "monto",
+			value: "Monto"
 		},
 		{
-			id: "correo",
-			value: "Correo"
-		},		
-	];
+			id: "fechaCompra",
+			value: "Fecha compra"
+		},
+		{
+			id: "cantidad",
+			value: "Cantidad de boletos"
+		},
+		{
+			id: "status",
+			value: "Estatus"
+		},
+		{
+			id: "descuento",
+			value: "Descuento"
+		},					
+	];	
 
 	constructor(private dialog: MatDialog) {
 
-		OrdenService.obtenerCargos({offset: 25, limit: 25}).then(r => console.log(r.data))
-		this.displayedColumns = ['id', 'nombre', 'apellidos', 'correo']
-		this.dataSource = new MatTableDataSource(this.Usuarios);
-		UsuarioService.obtenerUsuarios()
-			.then(r => r && r.data ? this.dataSource = new MatTableDataSource(r.data.map(u => {
-				console.log(u)
-				let usuario = new Usuario(u);
-				let usuariobasico: UsuarioInfoBasica = {
-					id: usuario.getId(),
-					nombre: usuario.getNombre(),
-					apellidos: usuario.getApellidos(),
-					correo: usuario.getCorreo(),
-				}
-				return usuariobasico;
-			})) : null)
+
+		this.columns_openpay = this.columnsOpen.map(n => n.id);
+		this.columns_ordenes = this.columnsOrdenes.map(n => n.id);
+
+		this.dataSourceOpenpay = new MatTableDataSource(this.cargos);
+		this.dataSourceOrdenes = new MatTableDataSource(this.ordenes);
+
+		OrdenService.obtenerCargos({offset: 25, limit: 25})
+		.then(r => {
+			console.log(r.data)
+			if(r && r.data)
+				this.dataSourceOpenpay = new MatTableDataSource(r.data.lista.map(c => {
+					 let cargo: Cargos = {
+						id: c.id,
+						holder_name: c.card.holder_name,
+						amount: c.amount,
+						method: c.method,
+						transaction_type: c.transaction_type,
+						status: c.status,
+						operation_date: c.operation_date,
+						description: c.description,
+						order_id: c.order_id,
+						customer_id: c.customer_id
+					}
+
+					return cargo;
+				}))
+			console.log(this.dataSourceOpenpay)
+		});
+
+		OrdenService.obtenerOrdenes()
+		.then(r => {
+			if(r && r.data)
+				this.dataSourceOrdenes = new MatTableDataSource(r.data.map(o => {
+					return new Orden(o);
+				}))
+		})
+
 	}
 
 	ver(id) {
@@ -79,16 +167,18 @@ export class OrdenesComponent implements OnInit {
 	}
 
 	applyFilter(filterValue: string) {
-		this.dataSource.filter = filterValue.trim().toLowerCase();
-	
-		if (this.dataSource.paginator) {
-		  this.dataSource.paginator.firstPage();
-		}
-	  }	
+		// this.dataSource.filter = filterValue.trim().toLowerCase();
+
+		// if (this.dataSource.paginator) {
+		//   this.dataSource.paginator.firstPage();
+		// }
+	  }
 
 	ngOnInit() {
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;		
+		this.dataSourceOrdenes.paginator = this.paginator;
+
+		this.dataSourceOpenpay.sort = this.sort;
+		this.dataSourceOrdenes.sort = this.sortOrdenes;
 	}
 
 }
