@@ -53,6 +53,10 @@ export class OrdenesComponent implements OnInit {
 			value: "Nombre"
 		},
 		{
+			id: "amount",
+			value: "Monto"
+		},
+		{
 			id: "method",
 			value: "Metodo"
 		},
@@ -156,14 +160,14 @@ export class OrdenesComponent implements OnInit {
 	}
 
 	ver(id) {
-		const dialogRef = this.dialog.open(DetallesUsuarioComponent, {
-			width: '90%',
-			height: '90%',
-			data: id
-		});
+		// const dialogRef = this.dialog.open(DetallesUsuarioComponent, {
+		// 	width: '90%',
+		// 	height: '90%',
+		// 	data: id
+		// });
 
-		dialogRef.afterClosed().subscribe(result => {
-		});
+		// dialogRef.afterClosed().subscribe(result => {
+		// });
 	}
 
 	applyFilter(filterValue: string) {
