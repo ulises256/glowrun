@@ -6,7 +6,7 @@ module.exports = ({Sequelize, sequelize } = conector) =>
         status:  {
             type: Sequelize.ENUM,
             values: [ 'proximo', 'realizado' ],
-            defaultValue: 'No'
+            defaultValue: 'proximo'
         },
         videoUrl: Sequelize.STRING
     },{

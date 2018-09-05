@@ -21,7 +21,7 @@ export class BoletosComponent implements OnInit, AfterViewInit {
 	@Output() quitarBoleto = new EventEmitter<Boleto>();
 	@Output() agregarBoleto = new EventEmitter<Boleto>();
 	
-	constructor(private dialog: MatDialog, private _router: Router) { }
+	constructor(private dialog: MatDialog) { }
 
 	anadirBoleto(boleto?: Boleto) {
 		boleto? null : boleto =  new Boleto({});

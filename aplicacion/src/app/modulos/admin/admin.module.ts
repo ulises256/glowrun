@@ -27,6 +27,8 @@ import { PatrocinadoresAdminComponent } from './patrocinadores-admin/patrocinado
 import { AgregarPatroComponent } from './patrocinadores-admin/agregarPatro/agregarPatro.component';
 import { PatrocinadorService } from '../../services';
 import { DetallesUsuarioComponent } from './fragments/detalles-usuario/detalles-usuario.component';
+import { CuponesComponent } from './carreras/carrera/cupones/cupones.component';
+import { AnadirCuponComponent } from './fragments/anadir-cupon/anadir-cupon.component';
 
 
 
@@ -50,7 +52,8 @@ import { DetallesUsuarioComponent } from './fragments/detalles-usuario/detalles-
     AnadirCarreraComponent,
     AnadirNuevoPatrocinadorComponent,
     AnadirBoletoComponent,
-    DetallesUsuarioComponent
+    DetallesUsuarioComponent,
+    AnadirCuponComponent
   ],
   declarations: [
     AdminComponent,
@@ -69,7 +72,9 @@ import { DetallesUsuarioComponent } from './fragments/detalles-usuario/detalles-
     PatrocinadoresAdminComponent,
     AgregarPatroComponent,
     DetallesUsuarioComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    CuponesComponent,
+    AnadirCuponComponent
   ],
   providers: [PatrocinadorService]
   

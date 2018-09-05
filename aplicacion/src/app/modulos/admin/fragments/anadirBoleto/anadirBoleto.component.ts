@@ -60,7 +60,6 @@ export class AnadirBoletoComponent implements OnInit {
 
 	ngOnInit() {
 		this.form = this.formBuilder.group({
-			precioini: [this.data.$precioini, [Validators.required, Validators.pattern("[0-9]*")]],
 			preciofin: [this.data.$preciofin, [Validators.required, Validators.pattern("[0-9]*")]],
 			fechaini: [this.data.$fechaini, Validators.required],
 			fechafin: [this.data.$fechafin, Validators.required],

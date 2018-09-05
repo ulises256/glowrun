@@ -10,4 +10,8 @@ route.route('/data/cupon/:id')
         .put(x.update)
         .delete(x.delete);
 
+
+route.route('/data/cupon/carrera/:idCarrera')
+        .get(x.carreras)        
+
 module.exports = route;    

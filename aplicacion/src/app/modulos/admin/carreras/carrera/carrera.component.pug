@@ -95,6 +95,13 @@
                     (agregarBoleto)="agregarBoleto($event)")
             mat-expansion-panel
                 mat-expansion-panel-header
+                    mat-panel-title Cupones
+                    mat-panel-description Agrege o quite cupones                  
+                mat-card.galeria
+                    cupones(
+                    [idCarrera]="carrera?.$id")                     
+            mat-expansion-panel
+                mat-expansion-panel-header
                     mat-panel-title Ruta de la carrera
                     mat-panel-description Maque el recorrido que tendra la carrera                  
                 mat-card.camino
@@ -108,3 +115,4 @@
                     [imagenes]="carrera?.geImagenes()"
                     (quitarImagen)="carrera?.seImagenes($event)"
                     (agregarImagen)="carrera?.seImagenes($event)")
+                
