@@ -1,15 +1,54 @@
 .fag
     display flex
     width 100%
+    justify-content center
 	.fag-content
         display flex
-        width 80%
+        width 90%
         flex-direction column
-		.explicacion
+        position relative
+        .atras
+            display flex
+            flex-direction column
             width 100%
-        .mapa
-            width 500px
-            .contenedor
-                svg
-                    height 100%
-                    width auto
+            .presencia
+                color white
+                display flex
+                justify-content flex-end
+                align-items center
+                width 100%
+                .titulo
+                    display flex
+                    justify-content flex-end
+                    height 100px
+                    h2 
+                        font-size 104px
+                        height 0px
+                        font-family Loto
+            .nacional
+                color white
+                display flex
+                justify-content flex-end
+                align-items center
+                width 100%   
+                .titulo 
+                    display flex
+                    justify-content flex-start
+                    height 100px
+                    h2 
+                        font-size 104px   
+                        height 0px
+                        font-family Loto
+        .delante
+            position absolute
+            display flex
+            justify-content center
+            align-items center
+            .explicacion
+                width 100%
+            .mapa
+                width 500px
+                .contenedor
+                    svg
+                        height 100%
+                        width auto

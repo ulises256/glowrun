@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit } from '@angular/core';
 import * as $ from 'jquery';
-import { Estado } from '../../../models';
+import { Estado, Carrera } from '../../../models';
 import { EstadoService } from '../../../services';
 
 @Component({
@@ -8,8 +8,11 @@ import { EstadoService } from '../../../services';
 	templateUrl: './faq.component.pug',
 	styleUrls: ['./faq.component.styl']
 })
-export class FaqComponent implements OnInit {
+export class FaqComponent implements OnInit, AfterViewInit {
 	estados: Estado[] =[]
+	estado: Estado;
+	carrerasEnElEstado: Carrera[] = [];
+	@ViewChildren('someName') someDivs;
 	paleta = [
 		"#ff3377",
 		"#f27019",
@@ -26,10 +29,33 @@ export class FaqComponent implements OnInit {
 			});
 	}
 
+	ngAfterViewInit() {
+
+	}
+
+	mostrarCarreras(id){
+
+		this.estado =  this.estados.find(estado => estado.$id == id)
+
+		if(this.estado.$tiene_carrera=="Si")
+			EstadoService.obtenerCarrerasEnEsteEstado(id)
+				.then(r => r && r.data ? this.carrerasEnElEstado = r.data.map(n=> new Carrera(n)): null)
+	}
+
 	ngOnInit() {
-		$('path').mouseover(function() {
-			console.log(this.id);
-		 });
+
+		$("path").hover(function() {
+			$(this).css('cursor','pointer');
+		}, function() {
+			$(this).css('cursor','auto');
+		});
+		
+		
+		 $('path').on("click", event => {
+			 console.log(event)
+			 this.mostrarCarreras(+event.target.id);
+		 })
+
 	}
 
 }

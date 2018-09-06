@@ -31,5 +31,9 @@ export class EstadoService {
     public static obtenerMunicipios(idEstado) {
         return axios.default.get(this.apiUrl + '/data/estado/municipio/' + idEstado);
     }
+
+    public static obtenerCarrerasEnEsteEstado(idEstado) {
+        return axios.default.post(this.apiUrl + '/data/carrera/carrerasXestados/estados/muni/' + idEstado)
+    }
 }
     

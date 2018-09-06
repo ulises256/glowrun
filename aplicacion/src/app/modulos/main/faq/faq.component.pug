@@ -1,7 +1,22 @@
 .fag
 	.fag-content
-		.explicacion
-			explicacion
-		.mapa
-			include ./mapa.component.pug
+		.atras
+			.presencia
+				.titulo
+					h2 PRESENCIA
+			.nacional
+				.titulo
+					h2 NACIONAL 
+		.delante
+			.explicacion
+				explicacion
+			.mapa
+				include ./mapa.component.pug
+			.carreras
+				.estadito(*ngIf="estado && estado.$tiene_carrera == 'Si'" )
+					h3(style="color: white;") {{estado.$estado}}
+				.carreritas(*ngIf="estado && estado.$tiene_carrera == 'Si'")
+					.carrerrita( *ngFor="let carrera of carrerasEnElEstado")
+						p(style="color: white;") {{carrera.$nombre}}
+
 		
