@@ -21,6 +21,7 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SlickModule } from 'ngx-slick';
 import { PatrocinadorService, OrdenService, AuthService, CarreraService } from './services';
 import { AuthGuard } from './guards/auth.guard';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { AuthGuard } from './guards/auth.guard';
     }),
     AppRoutingModule,
     FormsModule,
+    DragScrollModule,
     LoadingModule.forRoot({
         animationType: ANIMATION_TYPES.wanderingCubes,
         backdropBackgroundColour: 'rgba(0,0,0,1)',

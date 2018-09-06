@@ -1,1 +1,8 @@
-p galerias work
+
+.galeria
+    .galeria-content
+        h1 Galeria
+        .carrera(*ngFor="let carrera of carreras")
+            .galerias
+                drag-scroll(style="width: 100%;     height: 500px;" scrollbar-hidden="true")
+                    imagen(drag-scroll-item *ngFor="let imagen of carrera?.geImagenes()" [id]="imagen.getId()")

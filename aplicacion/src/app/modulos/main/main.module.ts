@@ -28,6 +28,7 @@ import { BoletoComponent } from './boleto/boleto.component';
 import { LoadingComponent } from '../../extras/loading/loading.component';
 import { PrivacidadComponent } from './privacidad/privacidad.component';
 import { CondicionesComponent } from './condiciones/condiciones.component';
+import { DragScrollModule } from 'ngx-drag-scroll/lib';
 
 
 
@@ -40,9 +41,10 @@ import { CondicionesComponent } from './condiciones/condiciones.component';
 	MaterialModule,
 	SlickModule.forRoot(),
 	AgmCoreModule,
-	  AgmSnazzyInfoWindowModule,
+	AgmSnazzyInfoWindowModule,
 	LoadingModule,
 	ExtrasModule,
+	DragScrollModule
 	],
 	declarations: [
 		MainComponent,

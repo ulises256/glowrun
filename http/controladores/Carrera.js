@@ -1,6 +1,6 @@
 const db = require('../relaciones');
 const _ = require('lodash')
-var { carrera, imagenes, patrocinador, municipio} = db;
+var { carrera, imagenes, patrocinador, municipio, estado} = db;
 
 var ex = module.exports = {};
 
@@ -84,7 +84,7 @@ ex.unirCiudad = (req, res, next) => carrera.findById(req.params.id)
                         .then(ciudades => _.flatten(ciudades))
                         .then(ciudades => ciudades.map(n => new Object({id: n.id_municipio})))
                         .then(ciudades => municipio.findById(ciudades[0].id, {attributes: ['id', 'municipio']})
-                                            .then(ciudad => res.status(200).jsonp(ciudad))
+                                            .then(ciudad => {ciudad.getEstado().then(estadito => estadito[0].update({tiene_carrera: 'Si'}));res.status(200).jsonp(ciudad)})
                         )
                         .catch(err => res.status(500).jsonp(err))
     );
@@ -101,7 +101,7 @@ ex.obtenerBoletos = (req, res, next) => carrera.findById(req.params.id)
     .catch(err => console.log(err));
 
 
-ex.obtenerCarreasConGaleria = (req, res, next) => carrera.findAll({wehere: { status: 'realizado' }})
+ex.obtenerCarrerasConGaleria = (req, res, next) => carrera.findAll({wehere: { status: 'realizado' }})
     .then(carreras =>  res.status(200).jsonp(carreras));
 
 ex.agregarBoleto = (req, res, next) => carrera.findById(req.params.id)
@@ -117,8 +117,8 @@ ex.anadirRuta = (req, res, next) => carrera.findById(req.params.id)
     .then(carrera => carrera.createRuta())
     .then(ruta => res.status(200).jsonp(ruta));
 
-
 ex.obtenerHome =  (req, res, next) => carrera.findAll({
+    where: {status: 'proximo'},
     order: [['fechaini', 'ASC']],
     limit: 4
 }).then(response => res.status(200).jsonp(response))
@@ -132,7 +132,7 @@ ex.filtroCarrera =  (req, res, next) =>{
                 $like: '%'+req.body.busqueda+'%'
             }
         },
-        attributes: ['id', 'nombre','description', 'fechaini']
+        attributes: ['id', 'nombre','description', 'fechaini', 'status']
     })
     .then(patrocinadores => res.status(200).jsonp(patrocinadores))
     .catch(err => console.log(err));
@@ -142,6 +142,7 @@ ex.paginacion = function(req, res, next) {
 
     carrera.findAndCountAll(
             {
+                where: {status: 'realizado'},
                 order:[
                     ['fechaini', 'DESC'],
                 ],
@@ -157,3 +158,15 @@ ex.paginacion = function(req, res, next) {
         })
 
 };
+
+ex.carrerasXEstado = (req, res, next) => {
+    estado.findById(req.params.idEstado)
+        .then(estadito => estadito.getMunicipios())
+        .then(municipios => Promise.all(
+            municipios.map ( async (municipio) =>
+                await municipio.getCarreras()
+            )))
+        .then(response => response.filter(n => n.length > 0))
+        .then(response => _.flatten(response))
+        .then(response =>  res.status(200).jsonp(response))
+}

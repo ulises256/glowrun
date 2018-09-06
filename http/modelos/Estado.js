@@ -8,7 +8,12 @@ module.exports = ({Sequelize, sequelize } = conector) =>
         updatedAt: {
             type: Sequelize.DATE,
             allowNull: true
-        } 
+        },
+        tiene_carrera:  {
+            type: Sequelize.ENUM,
+            values: [ 'No', 'Si' ],
+            defaultValue: 'No'
+        }  
     },{
     	name : {
     		singular: 'estado',

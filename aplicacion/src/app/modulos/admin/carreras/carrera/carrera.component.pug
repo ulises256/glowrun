@@ -46,7 +46,7 @@
                                         autocomplete="off" 
                                         required)
                             mat-form-field(class="input-layout")    
-                                mat-select([disabled]="editable.disiabled" name="status" placeholder="Selecione el estatus"  [(ngModel)]="carrera.$status" required)
+                                mat-select([disabled]="editable.disiabled" name="status" placeholder="Selecione el estatus"  [ngModel]="carrera.$status"  (change)="carrera.$status = $event.value" required)
                                     mat-option( [value]="'proximo'") Proxima Carrera
                                     mat-option( [value]="'realizado'") Carrera Realizada                                                          
                         .ciudad

@@ -9,8 +9,8 @@
                     .flecha-container
                         button.flecha(mat-icon-button)
                             mat-icon keyboard_arrow_left
-                    .carrera-content(*ngFor="let carrera of carrerasProximas | slice:0:3; let i = index" (click)="verCarrera(carrera.$id)")
-                        .carrera
+                    .carrera-content(*ngFor="let carrera of carrerasProximas | slice:0:3; let i = index")
+                        .carrera((click)="verCarrera(carrera.$id)")
                             .imagen-container(style="background-image : url('assets/images/example.png')")
                             .pie
                                               
@@ -33,8 +33,8 @@
                     .flecha-container
                         button.flecha(mat-icon-button (click)="anterior()")
                             mat-icon keyboard_arrow_left
-                    .carrera-content(*ngFor="let carrera of carrerasFiltro | slice:0:3;" (click)="verCarrera(carrera.$id)")
-                        .carrera
+                    .carrera-content(*ngFor="let carrera of carrerasFiltro | slice:0:3;")
+                        .carrera((click)="verCarrera(carrera.$id)")
                             .imagen-container(style="background-image : url('assets/images/example.png')")
                             .pie
                                               

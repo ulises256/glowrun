@@ -6,6 +6,8 @@ import { Carrera, Boleto, Usuario, Orden } from '../../../models';
 import { Observable } from 'rxjs';
 import { Time, TimerService } from '../../../services/timer.service';
 import * as moment from 'moment'
+import { Cupon } from '../../../models/cupon.model';
+import { CuponService } from '../../../services/cupon.service';
 
 @Component({
 	selector: 'app-boleto',
@@ -18,6 +20,10 @@ export class BoletoComponent implements OnInit, OnDestroy {
 	carrera: Carrera
 
 	boletos: Boleto [];
+	cupones: Cupon[];
+	descuento: number;
+	cuponValido: boolean;
+
 	actual: Boleto = undefined;
 	proximo: Boleto = undefined;
 	time1$: Observable<Time>;
@@ -45,6 +51,8 @@ export class BoletoComponent implements OnInit, OnDestroy {
 					this.auth.modificarRedirect('/comprar/' + params['id'])
 					user ? this.usuario = user : this.router.navigate(['/login'])
 				}).closed;
+
+			CuponService.obtenerCuponesCarrera(+params['id']).then(r => r && r.data ? this.cupones = r.data.map(n => new Cupon(n)) : null)
 		});
 	}
 
@@ -53,8 +61,24 @@ export class BoletoComponent implements OnInit, OnDestroy {
 
 	cambiarPrecio(cantidad) {
 		console.log(cantidad.target.value)
-		this.precioCompra = this.actual.$precioini * cantidad.target.value;
+		this.precioCompra = this.actual.$precioini * cantidad.target.value - this.descuento;
 		this.cantidadBoletos = cantidad.target.value;
+	}
+
+	checarCupon(codigo) {
+
+		console.log(codigo.target.value)
+		console.log(this.cupones.find(n => n.codigo == codigo.target.value))
+
+		let cupon = this.cupones.find(n => n.codigo == codigo.target.value)
+
+		if(cupon){
+			cupon.status == 'normal' ?  this.cuponValido = true : this.cuponValido = false;
+			this.descuento = (this.precioCompra * (cupon.precio/100))
+		}
+		else{
+			this.cuponValido = false;
+		}
 	}
 
 	irComprar(){
@@ -64,7 +88,7 @@ export class BoletoComponent implements OnInit, OnDestroy {
 			 id_boleto: this.actual.$id,
 			 monto: this.precioCompra,
 			 cantidad: this.cantidadBoletos,
-			 descuento: 0,
+			 descuento: this.descuento ? this.descuento : 0,
 		}
 
 		OrdenService.crearOrden(orden)

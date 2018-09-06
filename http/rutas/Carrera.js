@@ -38,12 +38,14 @@ route.route('/data/carrera/rutas/:id')
         .post(x.anadirRuta);        
 
 route.route('/data/carrera/galerias/galerias')
-        .get(x.obtenerCarreasConGaleria);
+        .get(x.obtenerCarrerasConGaleria);
 
 route.route('/data/carrera/filtro')
         .post(x.filtroCarrera);
 
 route.route('/data/carrera/paginacion/:Items/:Pagina')
-        .post(x.paginacion)          
+        .post(x.paginacion)
+route.route('/data/carrera/carrerasXestados/estados/muni/:idEstado')
+        .post(x.carrerasXEstado)        
 module.exports = route;
 

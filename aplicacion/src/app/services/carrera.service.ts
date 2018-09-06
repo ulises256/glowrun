@@ -30,7 +30,9 @@ export class CarreraService {
             id: carrera.$id,
             nombre: carrera.$nombre,
             description: carrera.$description,
-            fechaini: carrera.$fechaini
+            fechaini: carrera.$fechaini,
+            videoUrl: carrera.$videoUrl,
+            status: carrera.$status
 
         }
         return axios.default.put(this.apiUrl + '/data/carrera/' + carrera.$id, carrer);
@@ -103,6 +105,10 @@ export class CarreraService {
 
     public static paginacion(items, pagina) {
         return axios.default.post(this.apiUrl + '/data/carrera/paginacion/' + items +'/'+ pagina);
-    }    
+    } 
+
+    public static obtenerGalerias() {
+        return axios.default.get(this.apiUrl + '/data/carrera/galerias/galerias');
+    }
 }
     

@@ -19,6 +19,8 @@
 							p despues ${{proximo?.$precioini}}mxn
 					.productos
 						input(type="number" id="cantidad" placeholder="cantidad" (change)="cambiarPrecio($event)"  min="1" value="1" autocomplete="off" required)
+						input(type="text" id="cupon" placeholder="Codigo del cupon" (change)="checarCupon($event)"  autocomplete="off" required)
+						mat-error(*ngIf="!cuponValido") Código no valido o expirado
 						p precio a pagar: {{precioCompra}}
 						button(mat-button color="accent" (click)="irComprar()") confirmar
 		.fila3

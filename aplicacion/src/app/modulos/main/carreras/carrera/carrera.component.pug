@@ -17,7 +17,7 @@
             .centro
             .derecha
                 .galeria
-                    ngx-slick( #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)").carousel
+                    ngx-slick(*ngIf="carrera.geImagenes().length > 0" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)").carousel
                         .slide(ngxSlickItem *ngFor="let image of carrera.geImagenes()")
                             imagen([id]="image.getId()" )
                 a(routerLink="'/galerias'" ) IR A GALERIA
