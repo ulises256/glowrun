@@ -10,6 +10,7 @@ import { Cupon } from '../../../../models/cupon.model';
 })
 export class AnadirCuponComponent implements OnInit {
 	public form: FormGroup;
+	fechaactual = new Date
 	constructor(public dialogRef: MatDialogRef<AnadirCuponComponent>,
 		private formBuilder: FormBuilder,
 		@Inject(MAT_DIALOG_DATA) public data: Cupon) { }
