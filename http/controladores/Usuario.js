@@ -1,4 +1,5 @@
 var db = require('../relaciones');
+var nodeMailer = require('nodemailer');
 
 var {usuario, carrera, orden} = db;
 
@@ -35,4 +36,32 @@ ex.unirCarrera = (req, res, next) => usuario.findById(req.params.id)
     );
 
 ex.obtenerOrdenes = (req, res, next) => usuario.findById(req.params.id)
-    .then(user => user.getOrdenes().then(ordenes => res.status(200).jsonp(ordenes)))
+    .then(user => user.getOrdenes().then(ordenes => res.status(200).jsonp(ordenes)));
+
+ex.enviarEmail = (req, res) => {
+    let transporter = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'glowrunmx1@gmail.com',
+            pass: '#1q2w3e4r'
+        }
+    });
+
+    let mailOptions = {
+        from: '"Desde la página web - Nombre: " '+req.body.nombre+'<glowrunmx1@gmail.com>', // sender address
+        to: 'admin@glowrun5k.com.mx', // list of receivers
+        subject: req.body.asunto, // Subject line
+        text: req.body.descripcion, // plain text body
+        html: '<p>'+req.body.descripcion+'</p><br>'+'Correo: '+req.body.correo // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+            res.render('index');
+        }); 
+}    

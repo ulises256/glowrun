@@ -19,5 +19,8 @@ routeUsuario.route('/data/usuario/carrea/:id')
 routeUsuario.route('/data/usuario/ordenes/:id')
         .get(x.obtenerOrdenes)
 
+routeUsuario.route('/data/enviarcorreo')
+        .post(x.enviarEmail);        
+
 module.exports = routeUsuario;
 

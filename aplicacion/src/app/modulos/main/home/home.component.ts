@@ -16,7 +16,7 @@ import * as moment from 'moment'
 export class HomeComponent implements OnInit {
 	time1$: Observable<Time>;
 	carrerasProximas: Carrera[] = [];
-	url = 'https://www.youtube.com/watch?v=GH2qh7ItPJI&t=10s';
+	url = 'https://www.youtube.com/watch?v=OVw3XMi0FcA&feature=';
 
 	constructor(private router: Router, private timerService: TimerService) {
 		CarreraService.obtenerHome()
@@ -42,32 +42,32 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 
-		$("#btn-comprar").hover(function () {
-			$(this).removeClass("shake-opacity");
-		}, function () {
-			$(this).addClass("shake-opacity");
-		});
+		// $("#btn-comprar").hover(function () {
+		// 	$(this).removeClass("shake-opacity");
+		// }, function () {
+		// 	$(this).addClass("shake-opacity");
+		// });
 
-		$("#carrera1").hover(function () {
-			$(this).addClass("shake-slow");
-			setTimeout(function() {
-				$(this).removeClass("shake-slow");
-			}, 500);			
-		}, function () {
-			$(this).removeClass("shake-slow");
-		});
+		// $("#carrera1").hover(function () {
+		// 	$(this).addClass("shake-slow");
+		// 	setTimeout(function() {
+		// 		$(this).removeClass("shake-slow");
+		// 	}, 500);			
+		// }, function () {
+		// 	$(this).removeClass("shake-slow");
+		// });
 
-		$("#carrera2").hover(function () {
-			$(this).addClass("shake-slow");
-		}, function () {
-			$(this).removeClass("shake-slow");
-		});
+		// $("#carrera2").hover(function () {
+		// 	$(this).addClass("shake-slow");
+		// }, function () {
+		// 	$(this).removeClass("shake-slow");
+		// });
 
-		$("#carrera3").hover(function () {
-			$(this).addClass("shake-slow");
-		}, function () {
-			$(this).removeClass("shake-slow");
-		});		
+		// $("#carrera3").hover(function () {
+		// 	$(this).addClass("shake-slow");
+		// }, function () {
+		// 	$(this).removeClass("shake-slow");
+		// });		
 	}
 
 }

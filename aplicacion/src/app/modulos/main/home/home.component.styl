@@ -51,7 +51,7 @@ transition(duracion, delay)
                     width 100%
                     h1, h3 
                         font-size 50px
-                        height 0px
+                        margin:  0px
                         @media screen and (max-width: 1048px)
                             font-size 38px
                         @media mobile
@@ -61,6 +61,10 @@ transition(duracion, delay)
                     .dias, .horas, .minutos, .segundos
                         flex 1
                         flex-direction column
+                .boton
+                    transition(500ms, 0)
+                    &:hover
+                        transform scale(1.1)
         .linea
             width 100%
             height 8px
@@ -87,13 +91,12 @@ transition(duracion, delay)
                     display flex
                     justify-content center
                     align-items center
-                    margin 10px 10px 10px 10px                                         
+                    margin 10px 10px 10px 10px
+                    position relative
+                    svg 
+                        position absolute
                     .titu
                         flex 1
-                        background-repeat no-repeat
-                        background-size cover
-                        background-position center
-                        background-image url('assets/images/cuadritos/glow_galeria.png')
                         height 270px
                         display flex
                         justify-content center
@@ -101,7 +104,7 @@ transition(duracion, delay)
                         flex-direction column
                         h2
                             font-size 50px
-                            height 5px
+                            margin 0px
                     .images
                         flex 2
                         transition(500ms, 0)
@@ -120,11 +123,13 @@ transition(duracion, delay)
                     height 250px
                     margin 10px 10px 10px 10px
                     position relative
+                    transition(500ms, 0)
                     img 
                         width 100%
                         height 100%
                     &:hover
-                        cursor pointer                        
+                        cursor pointer
+                        transform scale(1.2)
                     .content
                         position absolute
                         display flex
@@ -141,3 +146,7 @@ transition(duracion, delay)
                             display flex
                             justify-content center
                             align-items center
+                    svg 
+                        position absolute
+                        width 64px
+                        height 64px

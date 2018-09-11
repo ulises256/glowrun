@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, AfterViewInit } from '@angular/core';
 import * as $ from 'jquery';
 import { Estado, Carrera } from '../../../models';
 import { EstadoService } from '../../../services';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-faq',
@@ -15,11 +16,13 @@ export class FaqComponent implements OnInit, AfterViewInit {
 	@ViewChildren('someName') someDivs;
 	paleta = [
 		"#ff3377",
-		"#f27019",
-		"#90ff07",
+		"#ef6100",
+		"#00c900",
 		"#1cccf4"
 	]
-	constructor() { 
+
+	cargando = false;
+	constructor(private router: Router) {
 		EstadoService.obtenerEstados()
 			.then(r => r && r.data ? this.estados = r.data.map(estado => new Estado(estado)): null)
 			.then(estados => {
@@ -33,13 +36,30 @@ export class FaqComponent implements OnInit, AfterViewInit {
 
 	}
 
+	verCarrera(id) {
+		this.router.navigate(['carreras/' + id]);
+
+	}
+
 	mostrarCarreras(id){
+		let buscarCarreras = () => {
+			if(this.estado.$tiene_carrera=="Si")
+				this.cargando = true;
+				EstadoService.obtenerCarrerasEnEsteEstado(id)
+					.then(r => r && r.data ? this.carrerasEnElEstado = r.data.map(n=> new Carrera(n)): null)
+					.then(algo => this.cargando = false);
+		}
 
-		this.estado =  this.estados.find(estado => estado.$id == id)
+		if(this.estado){
+			(this.estado.$id) ?
+				(this.estado.$id == id ? (null) : (this.estado =  this.estados.find(estado => estado.$id == id), buscarCarreras()))
+				:
+				(this.estado =  this.estados.find(estado => estado.$id == id), buscarCarreras());
+			}
+		else{
+			this.estado =  this.estados.find(estado => estado.$id == id); buscarCarreras();
+		}
 
-		if(this.estado.$tiene_carrera=="Si")
-			EstadoService.obtenerCarrerasEnEsteEstado(id)
-				.then(r => r && r.data ? this.carrerasEnElEstado = r.data.map(n=> new Carrera(n)): null)
 	}
 
 	ngOnInit() {
@@ -49,10 +69,9 @@ export class FaqComponent implements OnInit, AfterViewInit {
 		}, function() {
 			$(this).css('cursor','auto');
 		});
-		
-		
+
+
 		 $('path').on("click", event => {
-			 console.log(event)
 			 this.mostrarCarreras(+event.target.id);
 		 })
 

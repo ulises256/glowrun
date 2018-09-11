@@ -1,5 +1,5 @@
 .home
-    .home-content(class="shake-trigger")
+    .home-content
         .portada
             .background
                 videojs(*ngIf="url" [url]="url" [autoplay]="true" [mute]="true" [loop]="true" [controls]="false")
@@ -25,6 +25,7 @@
         .piesito
             .piesito-content
                 .galeria
+                    include ../partials/mancha.pug
                     .titu
                         h2 GA
                         h2 LE
@@ -33,30 +34,14 @@
                         img(src="assets/images/fondito.jpg", alt="")
                 .tit
                     p Proxima Carreras
-                .primero(id="carrera1" (click)="verCarrera(carrerasProximas[1].$id)")
-                    img(src="assets/images/cuadritos/glow_home_1.png", alt="")
+                .primero(
+                    id="carrera1" (click)="verCarrera(carrera.$id)"
+                    *ngFor="let carrera of carrerasProximas | slice:1; ")
+                    include ../partials/mancha.pug
                     .content
                         .fecha
-                            p {{carrerasProximas[1]?.$fechaini | date:'mediumDate'}}
+                            p {{carrera?.$fechaini | date:'mediumDate'}}
                         .nombre
-                            h2 {{carrerasProximas[1]?.$nombre}}
+                            h2 {{carrera?.$nombre}}
                         .pie
                             p Comptra tu boleto
-                .segundo(id="carrera2" (click)="verCarrera(carrerasProximas[2].$id)")
-                    img(src="assets/images/cuadritos/glow_home_2.png", alt="")
-                    .content
-                        .fecha
-                            p {{carrerasProximas[2]?.$fechaini | date:'mediumDate'}}
-                        .nombre
-                            h2 {{carrerasProximas[2]?.$nombre}}
-                        .pie
-                            p Comptra tu boleto                    
-                .tercero(id="carrera3" (click)="verCarrera(carrerasProximas[3].$id)")
-                    img(src="assets/images/cuadritos/glow_home_3.png", alt="")
-                    .content
-                        .fecha
-                            p {{carrerasProximas[3]?.$fechaini | date:'mediumDate'}}
-                        .nombre
-                            h2 {{carrerasProximas[3]?.$nombre}}
-                        .pie
-                            p Comptra tu boleto                    
