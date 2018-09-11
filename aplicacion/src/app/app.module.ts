@@ -5,6 +5,7 @@ import { FormsModule } from "@angular/forms";
 import {DndModule} from 'ng2-dnd';
 import { AgmCoreModule } from '@agm/core';
 import { MaterialModule } from './extras/material.module';
+
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 // import "angular2-navigate-with-data";
 import { AppComponent } from './app.component';

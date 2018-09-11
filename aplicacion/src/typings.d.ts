@@ -6,6 +6,7 @@ declare var slick: any;
 declare var dripify: any;
 declare var $f: any;
 declare var OpenPay: any;
+declare let ga: Function;
 interface NodeModule {
   id: string;
 }

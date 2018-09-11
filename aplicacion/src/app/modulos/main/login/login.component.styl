@@ -6,13 +6,14 @@ transition(duracion, delay)
     -webkit-transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
     transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
     -webkit-transition-delay delay ease-in-out
-    transition-delay delay ease-in-out    
+    transition-delay delay ease-in-out
 
 div
     display flex
 
 *
-    font-family Loto    
+    font-family Loto
+    font-weight 100
 
 .login
     justify-content center
@@ -30,7 +31,7 @@ div
             height 80%
             width 100%
             justify-content center
-            align-items center            
+            align-items center
         .cabeza
             justify-content flex-start
             .back-precio
@@ -47,6 +48,8 @@ div
                 justify-content flex-end
                 h1
                     font-size 80px
+                    font-family Bebas
+                    font-weight 100
             .back-login-icons
                 flex 1.5
                 position relative
@@ -58,12 +61,14 @@ div
                     width 100%
                     a
                         margin 20px 20px 20px 20px
-                        background-color rgba(0, 0, 0, 0.1)
                         transition(500ms, 0)
                         &:hover
                             transform scale(1.5)
-                        img
+                        svg
                             width 68px
+                            height 68px
+                            path
+                                fill #b7004b
         .pies
             .di
                 flex 1
@@ -71,6 +76,7 @@ div
                 flex 1
                 font-size 10px
                 justify-content center
+                color gray
 
             .do
                 flex: 1
