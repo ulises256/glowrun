@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
 		// 	$(this).addClass("shake-slow");
 		// 	setTimeout(function() {
 		// 		$(this).removeClass("shake-slow");
-		// 	}, 500);			
+		// 	}, 500);
 		// }, function () {
 		// 	$(this).removeClass("shake-slow");
 		// });
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 		// 	$(this).addClass("shake-slow");
 		// }, function () {
 		// 	$(this).removeClass("shake-slow");
-		// });		
+		// });
 	}
 
 }

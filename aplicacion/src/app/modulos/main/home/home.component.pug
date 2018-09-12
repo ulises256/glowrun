@@ -2,7 +2,7 @@
     .home-content
         .portada
             .background
-                videojs(*ngIf="url" [url]="url" [autoplay]="true" [mute]="true" [loop]="true" [controls]="false")
+                videojs(*ngIf="url" [url]="url" [autoplay]="false" [mute]="true" [loop]="true" [controls]="false")
             .contador
                 .titulo
                     h1 {{carrerasProximas[0]?.$nombre}}
@@ -34,7 +34,7 @@
                         img(src="assets/images/fondito.jpg", alt="")
                 .tit
                     p Proxima Carreras
-                .primero(
+                .proximas(
                     id="carrera1" (click)="verCarrera(carrera.$id)"
                     *ngFor="let carrera of carrerasProximas | slice:1; ")
                     include ../partials/mancha.pug

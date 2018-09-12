@@ -1,5 +1,5 @@
 .usuario
-	.usuario-content
+	.usuario-content(*ngIf="usuario")
 		.mat-cardto
 			section.encabezado
 				.foto
@@ -10,27 +10,60 @@
 					button(mat-menu-item type="submit" (click)="editar(usuarioForm)" matTooltip="{{editable.tooltip}}")
 						mat-icon {{editable.icon}}
 						span {{editable.tooltip}}
-			section.datos([formGroup]="usuarioForm")
-				.nombre
-					h4 Nombre:
+				section.datos([formGroup]="usuarioForm")
+					.nombre2
+						h4 Nombre:
+						mat-form-field(class="input-layout")
+							input(matInput formControlName="nombre"  (ngModelChange)="usuario.setNombre($event)" autocomplete="off"  required)
+						mat-divider
+					.correo
+						h4 Correo:
+						mat-form-field(class="input-layout")
+							input(matInput formControlName="correo"  (ngModelChange)="usuario.setCorreo($event)"  autocomplete="off"  required)
+						mat-divider
+					.edad
+						h4 Edad:
+						mat-form-field(class="input-layout")
+							input(matInput formControlName="edad"  (ngModelChange)="usuario.setEdad($event)"  autocomplete="off"  required)
+						mat-divider
+					.genero
+						h4 Sexo:
+						mat-form-field(class="input-layout")
+							mat-select( name="status" formControlName="sexo" (change)="usuario.setSexo($event)" required)
+								mat-option( [value]="'male'") Hombre
+								mat-option( [value]="'female'") Mujer							
+							//- input(matInput formControlName="sexo"  (ngModelChange)="usuario.setSexo($event)" autocomplete="off"   required)
+						mat-divider
+			section.generales([formGroup]="usuarioForm")
+				.ciudad
+					h4 De que ciudad vienes?
+					.inputs
+						mat-form-field.input-layout
+							mat-select(placeholder="Seleciona estado" [disabled]="editable.disiabled" required)
+								mat-option --
+								mat-option(*ngFor="let estado of estados" [value]="estado" (click)="selecionarMunicipio(estado)") {{estado.$estado}}
+						mat-form-field.input-layout
+							mat-select(placeholder="Seleciona ciudad" formControlName="ciudad" (change)="usuario.setCiudad($event.$municipio)"  [disabled]="editable.disiabled" required)
+								mat-option --
+								mat-option(*ngFor="let ciudad of municipios | async" [value]="ciudad") {{ciudad.$municipio}}
+				.entero
+					h4 Como te enteraste de la carrera:
 					mat-form-field(class="input-layout")
-						input(matInput formControlName="nombre"  (ngModelChange)="usuario.setNombre($event)" autocomplete="off"  required)
+						textarea(matInput formControlName="entero" rows="10"  (ngModelChange)="usuario.setEntero($event)"  autocomplete="off"  required)
 					mat-divider
-				.correo
-					h4 Correo:
+				.gustos
+					h4 Nos contarias tus gustos?:
 					mat-form-field(class="input-layout")
-						input(matInput formControlName="correo"  (ngModelChange)="usuario.setCorreo($event)"  autocomplete="off"  required)
+						textarea(matInput formControlName="gustos" rows="10"  (ngModelChange)="usuario.setGustos($event)"  autocomplete="off"  required)
 					mat-divider
-				.edad
-					h4 Edad:
-					mat-form-field(class="input-layout")
-						input(matInput formControlName="edad"  (ngModelChange)="usuario.setEdad($event)"  autocomplete="off"  required)
-					mat-divider
-				.genero
-					h4 Sexo:
-					mat-form-field(class="input-layout")
-						input(matInput formControlName="sexo"  (ngModelChange)="usuario.setSexo($event)" autocomplete="off"   required)
-					mat-divider
-			.ordenes
-				.tabla(*ngFor="let orden of ordenes")
-					h1 {{orden.$nombre}}
+		.ordenes(*ngIf="dataSourceOrdenes")
+			h2 Tus boletos
+			.mat-elevation-z8
+				mat-table(#table2 [dataSource]="dataSourceOrdenes" matSort)
+					ng-container(matColumnDef="{{column.id}}" *ngFor="let column of columnsOrdenes")
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{column.value}}
+						mat-cell(*matCellDef="let element") {{element[column.id]}}
+
+					mat-header-row(*matHeaderRowDef="columns_ordenes")
+					mat-row(*matRowDef="let row; columns: columns_ordenes;")
+

@@ -16,7 +16,7 @@ export class AuthService {
 
     constructor(private router: Router) {
         console.log('Auth contructor')
-        localStorage.getItem("token") != null ? 
+        localStorage.getItem("token") != null ?
             (this.isLoginSubject.next(true),this.validarToken(localStorage.getItem("token")) )
             : this.isLoginSubject.next(false);
         console.log(this.usuarioSubject.getValue());
@@ -60,7 +60,7 @@ export class AuthService {
 
     obtenerUsuario() {
         return this.usuarioSubject;
-    }    
+    }
 
     obtenerRedirect() {
         return this.redirecionarA.asObservable();

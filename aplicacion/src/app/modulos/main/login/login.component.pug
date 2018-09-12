@@ -9,7 +9,7 @@
 		.cuerpo
 			.tito
 				h1 Registraste
-			//-form([formGroup]="loginForm" id="login" (ngSubmit)="login(loginForm)" novalidate).formulario
+			form([formGroup]="loginForm" id="login" (ngSubmit)="login(loginForm)" novalidate).formulario
 				input(type="text" id="nombre" formControlName="usuario"  placeholder="usuario" autocomplete="off" required)
 				input(type="text" id="nombre" formControlName="contra"  placeholder="contrasena" autocomplete="off" required)
 				button(type="submit") iniciar we
