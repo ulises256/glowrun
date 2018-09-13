@@ -61,6 +61,9 @@ export class BoletoComponent implements OnInit, OnDestroy {
 
 	cambiarPrecio(cantidad) {
 		console.log(cantidad.target.value)
+
+		this.descuento ? null :  this.descuento = 0;
+
 		this.precioCompra = this.actual.$precioini * cantidad.target.value - this.descuento;
 		this.cantidadBoletos = cantidad.target.value;
 	}
@@ -78,6 +81,7 @@ export class BoletoComponent implements OnInit, OnDestroy {
 		}
 		else{
 			this.cuponValido = false;
+			this.descuento = 0;
 		}
 	}
 

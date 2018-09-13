@@ -1,9 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Usuario, Orden, Estado } from '../../../models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService, EstadoService } from '../../../services';
+import { AuthService, EstadoService, OrdenService } from '../../../services';
 import { Subscription } from 'rxjs/Subscription';
 import { MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
+// import * as jsPDF from 'jspdf';
+import * as html2canvas from "html2canvas"
 
 @Component({
 	selector: 'usuario',
@@ -19,7 +22,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 	usuario: Usuario;
 	subscription: Subscription;
 	dataSourceOrdenes: MatTableDataSource<Orden>;
-	ordenes: Orden[] = [];		
+	ordenes: Orden[] = [];
+	@ViewChild('qrcode') qrImage: ElementRef;
+	impresiones = [];
 	columnsOrdenes = [
 		{
 			id: "nombre",
@@ -50,7 +55,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 			value: "Opciones"
 		},								
 	];
-	constructor(private formBuilder: FormBuilder, private auth: AuthService) {
+	constructor(private formBuilder: FormBuilder,  private router:Router,private ordenService: OrdenService, private auth: AuthService) {
 		this.subscription = this.auth.obtenerUsuario().subscribe(user => {
 			this.usuario = user
 			if(user) {
@@ -68,11 +73,56 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 				this.dataSourceOrdenes = new MatTableDataSource(this.ordenes);
 
 				this.usuario.getOrdenes()
-				.then(ordens => this.dataSourceOrdenes = new MatTableDataSource(ordens));
+				.then(ordens => this.ordenes = ordens)
+				.then(ordens => this.dataSourceOrdenes = new MatTableDataSource(this.ordenes));
 			}
 
 		});
 	}	
+
+	imprimirBoleto(orden: Orden) {
+		var doc = new jsPDF()
+		this.impresiones = orden.$impresos;
+		this.impresiones
+		.forEach((impreso, index)=> {
+			var qrcodjs = new QRCode(''+impreso.id+'', {
+				text: impreso.codigo,
+				width: 128,
+				height: 128,
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.H
+			});
+
+			console.log(qrcodjs._el)
+
+			index == orden.$impresos.length -1 ?
+
+			html2canvas(qrcodjs._el).then(canvas => {
+				var img = canvas.toDataURL("img/png");
+				doc.addImage(img, 'JPGE', 20, 20)
+				doc.save('Boletos.pdf');
+			})
+			: null;
+		})
+
+
+
+
+	}
+
+	irAPagar(orden) {
+		console.log(orden )
+		this.ordenService.modificarOrdenPendiente(orden);
+		this.router.navigate(['/pago'])
+	}
+
+	eliminarOrden(orden) {
+		console.log(orden )
+		OrdenService.eliminarOrden(orden.$id)
+			.then(r => r && r.data ? this.ordenes.splice(this.ordenes.indexOf(orden), 1) : null)
+			.then(r => this.dataSourceOrdenes.data = this.ordenes);
+	}
 
 	editar(form: FormGroup) {
 		this.editable.disiabled ?

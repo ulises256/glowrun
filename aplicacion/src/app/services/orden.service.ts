@@ -44,6 +44,10 @@ export class OrdenService {
         return axios.default.post(this.apiUrl + '/data/orden/pagar/transaccion/pagos', peticion);
     }
 
+    public static obtenerImpresos(idOrden) {
+        return axios.default.get(this.apiUrl + '/data/orden/impresos/' + idOrden)
+    }
+
     modificarOrdenPendiente(orden: Orden) {
         this.ordenPendienteSubject.next(orden);
         console.log(this.ordenPendienteSubject.value)

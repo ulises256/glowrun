@@ -60,10 +60,39 @@
 			h2 Tus boletos
 			.mat-elevation-z8
 				mat-table(#table2 [dataSource]="dataSourceOrdenes" matSort)
-					ng-container(matColumnDef="{{column.id}}" *ngFor="let column of columnsOrdenes")
-						mat-header-cell(*matHeaderCellDef mat-sort-header) {{column.value}}
-						mat-cell(*matCellDef="let element") {{element[column.id]}}
+					//- ng-container(matColumnDef="{{column.id}}" *ngFor="let column of columnsOrdenes | slice:0:6")
+					//- 	mat-header-cell(*matHeaderCellDef mat-sort-header) {{column.value}}
+					//- 	mat-cell(*matCellDef="let element") {{element[column.id]}}
+					ng-container(matColumnDef="{{columnsOrdenes[0].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[0].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[0].id]}}						
+					ng-container(matColumnDef="{{columnsOrdenes[1].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[1].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[1].id] | currency}}	
+					ng-container(matColumnDef="{{columnsOrdenes[2].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[2].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[2].id]}}	
+					ng-container(matColumnDef="{{columnsOrdenes[3].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[3].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[3].id]}}	
+					ng-container(matColumnDef="{{columnsOrdenes[4].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[4].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[4].id]}}	
+					ng-container(matColumnDef="{{columnsOrdenes[5].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[5].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[5].id]}}																															
+					ng-container(matColumnDef="{{columnsOrdenes[6].id}}" )
+						mat-header-cell(*matHeaderCellDef mat-sort-header) {{columnsOrdenes[6].value}}
+						mat-cell(*matCellDef="let element") {{element[columnsOrdenes[6].id]}}
+							button(*ngIf="element.$status=='completed'" mat-icon-button (click)="imprimirBoleto(element)" matTooltip="Imprimir boleto")
+								mat-icon print
+							button(*ngIf="element.$status!='completed'" (click)="irAPagar(element)"  mat-icon-button matTooltip="Terminar pago")
+								mat-icon attach_money
+							button(*ngIf="element.$status!='completed'"  (click)="eliminarOrden(element)" mat-icon-button matTooltip="Quitar")
+								mat-icon delete									
 
 					mat-header-row(*matHeaderRowDef="columns_ordenes")
 					mat-row(*matRowDef="let row; columns: columns_ordenes;")
+		#qrcode(#qrcode)
+			.impresion(*ngFor="let impresion of impresiones" id="{{impresion.id}}")
 

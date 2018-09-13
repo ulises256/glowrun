@@ -18,6 +18,8 @@ var cupon = require('./modelos/Cupon')(conector);
 var ruta = require('./modelos/Ruta')(conector);
 var punto = require('./modelos/Puntos')(conector);
 var llaveSocial = require('./modelos/LlaveSocial')(conector);
+
+var impreso = require('./modelos/Impresos')(conector);
 //- Relations
 usuario.hasOne(llaveSocial , {as: 'SocialKey', foreignKey: 'id_usuario', onDelete: 'CASCADE'});
 llaveSocial.belongsTo(usuario, {as: 'Usuario', foreignKey: 'id_usuario'});
@@ -55,6 +57,9 @@ boleto.belongsTo(carrera, {as: 'Carrera', foreignKey: 'id_carrera'});
 boleto.hasMany(orden, {as: 'Ordenes', foreignKey: 'id_boleto'});
 orden.belongsTo(boleto, {as: 'Boleto', foreignKey: 'id_boleto'});
 
+orden.hasMany(impreso, {as: 'Impresos', foreignKey: 'id_orden'})
+impreso.belongsTo(orden, {as: 'Orden', foreignKey: 'id_orden'})
+
 patrocinador.hasMany(puntoVenta, {as: 'PuntosVentas', foreignKey: 'id_patrocinador'});
 puntoVenta.belongsTo(patrocinador, {as: 'Patrocinador', foreignKey: 'id_patrocinador'});
 
@@ -83,3 +88,4 @@ module.exports.boleto = boleto;
 module.exports.puntoVenta = puntoVenta;
 module.exports.ruta = ruta;
 module.exports.punto = punto;
+module.exports.impreso = impreso;

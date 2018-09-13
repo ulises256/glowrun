@@ -7,6 +7,8 @@ declare var dripify: any;
 declare var $f: any;
 declare var OpenPay: any;
 declare let ga: Function;
+declare var QRCode: any;
+declare var jsPDF: any;
 interface NodeModule {
   id: string;
 }

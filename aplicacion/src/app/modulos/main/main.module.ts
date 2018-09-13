@@ -31,7 +31,6 @@ import { CondicionesComponent } from './condiciones/condiciones.component';
 import { DragScrollModule } from 'ngx-drag-scroll/lib';
 
 
-
 @NgModule({
 	imports: [
 	CommonModule,

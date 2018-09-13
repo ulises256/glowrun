@@ -12,6 +12,10 @@ route.route('/data/orden/:id')
 
 route.route('/data/orden/usuario/:id')
         .get(x.obtenerUsuario);
+
+
+route.route('/data/orden/impresos/:id')
+        .get(x.obtenerImpresos);        
 route.route('/data/orden/pagar/transaccion/pagos')
         .post(x.verCargos)
 route.route('/data/orden/pagar/transaccion/pago/:idOrden')

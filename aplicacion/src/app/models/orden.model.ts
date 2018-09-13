@@ -11,6 +11,7 @@ export class Orden {
 	private cantidad: number;
 	private descuento: number;
 	private status: string;
+	private impresos: any = []
 
 	constructor(arg) {
 		this.id = arg.id;
@@ -22,6 +23,7 @@ export class Orden {
 		this.cantidad = arg.cantidad;
 		this.descuento = arg.descuento;
 		this.status = arg.status;
+		OrdenService.obtenerImpresos(this.id).then(r => r && r.data ?  this.impresos =  r.data : this.impresos = [])
     }
 
 	public get $id(): number {
@@ -58,6 +60,10 @@ export class Orden {
 
 	public get $status() : string {
 		return this.status;
+	}
+
+	public get $impresos(): Array<any> {
+		return this.impresos
 	}
 	
 	public set $id(value: number) {
