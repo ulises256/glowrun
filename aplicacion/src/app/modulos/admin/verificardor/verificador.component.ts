@@ -25,7 +25,8 @@ export class VerificadorComponent implements OnInit {
         if (videoDevices.length > 0){
             let choosenDev;
             for (const dev of videoDevices){
-                if (dev.label.includes('front')){
+                console.log(dev.label)
+                if (dev.label.includes('back')){
                     choosenDev = dev;
                     break;
                 }
