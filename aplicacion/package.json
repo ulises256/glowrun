@@ -30,10 +30,12 @@
     "@types/google-maps": "^3.2.0",
     "@types/googlemaps": "^3.30.11",
     "@types/gsap": "^1.19.2",
+    "@types/html2canvas": "0.5.32",
     "@types/lodash": "^4.14.108",
     "@vimeo/player": "^2.3.0",
     "angular-froala-wysiwyg": "^2.8.4",
     "angular2-navigate-with-data": "^1.1.11",
+    "angular2-qrscanner": "^1.0.4",
     "angular4-social-login": "^1.1.1",
     "animejs": "^2.2.0",
     "c3": "^0.4.21",
@@ -45,6 +47,7 @@
     "dropify": "^0.2.2",
     "gsap": "^2.0.1",
     "hammerjs": "^2.0.8",
+    "html2canvas": "0.5.0-beta4",
     "jquery": "^3.3.1",
     "jspdf": "^1.4.1",
     "lodash": "^4.17.5",
@@ -65,9 +68,7 @@
     "video.js": "^6.7.3",
     "videojs-vimeo": "^2.0.2",
     "vimeo": "^2.0.1",
-    "zone.js": "^0.8.19",
-    "html2canvas": "0.5.0-beta4",
-    "@types/html2canvas": "0.5.32"
+    "zone.js": "^0.8.19"
   },
   "devDependencies": {
     "@angular-devkit/core": "0.3.2",

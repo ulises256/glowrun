@@ -15,6 +15,7 @@ import { CarreraComponent } from './carreras/carrera/carrera.component';
 import { OrdenesComponent } from './ordenes/ordenes.component'
 import { PatrocinadoresAdminComponent } from './patrocinadores-admin/patrocinadores-admin.component';
 import { AgregarPatroComponent } from './patrocinadores-admin/agregarPatro/agregarPatro.component';
+import { VerificadorComponent } from './verificardor/verificador.component'
 
 const admin_routers: Routes = [
 	{
@@ -50,10 +51,14 @@ const admin_routers: Routes = [
 			{
 				path: 'ordenes',
 				component: OrdenesComponent
-			},			
+			},
 			{
 				path: 'usuarios',
 				component: UsuariosComponent
+			},
+      {
+				path: 'verificador',
+				component: VerificadorComponent
 			}
 		]
 	}

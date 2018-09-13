@@ -4,6 +4,8 @@ import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { QuillEditorModule } from 'ngx-quill-editor';
+import { NgQrScannerModule } from 'angular2-qrscanner';
+
 import { AdminRoutingModule } from './admin-routing.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { MaterialModule } from '../../extras/material.module';
@@ -29,6 +31,7 @@ import { PatrocinadorService } from '../../services';
 import { DetallesUsuarioComponent } from './fragments/detalles-usuario/detalles-usuario.component';
 import { CuponesComponent } from './carreras/carrera/cupones/cupones.component';
 import { AnadirCuponComponent } from './fragments/anadir-cupon/anadir-cupon.component';
+import { VerificadorComponent } from './verificardor/verificador.component'
 
 
 
@@ -43,7 +46,8 @@ import { AnadirCuponComponent } from './fragments/anadir-cupon/anadir-cupon.comp
     AgmCoreModule,
     ExtrasModule,
     FroalaEditorModule, FroalaViewModule,
-    HttpClientModule
+    HttpClientModule,
+    NgQrScannerModule
   ],
   exports: [],
   entryComponents: [
@@ -74,9 +78,10 @@ import { AnadirCuponComponent } from './fragments/anadir-cupon/anadir-cupon.comp
     DetallesUsuarioComponent,
     OrdenesComponent,
     CuponesComponent,
-    AnadirCuponComponent
+    AnadirCuponComponent,
+    VerificadorComponent
   ],
   providers: [PatrocinadorService]
-  
+
 })
 export class AdminModule { }

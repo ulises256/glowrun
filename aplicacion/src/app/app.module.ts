@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
 import {DndModule} from 'ng2-dnd';
 import { AgmCoreModule } from '@agm/core';
+import { NgQrScannerModule } from 'angular2-qrscanner';
 import { MaterialModule } from './extras/material.module';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -37,6 +38,7 @@ import { DragScrollModule } from 'ngx-drag-scroll';
       MainModule,
       AdminModule,
       DndModule.forRoot(),
+      NgQrScannerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCvjxrAegekcCef-gLjHfdIS0V9KUVMqg4',
     }),
