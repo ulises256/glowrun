@@ -29,6 +29,7 @@ import { LoadingComponent } from '../../extras/loading/loading.component';
 import { PrivacidadComponent } from './privacidad/privacidad.component';
 import { CondicionesComponent } from './condiciones/condiciones.component';
 import { DragScrollModule } from 'ngx-drag-scroll/lib';
+import { ManchaComponent } from './partials/mancha/mancha.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { DragScrollModule } from 'ngx-drag-scroll/lib';
 		BoletoComponent,
 		LoadingComponent,
 		PrivacidadComponent,
-		CondicionesComponent
+		CondicionesComponent,
+		ManchaComponent
 	],
 	entryComponents: [
 		LoginComponent,

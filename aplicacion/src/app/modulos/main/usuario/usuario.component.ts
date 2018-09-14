@@ -85,7 +85,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 		this.impresiones = orden.$impresos;
 		this.impresiones
 		.forEach((impreso, index)=> {
-			var qrcodjs = new QRCode(''+impreso.id+'', {
+			let qrcodjs = new QRCode(''+impreso.id+'', {
 				text: impreso.codigo,
 				width: 128,
 				height: 128,
@@ -96,19 +96,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
 			console.log(qrcodjs._el)
 
-			index == orden.$impresos.length -1 ?
-
 			html2canvas(qrcodjs._el).then(canvas => {
 				var img = canvas.toDataURL("img/png");
-				doc.addImage(img, 'JPGE', 20, 20)
-				doc.save('Boletos.pdf');
-			})
-			: null;
-		})
+				doc.addImage(img, 'JPGE', 10, 10)
+			}).then(algo => doc.save('Boleto'+(index+1)+'.pdf'))
+		});
 
-
-
-
+		
 	}
 
 	irAPagar(orden) {

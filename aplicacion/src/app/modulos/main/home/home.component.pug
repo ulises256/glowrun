@@ -24,24 +24,26 @@
         .linea
         .piesito
             .piesito-content
-                .galeria
-                    include ../partials/mancha.pug
-                    .titu
-                        h2 GA
-                        h2 LE
-                        h2 RIA
-                    .images((click)="irGaleria()")
+                .galeria((click)="irGaleria()")
+                    .titulo-content
+                        .titu
+                            h2 GA
+                            h2 LE
+                            h2 RIA
+                        include ../partials/manchita.pug                            
+                    .images
                         img(src="assets/images/fondito.jpg", alt="")
                 .tit
                     p Proxima Carreras
                 .proximas(
                     id="carrera1" (click)="verCarrera(carrera.$id)"
                     *ngFor="let carrera of carrerasProximas | slice:1; ")
-                    include ../partials/mancha.pug
-                    .content
-                        .fecha
-                            p {{carrera?.$fechaini | date:'mediumDate'}}
-                        .nombre
-                            h2 {{carrera?.$nombre}}
-                        .pie
-                            p Comptra tu boleto
+                    .proximas-content
+                        manchas([ancho]="235" [alto]="233")
+                        .content
+                            .fecha
+                                p {{carrera?.$fechaini | date:'mediumDate'}}
+                            .nombre
+                                h2 {{carrera?.$nombre}}
+                            .pie
+                                p Comptra tu boleto

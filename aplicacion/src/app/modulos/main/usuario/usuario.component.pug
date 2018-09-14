@@ -93,6 +93,8 @@
 
 					mat-header-row(*matHeaderRowDef="columns_ordenes")
 					mat-row(*matRowDef="let row; columns: columns_ordenes;")
-		#qrcode(#qrcode)
-			.impresion(*ngFor="let impresion of impresiones" id="{{impresion.id}}")
+		#qrcode(#qrcode )
+			.impresion(*ngFor="let impresion of impresiones" id="{{impresion.id}}" )
+				#diseno
+					img(src="assets/images/glowrun5klogo.png").imagen
 

@@ -1,5 +1,10 @@
 mobile = 'screen and (max-width: 768px)'
 
+rosa = #ff3377
+naranja = #ef6100
+verde = #00c900
+azul = #1cccf4
+
 transition(duracion, delay)
     -webkit-transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
     transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
@@ -73,7 +78,7 @@ transition(duracion, delay)
         .linea
             width 100%
             height 8px
-            background-color #00C834
+            background-color verde
         .piesito
             display flex
             color white
@@ -97,61 +102,79 @@ transition(duracion, delay)
                     justify-content center
                     align-items center
                     margin 10px 10px 10px 10px
-                    position relative
-                    svg
-                        position absolute
-                    .titu
+                    transition(500ms, 0)
+                    .titulo-content
                         flex 1
-                        height 270px
+                        position relative
                         display flex
-                        justify-content center
-                        align-items center
-                        flex-direction column
-                        h2
-                            font-size 50px
-                            margin 0px
+                        justify-content flex-end
+                        svg
+                            position absolute
+                            transform translate(0px, -30px) rotate(176deg)
+                            path 
+                                fill naranja
+                        .titu
+                            height 270px
+                            display flex
+                            justify-content center
+                            align-items center
+                            flex-direction column
+                            background-color naranja
+                            width 70%
+                            z-index: 2;
+                            h2
+                                font-size 50px
+                                margin 0px
                     .images
                         flex 2
-                        transition(500ms, 0)
                         img
                             width 100%
                             height 275px
-                        &:hover
-                            cursor pointer
-                            transform rotate(1deg) scale(1.1)
+                    &:hover
+                        cursor pointer
+                        transform rotate(1deg) scale(1.1)
                 .tit, .proximas, .segundo, .tercero
                     display flex
                     flex 1
                     justify-content center
                     align-items center
                 .proximas
-                    height 250px
-                    margin 10px 10px 10px 10px
-                    position relative
+                    display flex
+                    justify-content center
+                    align-items center
+                    margin 10px 10px 10px 10px                    
                     transition(500ms, 0)
-                    img
-                        width 100%
-                        height 100%
+                    flex 1
+                    height 233px
                     &:hover
                         cursor pointer
                         transform scale(1.2)
-                    .content
-                        position absolute
+                    .proximas-content
+                        flex 1
+                        position relative
                         display flex
-                        justify-content center
-                        align-items center
-                        flex-direction column
-                        padding 25px 25px 25px 25px
-                        .fecha
-                            width 100%
-                            display flex
-                            justify-content flex-start
-                        .nombre, .pie
-                            width 100%
+                        justify-content flex-end
+                        height 100%
+                        .content
+                            position absolute
                             display flex
                             justify-content center
                             align-items center
-                    svg
-                        position absolute
-                        width 64px
-                        height 64px
+                            flex-direction column
+                            width 70%
+                            background-color azul
+                            z-index: 2;
+                            .fecha
+                                width 100%
+                                display flex
+                                justify-content flex-start
+                            .nombre, .pie
+                                width 100%
+                                display flex
+                                justify-content center
+                                align-items center
+                        svg
+                            position absolute
+                            path 
+                                fill azul
+                            transform translate(0px, -30px) rotate(176deg)
