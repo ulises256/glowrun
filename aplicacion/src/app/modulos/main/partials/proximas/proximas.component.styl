@@ -1,0 +1,42 @@
+transition(duracion, delay)
+    -webkit-transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
+    transition all duracion cubic-bezier(0.445, 0.050, 0.550, 0.950)
+    -webkit-transition-delay delay ease-in-out
+    transition-delay delay ease-in-out
+
+.proximas
+    display flex
+    justify-content center
+    align-items center
+    margin 10px 10px 10px 10px
+    transition(500ms, 0)
+    flex 1
+    &:hover
+        cursor pointer
+        transform scale(1.2)
+    .proximas-content
+        flex 1
+        position relative
+        display flex
+        justify-content center
+        align-items center
+        width 100%
+        .content
+            position absolute
+            display flex
+            justify-content center
+            align-items center
+            flex-direction column
+            
+            width 90%
+            height 80%
+            z-index: 2;
+            .fecha
+                width 100%
+                display flex
+                justify-content flex-start
+            .nombre, .pie
+                width 100%
+                display flex
+                justify-content center
+                align-items center

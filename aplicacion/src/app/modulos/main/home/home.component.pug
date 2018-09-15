@@ -35,15 +35,4 @@
                         img(src="assets/images/fondito.jpg", alt="")
                 .tit
                     p Proxima Carreras
-                .proximas(
-                    id="carrera1" (click)="verCarrera(carrera.$id)"
-                    *ngFor="let carrera of carrerasProximas | slice:1; ")
-                    .proximas-content
-                        manchas([ancho]="235" [alto]="233")
-                        .content
-                            .fecha
-                                p {{carrera?.$fechaini | date:'mediumDate'}}
-                            .nombre
-                                h2 {{carrera?.$nombre}}
-                            .pie
-                                p Comptra tu boleto
+                proximas([carrerasProximas]="carrerasProximas")

@@ -1,0 +1,12 @@
+.proximas(
+    id="carrera1" (click)="verCarrera(carrera.id)"
+    *ngFor="let carrera of carreras | slice:1; ")
+    .proximas-content
+        manchas([ancho]="235" [alto]="233" [color]="carrera.color")
+        .content(id="{{carrera.id}}" [style.backgroundColor]="carrera.color")
+            .fecha
+                p {{carrera?.fechaini | date:'mediumDate'}}
+            .nombre
+                h2 {{carrera?.nombre}}
+            .pie
+                p Comptra tu boleto

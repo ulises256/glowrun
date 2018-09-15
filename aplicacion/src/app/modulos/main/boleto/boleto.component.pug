@@ -3,7 +3,8 @@
 		.fila1
 			.contador
 				.tiempo(*ngIf="time1$ | async as time1")
-					p El precio eleva su costo dentro de: {{time1.days}} dias {{time1.hours}} hrs
+					p El precio elevará su costo en:
+					h3 {{time1.days}} dias {{time1.hours}} hrs
 		.fila2
 			.title
 				h1 COMPRAR BOLETOS

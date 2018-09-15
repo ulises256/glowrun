@@ -5,7 +5,7 @@
         .carrera(*ngFor="let carrera of carreras")
             .galerias
                 drag-scroll(*ngIf="carrera?.geImagenes()?.length > 0"
-                    style="width: 100%;height: 500px;"
+                    style="width: 100%;"
                     scrollbar-hidden="true"
                     )
                     imagen(

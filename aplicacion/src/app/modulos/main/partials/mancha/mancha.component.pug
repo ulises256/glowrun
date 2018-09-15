@@ -1,3 +1,6 @@
 .mancha( [style.width.px]="ancho" [style.height.px]="alto")
-	.manchita(*ngFor="let i of [1,2,3]")
+	.manchita(
+		[style.top.px]="top"
+		[style.left.px]="left"
+		[style.width.px]="width")
 		include ./mancha.pug

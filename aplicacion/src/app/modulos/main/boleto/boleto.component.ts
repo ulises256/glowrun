@@ -49,7 +49,7 @@ export class BoletoComponent implements OnInit, OnDestroy {
 
 				this.sub = this.auth.obtenerUsuario().subscribe(user => {
 					this.auth.modificarRedirect('/comprar/' + params['id'])
-					user ? this.usuario = user : this.router.navigate(['/login'])
+					// user ? this.usuario = user : this.router.navigate(['/login'])
 				}).closed;
 
 			CuponService.obtenerCuponesCarrera(+params['id']).then(r => r && r.data ? this.cupones = r.data.map(n => new Cupon(n)) : null)
