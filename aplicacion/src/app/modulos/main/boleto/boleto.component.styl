@@ -16,17 +16,136 @@ azul = #1cccf4
         flex-direction column
         .fila1
             justify-content flex-start
-            height 100%
+            align-items center
+            height 75%
             .contador
-                background-color naranja
-                width 400px
-                height 200px
+                justify-content center
+                align-items center
+                position relative
+                width 300px
+                height 150px                
                 .tiempo
                     flex-direction column
                     justify-content center
+                    align-items center
+                    color white
+                    background-color naranja
+                    width 255px
+                    height 75px
+                    z-index 2
+                    h3, p
+                        font-family Loto
+                        margin 0px
+                    h3
+                        font-size 18px
+                svg
+                    position absolute
+                    transform translate(0px, -27px) rotate(25deg)
+                    path
+                        fill naranja
+
                     
         .fila2
             height 100%
+            justify-content center
+            align-items center
+            .title
+                color white
+                flex-direction column
+                width 60%
+                height 100%
+                justify-content center
+                align-items flex-end
+                h1
+                    font-family Bebas
+                    font-size 100px
+                    margin 10px
+                    font-weight 50
+            .cuadrado
+                width 100%
+                justify-content center
+                align-items center
+                height 100%
+                position relative
+                .fondo-cuadro
+                    flex-direction column
+                    background-color rosita
+                    width 75%
+                    height 63%
+                    z-index 2
+                    .info
+                        flex-direction row
+                        justify-content center
+                        height 100%
+                        .fecha
+                            justify-content flex-start
+                            color white
+                            flex-direction column
+                            width 50%
+                            margin 20px
+                            p
+                                margin: 0px;
+                                font-family Loto                            
+                                &.dia
+                                    font-size:  40px
+                                &.mes
+                                    font-size:  30px   
+                                &.nombre
+                                    font-size:  20px                                                                   
+                        .precio
+                            width 50%
+                            justify-content flex-end
+                            align-items center
+                            flex-direction column
+                            color white
+                            .ahora
+                                display flex
+                                h2, p
+                                    margin 0px
+                                    font-family Loto
+                                    font-size 60px
+                                p
+                                    font-size 20px
+                                    font-family Gloss_And_Bloom
+                            .despues
+                                display flex
+                                p
+                                    font-family Loto
+                                    margin 5px
+                                    &.des 
+                                        font-size 15px
+                                    &.pre
+                                        font-size 25px
+                                        text-decoration:line-through
+                                    &.mxn
+                                        font-family Gloss_And_Bloom
+                                        font-size 15px
+                    .productos
+                        height 50%
+                        display flex
+                        flex-direction column
+                        color white
+                        .inputs
+                            display flex
+                            input 
+                                flex 1
+                                margin 5px
+                        p
+                            margin 0px
+                            font-family Loto
+                svg
+                    position absolute
+                    &.:nth-child(1)
+                        transform translate(-328px,81px) rotate(-52deg) scale(0.2)
+                    &.:nth-child(2)
+                        transform translate(0px,0px) rotate(-52deg) scale(0.9)                    
+                    path
+                        fill rosita
+                        
+
+
+
+
         .fila3
             height 30%
         .fila4
