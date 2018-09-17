@@ -30,10 +30,12 @@
 							input(type="number" id="cantidad" placeholder="cantidad" (change)="cambiarPrecio($event)"  min="1" value="1" autocomplete="off" required)
 							input(type="text" id="cupon" placeholder="Codigo del cupon" (change)="checarCupon($event)"  autocomplete="off" required)
 							mat-error(*ngIf="!cuponValido") Código no valido o expirado
-						p precio a pagar: {{precioCompra}}
-						button(mat-button-raised color="accent" (click)="irComprar()") Confirmar
-				include ../partials/manchita.pug
-				include ../partials/manchita.pug
+						p precio a pagar: {{precioCompra | currency}}
+						button(mat-button (click)="irComprar()") Confirmar
+				.svg1
+					include ../partials/manchita.pug
+				.svg2
+					include ../partials/manchita.pug
 		.fila3
 			.politicas
 				p "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
@@ -41,6 +43,4 @@
 			.titulo-proximos
 				h3 PROXIMAS CARRERAS
 			.carreras-proximas
-				h3 Veracruz
-				h3 Merida
-				h3 Puebla
+				h3(*ngFor="let carrera of carrerasProximas | slice:1;" (click)="verCarrera(carrera.$id)" [style.color]="paleta[1]") {{carrera?.$nombre}}

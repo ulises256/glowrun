@@ -48,13 +48,11 @@ azul = #1cccf4
         .fila2
             height 100%
             justify-content center
-            align-items center
             .title
                 color white
                 flex-direction column
                 width 60%
-                height 100%
-                justify-content center
+                height 70%
                 align-items flex-end
                 h1
                     font-family Bebas
@@ -64,8 +62,7 @@ azul = #1cccf4
             .cuadrado
                 width 100%
                 justify-content center
-                align-items center
-                height 100%
+                height 97%
                 position relative
                 .fondo-cuadro
                     flex-direction column
@@ -133,20 +130,36 @@ azul = #1cccf4
                         p
                             margin 0px
                             font-family Loto
-                svg
+                .svg1, .svg2
                     position absolute
-                    &.:nth-child(1)
-                        transform translate(-328px,81px) rotate(-52deg) scale(0.2)
-                    &.:nth-child(2)
-                        transform translate(0px,0px) rotate(-52deg) scale(0.9)                    
-                    path
-                        fill rosita
-                        
-
-
-
-
+                    svg
+                        width 100%
+                        path
+                            fill rosita
+                .svg1
+                    transform translate(284px, -51px) rotate(-15deg) scale(1.3)
+                .svg2
+                    transform translate(-335px, 138px) rotate(-52deg) scale(0.7)                
         .fila3
             height 30%
+            .politicas                                
+                justify-content center
+                align-items center
+                color gray
+                p
+                    width 40%
+                    font-size 11px
+
         .fila4
             height 30%
+            justify-content center
+            align-items center
+            .titulo-proximos
+                color gray
+                margin-right: 80px;
+            .carreras-proximas
+                h3
+                    font-family Gloss_And_Bloom
+                    margin-right 40px
+                    &:hover
+                        cursor pointer

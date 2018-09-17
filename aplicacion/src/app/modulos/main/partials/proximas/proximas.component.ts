@@ -28,21 +28,20 @@ export class ProximasComponent implements OnInit, AfterViewInit{
                 .then(carreras => {
                     if(carreras)
                         this.carreras =  carreras.map(n => {
-                            let carerrita = {
+                            return {
                                 id: n.$id, fechaini: n.$fechaini, nombre: n.$nombre, color: this.paleta[_.random(0, 2)]
                             };
-                            return  carerrita;
                         });
                     
                 })
 
         : null;
 
-        console.log(this.carrerasProximas)
+
       }
 
     ngAfterViewInit(): void {
-        console.log(this.carrerasProximas)
+
     }
 
     ramdomizarEntreRangos(minimo: number, maximo: number) {
@@ -55,7 +54,7 @@ export class ProximasComponent implements OnInit, AfterViewInit{
 	}    
 
     ngOnInit(): void {
-        console.log(this.carrerasProximas)
+
         
 
     }

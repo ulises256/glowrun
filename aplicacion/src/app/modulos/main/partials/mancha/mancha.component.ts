@@ -10,9 +10,15 @@ export class ManchaComponent implements OnInit, AfterViewInit{
 
     @Input() ancho: number;
     @Input() alto: number;
-    @Input() color: string = '#1cccf4';
-    top: number = 0;
-    left: number = 0;
+    @Input() set color(value: string){
+        console.log(value);
+        this.colorsito = value
+
+    };
+
+    colorsito: any;
+    top: any= '0%';
+    left: any = '0%';
     width: number = 84;
 
     constructor() {    }
@@ -20,24 +26,21 @@ export class ManchaComponent implements OnInit, AfterViewInit{
 
     calcularRango(){
 
-        var valores = [[0,20], [80, 100]]
-        console.log(valores)
-        var decision = Math.floor(Math.random()  * (1 - 0)) + 0;
-        console.log(decision)
-        console.log(valores[decision])
+        var valores = [[-15,20], [70, 80]]
+        var decision = _.random(0, 1);
         var widt = _.random(valores[decision][0], valores[decision][1]);
-        var decision2 = Math.floor(Math.random()  * (1 - 0)) + 0;
+        var decision2 =  _.random(0, 1);
         var height = _.random(valores[decision2][0], valores[decision2][1]);
 
-        console.log(widt)
-        console.log(height)
-
+        this.top = height + '%';
+        this.left = widt + '%';
+        this.width = this.ramdomizarEntreRangos(84, (this.ancho - (this.ancho * 0.3)));
     }
 
     ngAfterViewInit(): void {
-        this.top = this.ramdomizarEntreRangos(1, this.alto)
-        this.left = this.ramdomizarEntreRangos(1, this.ancho)
-        this.width = this.ramdomizarEntreRangos(84, (this.ancho - (this.ancho * 0.3)));
+        // this.top = this.ramdomizarEntreRangos(1, this.alto)
+        // this.left = this.ramdomizarEntreRangos(1, this.ancho)
+        
     }
 
     ramdomizarEntreRangos(minimo: number, maximo: number) {

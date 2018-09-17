@@ -1,6 +1,5 @@
 .mancha( [style.width.px]="ancho" [style.height.px]="alto")
 	.manchita(
-		[style.top.px]="top"
-		[style.left.px]="left"
+		[ngStyle]="{'top': top, 'left': left}"
 		[style.width.px]="width")
 		include ./mancha.pug

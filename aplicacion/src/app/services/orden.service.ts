@@ -50,7 +50,6 @@ export class OrdenService {
 
     modificarOrdenPendiente(orden: Orden) {
         this.ordenPendienteSubject.next(orden);
-        console.log(this.ordenPendienteSubject.value)
     }
 
     obtenerOrdenPendiente() {

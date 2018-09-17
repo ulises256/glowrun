@@ -1,16 +1,20 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { OpenPayModel, Costumer } from '../../../models/openpay.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { OrdenService, AuthService } from '../../../services';
-import { Orden, Usuario } from '../../../models';
+import { OrdenService, AuthService, BoletoService, CarreraService } from '../../../services';
+import { Orden, Usuario, Carrera, Boleto } from '../../../models';
 import { MatDialog } from '@angular/material';
 import { LoadingComponent } from '../../../extras/loading/loading.component';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Time, TimerService } from '../../../services/timer.service';
+import * as moment from 'moment'
 
 @Component({
 	selector: 'app-pago',
 	templateUrl: './pago.component.pug',
-	styleUrls: ['./pago.component.styl']
+	styleUrls: ['./pago.component.styl'],
+	providers: [TimerService]
 })
 export class PagoComponent implements OnInit {
 
@@ -21,7 +25,15 @@ export class PagoComponent implements OnInit {
 	iconsDebit = []
 	orden: Orden;
 	usuario: Usuario;
+	boleto: Boleto;
 	sub: any;
+	time1$: Observable<Time>;
+	carrerasProximas: Carrera[] = [];
+	paleta = [
+		"#ff3377",
+		"#00c900",
+		"#1cccf4"
+	]
 
 	status = null;
 	constructor(
@@ -29,22 +41,11 @@ export class PagoComponent implements OnInit {
 		private ordenService: OrdenService,
 		private router: Router,
 		private auth: AuthService,
-		private dialog: MatDialog) {
-		this.iconsCards.push('assets/images/Amex.svg')
-		this.iconsCards.push('assets/images/Visa.svg')
-		this.iconsCards.push('assets/images/Mastercard.svg')
-
-		this.iconsDebit.push('assets/images/bbva-bancomer.svg')
-		this.iconsDebit.push('assets/images/Banco_santander_logo.svg')
-		this.iconsDebit.push('assets/images/HSBC.svg')
-		this.iconsDebit.push('assets/images/Logo_Scotiabank.svg')
-		this.iconsDebit.push('assets/images/inbursa.svg')
-		this.iconsDebit.push('assets/images/Ixe_Banco.ai')
+		private dialog: MatDialog,
+		private timerService: TimerService,) {
 	}
 
 	cobrar(form: FormGroup) {
-
-		console.log(this.orden)
 		if (form.valid) {
 			let costumer: Costumer = {
 				'holder_name': form.controls.nombre.value,
@@ -104,13 +105,17 @@ export class PagoComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
+		CarreraService.obtenerHome()
+		.then(r => r && r.data ? this.carrerasProximas = r.data.map(c => new Carrera(c, 'bandera')) : null)
 		this.openpay = new OpenPayModel(this.fomrTarjeta);
 
 		this.ordenService.obtenerOrdenPendiente().subscribe(orden => {
 			this.orden = orden;
+			BoletoService.obtenerBoleto(this.orden.$id_boleto)
+				.then(r => r && r.data? this.boleto = new Boleto(r.data): null)
+				.then(boleto => this.time1$ = this.timerService.timer(new Date(moment(boleto.$fechafin).format('MMMM DD, YYYY HH:mm:ss'))))
+
 		}).closed;
-		console.log(this.orden)
 
 		this.auth.obtenerUsuario().subscribe(usuario => {
 			this.usuario = usuario;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CarreraService, AuthService, OrdenService } from '../../../services';
@@ -8,6 +8,7 @@ import { Time, TimerService } from '../../../services/timer.service';
 import * as moment from 'moment'
 import { Cupon } from '../../../models/cupon.model';
 import { CuponService } from '../../../services/cupon.service';
+import * as _ from 'lodash';
 
 @Component({
 	selector: 'app-boleto',
@@ -15,7 +16,7 @@ import { CuponService } from '../../../services/cupon.service';
 	styleUrls: ['./boleto.component.styl'],
 	providers: [TimerService]
 })
-export class BoletoComponent implements OnInit, OnDestroy {
+export class BoletoComponent implements OnInit, OnDestroy, AfterViewInit{
 
 	carrera: Carrera
 
@@ -31,6 +32,14 @@ export class BoletoComponent implements OnInit, OnDestroy {
 	cantidadBoletos: number = 1;
 	usuario: Usuario;
 	sub: any;
+
+	carrerasProximas: Carrera[] = [];
+
+	paleta = [
+		"#ff3377",
+		"#00c900",
+		"#1cccf4"
+	]
 
 	constructor(private auth: AuthService,private route: ActivatedRoute, private router:Router, public location: Location, private timerService: TimerService, private ordenService: OrdenService) { }
 
@@ -49,11 +58,19 @@ export class BoletoComponent implements OnInit, OnDestroy {
 
 				this.sub = this.auth.obtenerUsuario().subscribe(user => {
 					this.auth.modificarRedirect('/comprar/' + params['id'])
-					// user ? this.usuario = user : this.router.navigate(['/login'])
+					user ? this.usuario = user : this.router.navigate(['/login'])
 				}).closed;
 
 			CuponService.obtenerCuponesCarrera(+params['id']).then(r => r && r.data ? this.cupones = r.data.map(n => new Cupon(n)) : null)
 		});
+	}
+
+	ramdon() {
+		return Math.floor(Math.random() * (2 - 0 + 1) + 0);
+	}
+
+	verCarrera(id) {
+		this.router.navigate(['/carreras/' + id]);
 	}
 
 	ngOnDestroy(){
@@ -66,6 +83,11 @@ export class BoletoComponent implements OnInit, OnDestroy {
 
 		this.precioCompra = this.actual.$precioini * cantidad.target.value - this.descuento;
 		this.cantidadBoletos = cantidad.target.value;
+	}
+
+	ngAfterViewInit(): void {
+		CarreraService.obtenerHome()
+		.then(r => r && r.data ? this.carrerasProximas = r.data.map(c => new Carrera(c, 'bandera')) : null)
 	}
 
 	checarCupon(codigo) {
