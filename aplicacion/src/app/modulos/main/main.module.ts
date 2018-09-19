@@ -31,6 +31,7 @@ import { CondicionesComponent } from './condiciones/condiciones.component';
 import { DragScrollModule } from 'ngx-drag-scroll/lib';
 import { ManchaComponent } from './partials/mancha/mancha.component';
 import { ProximasComponent } from './partials/proximas/proximas.component';
+import { ManchaStaticaComponent } from './partials/mancha-statica/mancha-statica.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ProximasComponent } from './partials/proximas/proximas.component';
 		PrivacidadComponent,
 		CondicionesComponent,
 		ManchaComponent,
-		ProximasComponent
+		ProximasComponent,
+		ManchaStaticaComponent
 	],
 	entryComponents: [
 		LoginComponent,

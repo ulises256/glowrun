@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Time, TimerService } from '../../../services/timer.service';
 import * as moment from 'moment'
+import { ConfirmDelDialogComponent } from '../../admin/fragments/confirm-del-dialog/confirm-del-dialog.component';
 
 @Component({
 	selector: 'app-pago',
@@ -46,27 +47,35 @@ export class PagoComponent implements OnInit {
 	}
 
 	cobrar(form: FormGroup) {
-		if (form.valid) {
-			let costumer: Costumer = {
-				'holder_name': form.controls.nombre.value,
-				'card_number': form.controls.tarjeta.value,
-				'expiration_month': form.controls.mes.value,
-				'expiration_year': form.controls.ano.value,
-				'cvv2': form.controls.codigo.value
+		const cobrarDialog = this.dialog.open(ConfirmDelDialogComponent, {
+			data: {titulo: 'Confirmar Pago por:', body: this.orden.$cantidad + ' Boleto de la carrera: '+ this.orden.$nombre + ' por el precio de $' + this.orden.$monto +' ?'}
+		}).afterClosed().subscribe(result => {
+			if(result){
+				if (form.valid) {
+					let costumer: Costumer = {
+						'holder_name': form.controls.nombre.value,
+						'card_number': form.controls.tarjeta.value,
+						'expiration_month': form.controls.mes.value,
+						'expiration_year': form.controls.ano.value,
+						'cvv2': form.controls.codigo.value
+					}
+					this.openpay.crearToken(costumer, this.orden, this.usuario);
+		
+					this.openpay.obtenerStatus().subscribe(status => {
+						console.log(status);
+						this.status = status
+						this.cargar();
+					})
+		
+				}
 			}
-			this.openpay.crearToken(costumer, this.orden, this.usuario);
+		})
 
-			this.openpay.obtenerStatus().subscribe(status => {
-				console.log(status);
-				this.status = status
-				this.cargar();
-			})
-
-		}
 	}
 
 	cargar() {
-		this.status==0? this.dialog.open(LoadingComponent) : null;
+
+		this.status==0? this.dialog.open(LoadingComponent).afterClosed().subscribe(result => this.router.navigate(['/user'])) : null;
 		this.status==1? this.dialog.closeAll() : null;
 		if(typeof(this.status) == "string") {
 			this.dialog.closeAll()

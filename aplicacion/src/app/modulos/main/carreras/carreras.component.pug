@@ -12,19 +12,21 @@
                     .carrera-content(*ngFor="let carrera of carrerasProximas | slice:0:3; let i = index")
                         .carrera((click)="verCarrera(carrera.$id)")
                             .imagen-container(style="background-image : url('assets/images/example.png')")
-                            .pie
-                                              
-                                .info([style.backgroundColor]="imagenes[i].color")
+                            .pie([style.backgroundColor]="imagenes[i].color")                                              
+                                .info
                                     .fecha
-                                        span 26
-                                        span {{carrera.$fechaini | date:'mediumDate'}}
-                                        span {{carrera.$fechaini | date:'mediumDate'}}
-                                    h2 {{carrera?.$nombre}}
-                                .mancha
-                                    img([src]="imagenes[i].image")
+                                        p.dia {{carrera?.fechaini | date:'dd'}}
+                                        p.mes {{carrera?.fechaini | date:'MMMM'}}
+                                        p.ano {{carrera?.fechaini | date:'yyyy'}}
+                                    .nombre
+                                        h2 {{carrera?.$nombre}}
+                                        p Comprar boleto
+                        mancha-statica([color]="imagenes[i].color").mancha1
+                        mancha-statica([color]="imagenes[i].color").mancha2
                     .flecha-container
                         button.flecha(mat-icon-button)                        
-                            mat-icon keyboard_arrow_right
+                            mat-icon keyboard_arrow_right                                      
+                
         .abajo
             .title
                 h1 Carreras
@@ -33,19 +35,20 @@
                     .flecha-container
                         button.flecha(mat-icon-button (click)="anterior()")
                             mat-icon keyboard_arrow_left
-                    .carrera-content(*ngFor="let carrera of carrerasFiltro | slice:0:3;")
+                    .carrera-content(*ngFor="let carrera of carrerasFiltro | slice:0:3; let i = index")
                         .carrera((click)="verCarrera(carrera.$id)")
                             .imagen-container(style="background-image : url('assets/images/example.png')")
-                            .pie
-                                              
+                            .pie([style.backgroundColor]="imagenes[i].color")         
                                 .info
                                     .fecha
-                                        span 26
-                                        span {{carrera.$fechaini | date:'mediumDate'}}
-                                        span {{carrera.$fechaini | date:'mediumDate'}}
-                                    h2 {{carrera?.$nombre}}
-                                .mancha
-                                    img(src="assets/images/cuadritos/glow_galeria2.png")
+                                        p.dia {{carrera?.fechaini | date:'dd'}}
+                                        p.mes {{carrera?.fechaini | date:'MMMM'}}
+                                        p.ano {{carrera?.fechaini | date:'yyyy'}}
+                                    .nombre
+                                        h2 {{carrera?.$nombre}}
+                                        p Ver carrera
+                        mancha-statica([color]="imagenes[i].color").mancha1
+                        mancha-statica([color]="imagenes[i].color").mancha2                           
                     .flecha-container
-                        button.flecha(mat-icon-button (click)="siguiente()")                        
-                            mat-icon keyboard_arrow_right
+                        button.flecha(mat-icon-button (click)="siguiente()")
+                            mat-icon keyboard_arrow_right 

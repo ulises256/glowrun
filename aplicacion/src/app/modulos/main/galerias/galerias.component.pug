@@ -9,8 +9,9 @@
                     scrollbar-hidden="true"
                     )
                     imagen(
+                        
                         drag-scroll-item
                         *ngFor="let imagen of carrera?.geImagenes()"
                         [id]="imagen.getId()")
             h2 {{carrera.$nombre}}
-            .linea(id="linea" #linea)
+            .linea(id="linea" #linea [@animateState]="state")

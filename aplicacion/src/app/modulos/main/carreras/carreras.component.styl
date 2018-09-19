@@ -28,7 +28,9 @@ transition(duracion, delay)
         .arriba, .abajo
             display flex
             width 100%
-            max-height 300px
+            max-height 100%
+            height: 100%;
+            align-items: center;            
             .title
                 height 100%
                 display flex
@@ -37,98 +39,95 @@ transition(duracion, delay)
                 width 25%
                 h1
                     height  0px
-                    font-size 50px
+                    font-size 62px
                     font-family Loto
                     color white
             .carreritas-container
                 position relative
-                width 75%
-            .carreritas
-                display flex
-                align-items center
-                height 300px
-                .flecha-container
-                    height 100%
+                width 85%
+                .carreritas
                     display flex
                     align-items center
-                    mat-icon
-                        color rosa
-                .carrera-content
-                    display flex
-                    justify-content center
-                    align-items start
-                    position relative
-                    height 100%
-                    width 100%
-                    .carrera
-                        height 270px
-                        width 250px
+                    height 300px                   
+                    .flecha-container
+                        height 100%
+                        display flex
+                        align-items center
+                        mat-icon
+                            color rosa
+                    .carrera-content
+                        display flex
+                        justify-content center
+                        align-items start
+                        position relative
+                        height 100%
+                        width 100%
                         transition(500ms, 0)
-                        .imagen-container
-                            width 100%
-                            height 200px
-                            background-position center
-                            background-size cover
-                        .pie
-                            height 50px
-                            display flex
-                            align-items center
-                            justify-content center
-                            .mancha
-                                position absolute
-                                height 50px
-                                width 250px
-                                z-index 1
-                                img
-                                    width 100%
-                                    height 100%
-                                    transform scale(1.1)
-                            .info
-                                z-index 2
-                                height 50px
-                                width 250px
-                                display flex
-                                flex-direction row
-                                justify-content center
-                                align-items center
-                                padding 0 10px
-                                p, h2
-                                    margin 0px
-                                    color white
-                                .fecha
-                                    font-size 11px
-                                    display flex
-                                    flex-direction column
-                                    span
-                                        &:nth-child(1)
-                                            font-size 14px
-                                        &:nth-child(2)
-                                            font-size 10px
-                                        font-size 8px
-
-                                h2
-                                    width 100%
-                                    font-size 18px
-                                    text-align center
-
-                            .imagen
-                                position relative
-                                width 100%
-                                height 100%
-                                img
-                                    width 100%
-                                    max-height 100%
-                                    position: absolute
-                                .info
-                                    width 100%
-                                    height 100%
-                                    display flex
-                                    p
-                                        font-family Loto
-                                    h2
-                                        font-family Gloss_And_Bloom
-
-
                         &:hover
                             cursor pointer
-                            transform rotate(1deg) scale(1.1)
+                            transform rotate(1deg) scale(1.1)                         
+                        .carrera
+                            z-index 2
+                            height 75%
+                            width 75%
+                            margin 10px
+                            .imagen-container
+                                width 100%
+                                height 200px
+                                background-position center
+                                background-size cover
+                            .pie
+                                width 100%
+                                height: 100px;
+                                display flex
+                                align-items center
+                                justify-content center
+                                .info
+                                    z-index 2
+                                    width 100%
+                                    height 80px
+                                    display flex
+                                    flex-direction row
+                                    justify-content center
+                                    align-items center
+                                    padding 0 10px
+                                    color white
+                                    .fecha
+                                        font-size 11px
+                                        display flex
+                                        flex-direction column
+                                        flex 1
+                                        p
+                                            font-family Loto
+                                            margin 2px
+                                            &.dia
+                                                font-size 35px
+                                                font-weight 300
+                                            &.mes
+                                                font-size 16px
+                                                font-weight 300
+                                            &.ano
+                                                font-size 14px
+                                                font-weight 300   
+                                    .nombre
+                                        flex 3
+                                        display flex
+                                        flex-direction column
+                                        justify-content center
+                                        align-items center
+                                        p
+                                            margin 0px
+                                        h2
+                                            
+                                            margin 0px
+                                            font-size 30px
+                                            text-align center
+                                            font-family Gloss_And_Bloom
+                        mancha-statica
+                            width 100%
+                            position absolute
+                            &.mancha1
+                                transform: translate(148px, 199px) scale(0.3);
+                            &.mancha2
+                                transform: translate(-138px, 211px) scale(0.3);
+

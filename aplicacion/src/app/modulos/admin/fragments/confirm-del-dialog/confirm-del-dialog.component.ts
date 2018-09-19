@@ -10,7 +10,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ConfirmDelDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ConfirmDelDialogComponent>, 
-		@Inject(MAT_DIALOG_DATA) public data: string) { }
+		@Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
 

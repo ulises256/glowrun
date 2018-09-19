@@ -42,7 +42,7 @@ export class BoletosComponent implements OnInit, AfterViewInit {
 		const dialogRef = this.dialog.open(ConfirmDelDialogComponent, {
             width: '300px',
 			height: '250px',
-			data: messaje
+			data: {body: messaje}
 		})
 
 		dialogRef.afterClosed().subscribe(result => {

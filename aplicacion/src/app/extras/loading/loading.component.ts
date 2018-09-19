@@ -9,7 +9,9 @@ import { MatDialogRef } from '@angular/material';
 })
 export class LoadingComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<LoadingComponent>) { }
+  constructor(public dialogRef: MatDialogRef<LoadingComponent>) {
+    dialogRef.disableClose = true;
+   }
 
   ngOnInit() {
 

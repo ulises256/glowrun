@@ -74,7 +74,10 @@ export class OpenPayModel {
 
 		console.log(chargeRequest)
 
-		OrdenService.pagar(this.orden.$id ,chargeRequest).then(res => res.data.error_code ? this.status.next(res.data.error_code) : this.status.next(res.data[0]))
+		OrdenService.pagar(this.orden.$id ,chargeRequest).then(res =>{
+			console.log(res)
+			 res.data.error_code ? this.status.next(res.data.error_code) : this.status.next(res.data)
+			})
 	}
 
 	private ErrorCallback = (response) => {

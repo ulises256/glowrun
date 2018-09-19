@@ -1,11 +1,11 @@
 .login
 	.login-content
-		.cabeza
-			.back-precio
-				img(src="assets/images/cuadritos/glow_home_1.png", alt="")
-				.contenido-precios
-					p El precio se elevará en:
-					h3 3:00 hrs
+		.fila1
+			.contador(*ngIf="time1$")
+				.tiempo(*ngIf="time1$ | async as time1")
+					p El precio elevará su costo en:
+					h3 {{time1.days}} dias {{time1.hours}} hrs
+				include ../partials/manchita.pug
 		.cuerpo
 			.tito
 				h1 Registraste

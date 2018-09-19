@@ -20,7 +20,8 @@
                     ngx-slick(*ngIf="carrera.geImagenes().length > 0" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)").carousel
                         .slide(ngxSlickItem *ngFor="let image of carrera.geImagenes()")
                             imagen([id]="image.getId()" )
-                a(routerLink="'/galerias'" ) IR A GALERIA
+                a.gale(routerLink="'/galerias'" ) IR A GALERIA
+                h2 Proximas carreras
                 proximas
         .abajo
             h4 PATROCINADORES

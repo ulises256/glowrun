@@ -1,4 +1,7 @@
-
+rosa = #ff3377
+naranja = #ef6100
+verde = #00c900
+azul = #1cccf4
 
 .carrera
     display flex
@@ -21,7 +24,7 @@
             .izquierda, .derecha
                 flex 3
             .centro
-                flex 1
+                flex 2
             .izquierda, .derecha
                 flex-direction column
             .izquierda
@@ -30,15 +33,21 @@
                     align-items baseline
                     h1
                         &.titulo
-                            font-family Loto
-                            font-size 38px
+                            font-family Bebas
+                            font-size 50px
                     a
                         &.reg
                             font-family Gloss_And_Bloom
                             font-size 25px
+                            cursor pointer
+                            color verde
                 .mapita, .cositas
                     height 40%
                     align-items center
+                .cositas
+                    display flex
+                    justify-content center
+                    align-content center
             .derecha
                 .galeria
                     width 100%
@@ -60,6 +69,14 @@
                             .img
                                 width 50px !important
                                 height 50px !important
+                h2
+                    margin 0
+                    margin-top 38px
+                    font-family Bebas
+                    font-size 28px
+                    color white
+                .gale
+                    color white
                 proximas
                     display flex
                     flex 1

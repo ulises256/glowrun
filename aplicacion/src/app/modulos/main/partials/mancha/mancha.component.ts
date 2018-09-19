@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core'
 import * as _ from 'lodash';
 @Component({
-    selector: 'manchas',
+    selector: 'mancha',
     templateUrl: './mancha.component.pug',
     styleUrls: ['./mancha.component.styl']
 })
@@ -10,13 +10,7 @@ export class ManchaComponent implements OnInit, AfterViewInit{
 
     @Input() ancho: number;
     @Input() alto: number;
-    @Input() set color(value: string){
-        console.log(value);
-        this.colorsito = value
-
-    };
-
-    colorsito: any;
+    @Input() color;
     top: any= '0%';
     left: any = '0%';
     width: number = 84;

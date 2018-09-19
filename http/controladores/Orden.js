@@ -30,7 +30,7 @@ ex.crearTransaccionPagar = (req, res, next) =>
 				.then(orden => {
 
 					orden.update(ordensita)
-						.then(response => res.status(200).jsonp(response));
+						.then(response => response.status == 'completed'? res.status(200).jsonp(1) : res.status(200).jsonp(0) );
 
 					for (i = 0; i < orden.cantidad; i++) {
 						crearBoleto();
