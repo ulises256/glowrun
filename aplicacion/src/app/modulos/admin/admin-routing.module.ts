@@ -56,7 +56,7 @@ const admin_routers: Routes = [
 				path: 'usuarios',
 				component: UsuariosComponent
 			},
-      {
+            {
 				path: 'verificador',
 				component: VerificadorComponent
 			}

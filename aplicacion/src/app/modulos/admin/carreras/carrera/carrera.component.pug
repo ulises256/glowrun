@@ -24,11 +24,10 @@
                                         required)
                             mat-form-field(class="input-layout")
                                 textarea(
+                                        [froalaEditor] [(froalaModel)]="carrera.$description" 
                                         [disabled]="editable.disiabled"
                                         matInput name="descripcion"
                                         placeholder="Descrpción"
-                                        [ngModel]="carrera.$description"
-                                        (ngModelChange)="carrera.$description = $event"
                                         autocomplete="off"
                                         rows="15"
                                         required)

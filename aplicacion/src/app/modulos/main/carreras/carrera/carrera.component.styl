@@ -3,12 +3,13 @@ naranja = #ef6100
 verde = #00c900
 azul = #1cccf4
 
+@import '../../../../../default.styl'
+
 .carrera
     display flex
     justify-content center
     width 100%
-    height 100%
-    max-height 90vh
+    min-height 100%
     color white
     .carrera-content
         display flex
@@ -25,11 +26,16 @@ azul = #1cccf4
                 flex 3
             .centro
                 flex 2
+                @media normal
+                    flex 0
+
             .izquierda, .derecha
                 flex-direction column
             .izquierda
-                .titulo, .registro, .descripcion
-                    height 20%
+                @media normal
+                    margin-right 20px
+                .titulo, .registro
+                    margin 10px
                     align-items baseline
                     h1
                         &.titulo
@@ -41,19 +47,33 @@ azul = #1cccf4
                             font-size 25px
                             cursor pointer
                             color verde
-                .mapita, .cositas
-                    height 40%
+                .mapita
+                    height 300px
+                    margin 20px 0
                     align-items center
                 .cositas
                     display flex
                     justify-content center
                     align-content center
+                .patrocinadores
+                    width 100%
+                    margin 20px 0
+                    display flex
+                    align-items center
+                    justify-content center
+                    .patro
+                        flex 1
+                        height 100%
+                        max-width 100%
             .derecha
+                @media normal
+                    margin-left 20px
                 .galeria
                     width 100%
                     max-width 100%
-                    height 50%
+                    height 350px
                     position relative
+                    margin-bottom 20px
                     .carousel
                         width 100%
                         height 450px
@@ -65,7 +85,7 @@ azul = #1cccf4
                             height 350px
                             imagen
                                 display flex
-                                justify-content: center 
+                                justify-content: center
                             .img
                                 width 50px !important
                                 height 50px !important
@@ -87,16 +107,3 @@ azul = #1cccf4
             align-items center
             justify-content center
             flex-direction column
-            .patrocinadores
-                width 40%
-                height 100%
-                max-width 90%
-                display flex
-                align-items center
-                justify-content center                
-                .patro
-                    flex 1
-                    height 100%
-                    max-width 100%
-            
-        

@@ -14,27 +14,27 @@ export class ManchaComponent implements OnInit, AfterViewInit{
     top: any= '0%';
     left: any = '0%';
     width: number = 84;
+    estilos : any;
 
     constructor() {    }
-    
+
 
     calcularRango(){
 
-        var valores = [[-15,20], [70, 80]]
-        var decision = _.random(0, 1);
-        var widt = _.random(valores[decision][0], valores[decision][1]);
-        var decision2 =  _.random(0, 1);
-        var height = _.random(valores[decision2][0], valores[decision2][1]);
+        let atributos = [ [ 'left', 'right' ] , [  'top', 'bottom' ] ]
 
-        this.top = height + '%';
-        this.left = widt + '%';
-        this.width = this.ramdomizarEntreRangos(84, (this.ancho - (this.ancho * 0.3)));
+        let x = atributos[0][  _.random(0, 1)  ]
+        let y = atributos[1][  _.random(0, 1)  ]
+        this.estilos = { [ y ] : _.random(1, 3) + '%' , [ x ] :  _.random(20, 80 ) + '%' }
+
+        console.log(this.estilos)
+
     }
 
     ngAfterViewInit(): void {
         // this.top = this.ramdomizarEntreRangos(1, this.alto)
         // this.left = this.ramdomizarEntreRangos(1, this.ancho)
-        
+
     }
 
     ramdomizarEntreRangos(minimo: number, maximo: number) {

@@ -1,61 +1,52 @@
 .usuario
 	.usuario-content(*ngIf="usuario")
-		.mat-cardto
-			section.encabezado
-				.foto
-					img([src]="usuario.getFoto()" *ngIf="usuario.getFoto()")
-				.nombre
-					h2(*ngIf="!usuario.getNombre()") {{usuario.getCorreo()}}
-					h2(*ngIf="usuario.getNombre()") {{usuario.getNombre()}}
-					button(mat-menu-item type="submit" (click)="editar(usuarioForm)" matTooltip="{{editable.tooltip}}")
-						mat-icon {{editable.icon}}
-						span {{editable.tooltip}}
-				section.datos([formGroup]="usuarioForm")
-					.nombre2
-						h4 Nombre:
+		mat-card
+			.info
+				section.encabezado
+					.foto
+						img([src]="usuario.getFoto()" *ngIf="usuario.getFoto()")
+					.nombre
+						//- h2(*ngIf="!usuario.getNombre()") {{usuario.getCorreo()}}
+						//- h2(*ngIf="usuario.getNombre()") {{usuario.getNombre()}}
+						button(mat-menu-item type="submit" (click)="editar(usuarioForm)" matTooltip="{{editable.tooltip}}")
+							mat-icon {{editable.icon}}
+							span {{editable.tooltip}}
+						
+						
+				section.generales([formGroup]="usuarioForm")
+					.inputs
 						mat-form-field(class="input-layout")
-							input(matInput formControlName="nombre"  (ngModelChange)="usuario.setNombre($event)" autocomplete="off"  required)
-						mat-divider
-					.correo
-						h4 Correo:
+							input(matInput formControlName="nombre"  (ngModelChange)="usuario.setNombre($event)"  placeholder="Nombre" autocomplete="off"  required)
+				
+						
+						mat-form-field(class="input-layout" )
+							input(matInput formControlName="correo"  (ngModelChange)="usuario.setCorreo($event)"  placeholder="correo" autocomplete="off"  required)
+					
 						mat-form-field(class="input-layout")
-							input(matInput formControlName="correo"  (ngModelChange)="usuario.setCorreo($event)"  autocomplete="off"  required)
-						mat-divider
-					.edad
-						h4 Edad:
+							input(matInput formControlName="edad"  (ngModelChange)="usuario.setEdad($event)"  placeholder="edad" autocomplete="off"  required)
+					
+					.inputs
 						mat-form-field(class="input-layout")
-							input(matInput formControlName="edad"  (ngModelChange)="usuario.setEdad($event)"  autocomplete="off"  required)
-						mat-divider
-					.genero
-						h4 Sexo:
-						mat-form-field(class="input-layout")
-							mat-select( name="status" formControlName="sexo" (change)="usuario.setSexo($event)" required)
+							mat-select( name="status" formControlName="sexo" (change)="usuario.setSexo($event)" placeholder="genero" required)
 								mat-option( [value]="'male'") Hombre
 								mat-option( [value]="'female'") Mujer							
-							//- input(matInput formControlName="sexo"  (ngModelChange)="usuario.setSexo($event)" autocomplete="off"   required)
-						mat-divider
-			section.generales([formGroup]="usuarioForm")
-				.ciudad
-					h4 De que ciudad vienes?
-					.inputs
+						
 						mat-form-field.input-layout
-							mat-select(placeholder="Seleciona estado" [disabled]="editable.disiabled" required)
+							mat-select(placeholder="Seleciona estado" [disabled]="editable.disiabled" required )
 								mat-option --
 								mat-option(*ngFor="let estado of estados" [value]="estado" (click)="selecionarMunicipio(estado)") {{estado.$estado}}
 						mat-form-field.input-layout
 							mat-select(placeholder="Seleciona ciudad" formControlName="ciudad" (change)="usuario.setCiudad($event.$municipio)"  [disabled]="editable.disiabled" required)
 								mat-option --
 								mat-option(*ngFor="let ciudad of municipios | async" [value]="ciudad") {{ciudad.$municipio}}
-				.entero
-					h4 Como te enteraste de la carrera:
+			.preguntas
+				.inputs
 					mat-form-field(class="input-layout")
-						textarea(matInput formControlName="entero" rows="10"  (ngModelChange)="usuario.setEntero($event)"  autocomplete="off"  required)
-					mat-divider
-				.gustos
-					h4 Nos contarias tus gustos?:
+						textarea(matInput formControlName="entero" rows="3" placeholder="¿Como te enteraste de la carrera?"  (ngModelChange)="usuario.setEntero($event)"  autocomplete="off" place required)
+					
 					mat-form-field(class="input-layout")
-						textarea(matInput formControlName="gustos" rows="10"  (ngModelChange)="usuario.setGustos($event)"  autocomplete="off"  required)
-					mat-divider
+						textarea(matInput formControlName="gustos" rows="3" placeholder="¿Nos contarias tus gustos?"   (ngModelChange)="usuario.setGustos($event)"  autocomplete="off"  required)
+				
 		.ordenes(*ngIf="dataSourceOrdenes")
 			h2 Tus boletos
 			.mat-elevation-z8
@@ -97,4 +88,3 @@
 			.impresion(*ngFor="let impresion of impresiones" id="{{impresion.id}}" )
 				#diseno
 					img(src="assets/images/glowrun5klogo.png").imagen
-

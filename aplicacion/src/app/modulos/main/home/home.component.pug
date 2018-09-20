@@ -2,7 +2,7 @@
     .home-content
         .portada
             .background
-                videojs(*ngIf="url" [url]="url" [autoplay]="false" [mute]="true" [loop]="true" [controls]="false")
+                videojs(*ngIf="url" [url]="url" [autoplay]="true" [mute]="true" [loop]="true" [controls]="false")
             .contador
                 .titulo
                     h1 {{carrerasProximas[0]?.$nombre}}
@@ -20,7 +20,7 @@
                         h3 {{time1.seconds}}
                         h3 SEGUNDOS
                 .boton
-                    a(mat-raised-button color="primary" id="btn-comprar" (click)="irAComprar(carrerasProximas[0]?.$id)") COMPRAR BOLETO
+                    a(mat-raised-button color="primary" id="btn-comprar" (click)="irAComprar(carrerasProximas[0]?.$id)") ADQUIRIR BOLETO
         .linea
         .piesito
             .piesito-content
@@ -32,8 +32,9 @@
                             h2 RIA
                         include ../partials/manchita.pug
                     .images
-                        img(src="assets/images/fondito.jpg", alt="")
+                        .imagen(style="background-image : url(assets/images/fondito.jpg)")
                 .tit
                     h2 Proxima
                     h2 Carreras
-                proximas([carrerasProximas]="carrerasProximas")
+                .proximas-container
+                    proximas([carrerasProximas]="carrerasProximas")
